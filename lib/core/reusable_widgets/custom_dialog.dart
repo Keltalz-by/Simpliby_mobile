@@ -7,17 +7,18 @@ import 'reusable_widgets.dart';
 
 class CustomDialog extends StatelessWidget {
   VoidCallback callback;
-  IconData icon = Icons.check_circle_outline_rounded;
-  Color iconColor = blueColor;
+  IconData icon;
+  Color iconColor;
   String textDetail;
   String buttonText;
+
   CustomDialog({
     Key? key,
     required this.callback,
-    required this.icon,
+    this.icon = Icons.check_circle_outline_rounded,
     required this.buttonText,
     required this.textDetail,
-    required this.iconColor,
+    this.iconColor = blueColor,
   }) : super(key: key);
 
   @override

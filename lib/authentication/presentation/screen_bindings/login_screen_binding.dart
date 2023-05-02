@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:simplibuy/authentication/data/datasources/registration_datasource.dart';
-import 'package:simplibuy/authentication/data/repositories/login_repository_impl.dart';
+import 'package:simplibuy/authentication/data/repositories/login_repository.dart';
 import 'package:simplibuy/authentication/data/repositories/verify_email_repository_impl.dart';
 import 'package:simplibuy/authentication/domain/usecases/login_usecase.dart';
 import 'package:simplibuy/authentication/domain/usecases/resend_otp_usecase.dart';

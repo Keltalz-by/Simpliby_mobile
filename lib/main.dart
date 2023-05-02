@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simplibuy/add_bank/presentation/screens/add_bank_screen.dart';
 import 'package:simplibuy/add_new_product/presentation/screens/add_new_product.dart';
+import 'package:simplibuy/authentication/presentation/screen_bindings/business_reg_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/login_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/signup_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/verify_email_binding.dart';
@@ -153,7 +154,8 @@ class MyApp extends StatelessWidget {
         binding: NotificationBinding()),
     GetPage(
         name: BUSINESS_DETAILS_SCREEN,
-        page: () => const BusinessDetailsScreen()),
+        page: () => BusinessDetailsScreen(),
+        binding: BusinessRegScreenBinding()),
     GetPage(name: PLAN_CHOICE_SCREEN, page: () => PlanScreen()),
     GetPage(name: PRO_PLAN_CHOICE_SCREEN, page: () => ProPlanScreen()),
     GetPage(

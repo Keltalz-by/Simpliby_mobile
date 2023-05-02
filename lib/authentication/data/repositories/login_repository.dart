@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:either_dart/either.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/authentication/data/datasources/registration_datasource.dart';
-import 'package:simplibuy/authentication/domain/entities/login_details.dart';
+import 'package:simplibuy/authentication/data/models/login_details.dart';
 import 'package:simplibuy/authentication/domain/repositories/auth_repository.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/failure/failure.dart';

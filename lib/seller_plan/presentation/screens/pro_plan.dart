@@ -92,7 +92,7 @@ class ProPlanScreen extends StatelessWidget {
             const Padding(padding: EdgeInsets.only(top: 15)),
             defaultButtons(
                 pressed: () {
-                  Get.toNamed(CONFIRM_PRO_SUB_SCREEN, arguments: "10,000");
+                  Get.toNamed(CONFIRM_PRO_SUB_SCREEN, arguments: "19,500");
                 },
                 text: "Subscribe yearly N19,500",
                 size: Size(MediaQuery.of(context).size.width * 0.7, 70)),

@@ -171,3 +171,189 @@ Widget emptyOrder() {
     ],
   );
 }
+
+Widget incomingOrdersBottomSheet(VoidCallback onAccept, VoidCallback onReject) {
+  return SingleChildScrollView(
+      child: Container(
+    padding: const EdgeInsets.all(35),
+    decoration: BoxDecoration(
+      color: whiteColor,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          blurRadius: 3.0,
+          offset: const Offset(0, 2),
+        ),
+      ],
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        personHeader(),
+        padding,
+        padding,
+        Text(
+          "Items",
+          style: TextStyle(color: Colors.grey, fontSize: 15),
+        ),
+        singleItemList("Rolon", "30"),
+        singleItemList("Rolon", "30"),
+        singleItemList("Rolon", "30"),
+        singleItemList("Rolon", "30"),
+        singleItemList("Rolon", "30"),
+        padding,
+        Text(
+          "Amount",
+          style: TextStyle(color: Colors.grey, fontSize: 15),
+        ),
+        Text(
+          "\$180",
+          style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
+        ),
+        padding,
+        Text(
+          "Status",
+          style: TextStyle(color: Colors.grey, fontSize: 15),
+        ),
+        Text(
+          "Paid",
+          style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
+        ),
+        padding,
+        Text(
+          "Ticket ID",
+          style: TextStyle(color: Colors.grey, fontSize: 15),
+        ),
+        Text(
+          "KNS684B234HK",
+          style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
+        ),
+        padding,
+        Text(
+          "Pickup time",
+          style: TextStyle(color: Colors.grey, fontSize: 15),
+        ),
+        Text(
+          "Monday 25th July, 2020",
+          style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
+        ),
+        padding,
+        padding,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            defaultButtons(
+                pressed: onAccept, text: "Accept", size: Size(130, 50)),
+            defaultButtons(
+                pressed: onReject, text: "Reject", size: Size(130, 50))
+          ],
+        )
+      ],
+    ),
+  ));
+}
+
+const padding = Padding(padding: EdgeInsets.only(top: 6));
+
+Widget singleItemList(String name, String price) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Text(
+        name,
+        style: TextStyle(fontSize: smallTextFontSize),
+      ),
+      padding,
+      Text(
+        "\$$price",
+        style: TextStyle(fontSize: smallTextFontSize),
+      )
+    ],
+  );
+}
+
+Widget personHeader() {
+  return Row(children: [
+    ClipRRect(
+        borderRadius: BorderRadius.circular(60),
+        child: FadeInImage.assetNetwork(
+            width: 60,
+            height: 60,
+            fit: BoxFit.cover,
+            placeholder: 'assets/gifs/simpliby_loading.gif',
+            imageErrorBuilder: (context, error, stackTrace) {
+              return const Icon(
+                Icons.account_circle,
+                size: 35,
+              );
+            },
+            image: "")),
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Ikenwa John",
+          style: const TextStyle(
+              color: blackColor,
+              fontSize: smallTextFontSize,
+              fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "09027901278",
+          style: const TextStyle(
+              color: blackColor,
+              fontSize: smallTextFontSize,
+              fontWeight: FontWeight.normal),
+        ),
+      ],
+    )
+  ]);
+}
+
+Widget acceptedOrdersBottomSheet(VoidCallback onCancel) {
+  final List<String> suggestions = [
+    "I ran out of Stock",
+    "The order has been overdue",
+    "A change in price occured",
+    "Closed for the week"
+  ];
+
+  return Container(
+      padding: const EdgeInsets.all(35),
+      decoration: BoxDecoration(
+        color: whiteColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 3.0,
+            offset: const Offset(0, 2),
+          ),
+        ],
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Autocomplete(optionsBuilder: (TextEditingValue textEditingValue) {
+            if (textEditingValue.text == '') {
+              return const Iterable<String>.empty();
+            } else {
+              List<String> matches = <String>[];
+              matches.addAll(suggestions);
+
+              matches.retainWhere((s) {
+                return s
+                    .toLowerCase()
+                    .contains(textEditingValue.text.toLowerCase());
+              });
+              return matches;
+            }
+          }, onSelected: (String selection) {
+            print('You just selected $selection');
+          }),
+          defaultButtons(pressed: onCancel, text: "Cancel Order")
+        ],
+      ));
+}

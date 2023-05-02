@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:simplibuy/authentication/domain/entities/signup_details.dart';
+import 'package:simplibuy/authentication/data/models/signup_details.dart';
 import 'package:simplibuy/authentication/domain/usecases/signup_usecase.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/validators/validators_string.dart';

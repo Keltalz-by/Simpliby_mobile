@@ -1,8 +1,8 @@
 import 'package:either_dart/either.dart';
+import 'package:simplibuy/authentication/data/models/login_details.dart';
 import 'package:simplibuy/authentication/domain/repositories/auth_repository.dart';
 import '../../../core/failure/failure.dart';
 import '../../../core/result/result.dart';
-import '../entities/login_details.dart';
 
 class LoginUsecase {
   final AuthRepository repository;

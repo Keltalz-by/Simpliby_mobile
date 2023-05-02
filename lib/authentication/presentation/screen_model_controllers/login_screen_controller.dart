@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:simplibuy/authentication/domain/entities/login_details.dart';
+import 'package:simplibuy/authentication/data/models/login_details.dart';
 import 'package:simplibuy/authentication/domain/usecases/login_usecase.dart';
 import 'package:simplibuy/authentication/domain/usecases/resend_otp_usecase.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';

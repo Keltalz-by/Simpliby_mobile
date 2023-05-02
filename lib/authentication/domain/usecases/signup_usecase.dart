@@ -1,5 +1,5 @@
 import 'package:either_dart/either.dart';
-import 'package:simplibuy/authentication/domain/entities/signup_details.dart';
+import 'package:simplibuy/authentication/data/models/signup_details.dart';
 import 'package:simplibuy/authentication/domain/repositories/auth_repository.dart';
 import '../../../core/failure/failure.dart';
 import '../../../core/result/result.dart';

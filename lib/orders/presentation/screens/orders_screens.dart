@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
+import 'package:simplibuy/core/reusable_widgets/custom_dialog.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/core/state/state.dart';
 import 'package:simplibuy/orders/presentation/controllers/orders_controllers.dart';
@@ -56,6 +57,30 @@ class OrdersScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  showBottomSheetAcceptedOrders() {
+    Get.bottomSheet(acceptedOrdersBottomSheet(() {
+      Get.dialog(CustomDialog(
+          callback: () {},
+          buttonText: "Confirm Payment",
+          textDetail: "Offer Accepted"));
+    }));
+  }
+
+  showBottomSheetIncoingOrders() {
+    Get.bottomSheet(incomingOrdersBottomSheet(() {
+      Get.dialog(CustomDialog(
+          callback: () {},
+          buttonText: "Confirm Payment",
+          textDetail: "Offer Accepted"));
+    }, () {
+      Get.dialog(CustomDialog(
+          callback: () {},
+          buttonText: "Continue",
+          iconColor: Colors.black,
+          textDetail: "Offer Declined"));
+    }));
   }
 
   Widget orderButtons(BuildContext context) {
@@ -126,7 +151,9 @@ class OrdersScreen extends StatelessWidget {
               itemCount: controller.incomingOrdersList.length,
               itemBuilder: (context, position) {
                 return singleIncomingOrder(
-                    context, controller.incomingOrdersList[position], () {});
+                    context, controller.incomingOrdersList[position], () {
+                  showBottomSheetIncoingOrders();
+                });
               }));
     });
   }
@@ -141,7 +168,9 @@ class OrdersScreen extends StatelessWidget {
               itemCount: controller.acceptedOrdersList.length,
               itemBuilder: (context, position) {
                 return singleAcceptedOrder(
-                    context, controller.acceptedOrdersList[position], () {});
+                    context, controller.acceptedOrdersList[position], () {
+                  showBottomSheetAcceptedOrders();
+                });
               }));
     });
   }

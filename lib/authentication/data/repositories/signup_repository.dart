@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:either_dart/either.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/authentication/data/datasources/registration_datasource.dart';
-import 'package:simplibuy/authentication/domain/entities/signup_details.dart';
+import 'package:simplibuy/authentication/data/models/signup_details.dart';
 import 'package:simplibuy/authentication/domain/repositories/auth_repository.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/failure/failure.dart';
@@ -27,9 +27,9 @@ class SignupRepositoryImpl implements AuthRepository<SignupDetail> {
         final res = await dataSource.registerUser(detail);
         final message = json.decode(res.body)['message'];
         if (res.statusCode == 201) {
-             final userId = json.decode(res.body)['data']['_id'];
-             print(userId);
-             storeUserId(userId);
+          final userId = json.decode(res.body)['data']['_id'];
+          print(userId);
+          storeUserId(userId);
           return Right(Result(value: message));
         } else {
           return Left(

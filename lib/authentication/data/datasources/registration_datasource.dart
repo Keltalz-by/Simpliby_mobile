@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
-import 'package:simplibuy/authentication/domain/entities/login_details.dart';
-import 'package:simplibuy/authentication/domain/entities/signup_details.dart';
+import 'package:simplibuy/authentication/data/models/login_details.dart';
+import 'package:simplibuy/authentication/data/models/signup_details.dart';
 import 'package:simplibuy/core/constants/string_constants.dart';
 
 class RegistrationDataSource {
@@ -45,6 +45,14 @@ class RegistrationDataSource {
   }
 
   Future<http.Response> resendOtp(String uid, String email) async {
+    var url = Uri.parse('${BASE_URL}auth/resendotp');
+    final Map<String, dynamic> body = {'userId': uid, 'email': email};
+    var response = await http.post(url, body: body);
+    return response;
+  }
+
+  Future<http.Response> registerBusiness(String uid, String email) async {
+    //not yet implmented
     var url = Uri.parse('${BASE_URL}auth/resendotp');
     final Map<String, dynamic> body = {'userId': uid, 'email': email};
     var response = await http.post(url, body: body);

@@ -51,7 +51,7 @@ Widget textFieldWithHeader(
   );
 }
 
-Widget country(BuildContext context, String title) {
+Widget country(BuildContext context, String title, Function(String) onchanged) {
   String selectedValue = 'Nigeria';
 
   return Column(
@@ -75,48 +75,57 @@ Widget country(BuildContext context, String title) {
               true, // Set the dropdown button to expand to the width of the container
           elevation: 0,
           value: selectedValue,
-          items: <String>['Nigeria', 'Option 2', 'Option 3', 'Option 4']
+          items: <String>['Nigeria', 'Ghana', 'Option 3', 'Option 4']
               .map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),
             );
           }).toList(),
-          onChanged: (newValue) {},
+          onChanged: (newValue) {
+            onchanged(newValue!);
+          },
         ),
       )
     ],
   );
 }
 
-Widget imageUpload(BuildContext context, String title) {
+Widget imageUpload(
+    {required BuildContext context,
+    required String title,
+    required VoidCallback onClick,
+    String infoText = "Upload file"}) {
   return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
     _text(title),
-    DottedBorder(
-        borderType: BorderType.RRect,
-        color: blueColor,
-        radius: const Radius.circular(6),
-        dashPattern: const [8, 4],
-        child: SizedBox(
-            width: MediaQuery.of(context)
-                .size
-                .width, // Set the width of the container
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Icon(
-                  Icons.download_sharp,
-                  size: 49,
-                ),
-                Text("Upload file",
-                    style: TextStyle(
-                        color: blueColor,
-                        fontSize: smallTextFontSize,
-                        fontWeight: FontWeight.bold))
-              ],
-            )))
+    GestureDetector(
+      onTap: onClick,
+      child: DottedBorder(
+          borderType: BorderType.RRect,
+          color: blueColor,
+          radius: const Radius.circular(6),
+          dashPattern: const [8, 4],
+          child: SizedBox(
+              width: MediaQuery.of(context)
+                  .size
+                  .width, // Set the width of the container
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.download_sharp,
+                    size: 49,
+                  ),
+                  Text(infoText,
+                      style: TextStyle(
+                          color: blueColor,
+                          fontSize: smallTextFontSize,
+                          fontWeight: FontWeight.bold))
+                ],
+              ))),
+    )
   ]);
 }
 
