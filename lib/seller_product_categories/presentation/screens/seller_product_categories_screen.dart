@@ -78,7 +78,7 @@ class SellerProductCategoriesScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(60),
+                    borderRadius: BorderRadius.circular(10),
                     child: FadeInImage.assetNetwork(
                         width: MediaQuery.of(context).size.width,
                         height: 100,
@@ -89,6 +89,7 @@ class SellerProductCategoriesScreen extends StatelessWidget {
                             'assets/images/buy.png',
                             width: MediaQuery.of(context).size.width,
                             height: 100,
+                            fit: BoxFit.cover,
                           );
                         },
                         image: "")),

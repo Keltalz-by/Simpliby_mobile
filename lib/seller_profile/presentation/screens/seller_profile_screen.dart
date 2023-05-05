@@ -3,11 +3,18 @@ import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/constants/string_constants.dart';
+import 'package:simplibuy/core/error_types/error_types.dart';
+import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/core/state/state.dart';
+import 'package:simplibuy/seller_profile/presentation/controllers/seller_profile_controller.dart';
+import 'package:simplibuy/seller_profile/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/store_and_product/presentation/screens/custom_widgets.dart';
 
+// ignore: must_be_immutable
 class SellerProfileScreen extends StatelessWidget {
-  const SellerProfileScreen({Key? key}) : super(key: key);
+  SellerProfileScreen({Key? key}) : super(key: key);
 
+  SellerProfileController controller = Get.find<SellerProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +26,8 @@ class SellerProfileScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 clipBehavior: Clip.none,
                 children: [
-                  imageSliders(context, []),
+                  imageSliders(
+                      context, controller.sellerProfileDetails.storeImages),
                   Positioned(
                       top: 40,
                       right: 20,
@@ -44,11 +52,11 @@ class SellerProfileScreen extends StatelessWidget {
                   )
                 ],
               )),
-          const Padding(
-              padding: EdgeInsets.only(left: defaultPadding),
+          Padding(
+              padding: const EdgeInsets.only(left: defaultPadding),
               child: Text(
-                "SHOPRITE",
-                style: TextStyle(
+                controller.sellerProfileDetails.storeName,
+                style: const TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.bold,
                     fontSize: smallTextFontSize),
@@ -56,23 +64,25 @@ class SellerProfileScreen extends StatelessWidget {
           Padding(
               padding: const EdgeInsets.only(
                   left: defaultPadding, right: defaultPadding),
-              child: storeDescription(desc: "The best store in the world")),
+              child:
+                  storeDescription(desc: controller.sellerProfileDetails.desc)),
           Padding(
               padding: const EdgeInsets.only(
                   left: defaultPadding, right: defaultPadding),
               child: storeContactDetails(
-                  email: "ebukaikenwa@gmail.com", phoneNumber: "09027901278")),
+                  email: controller.sellerProfileDetails.email,
+                  phoneNumber: controller.sellerProfileDetails.number)),
           Padding(
               padding: const EdgeInsets.only(left: defaultPadding),
-              child: Row(children: const [
-                Icon(
+              child: Row(children: [
+                const Icon(
                   Icons.location_on,
                   color: blackColor,
                   size: 13,
                 ),
                 Text(
-                  "Olorunsogo Street",
-                  style: TextStyle(
+                  controller.sellerProfileDetails.address,
+                  style: const TextStyle(
                     color: blackColor,
                     fontSize: 15,
                   ),
@@ -82,7 +92,7 @@ class SellerProfileScreen extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: storeFollowers(
-                followers: 1000,
+                followers: controller.sellerProfileDetails.followers.toInt(),
                 color: whiteColor,
                 decoration: const BoxDecoration(
                     color: blueColor,
@@ -90,18 +100,37 @@ class SellerProfileScreen extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.only(top: 20)),
           createPromoPost(),
-          Expanded(
+          showPromoPosts(context)
+        ]));
+  }
+
+  Widget showPromoPosts(BuildContext context) {
+    return Obx(
+      () {
+        if (controller.statePosts is LoadingState) {
+          return defaultLoading(context);
+        }
+        if (controller.statePosts is FinishedState) {
+          return Expanded(
               child: Container(
                   padding: const EdgeInsets.all(10),
                   child: ListView.separated(
                       separatorBuilder: (BuildContext context, int pos) {
                         return const Padding(padding: EdgeInsets.only(top: 10));
                       },
-                      itemCount: 3,
+                      itemCount: controller.promoPosts.length,
                       itemBuilder: (BuildContext context, int position) {
-                        return singlePromo(context);
-                      })))
-        ]));
+                        return singlePromo(
+                            context, controller.promoPosts[position]);
+                      })));
+        }
+        if (controller.state == ErrorState(errorType: InternetError())) {
+          return noInternetConnection(context);
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
   Widget editProfileButton() {
@@ -125,7 +154,7 @@ class SellerProfileScreen extends StatelessWidget {
   Widget storeLogo(BuildContext context) {
     return ClipOval(
         child: FadeInImage.assetNetwork(
-            image: "",
+            image: controller.sellerProfileDetails.storeLogo,
             width: 100,
             height: 100,
             fit: BoxFit.cover,
@@ -187,41 +216,6 @@ class SellerProfileScreen extends StatelessWidget {
           Get.toNamed(SELLER_EDIT_PROFILE_SCREEN);
         }
       },
-    );
-  }
-
-  Widget singlePromo(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-          color: whiteColor,
-          borderRadius: BorderRadius.all(Radius.circular(20))),
-      child: Column(
-        children: [
-          ClipRRect(
-              borderRadius: BorderRadius.circular(
-                  20), // adjust this value as per your needs
-              child: FadeInImage.assetNetwork(
-                  image: "",
-                  width: MediaQuery.of(context).size.width,
-                  height: 60,
-                  fit: BoxFit.cover,
-                  placeholder: defaultStoreImage,
-                  imageErrorBuilder: (context, error, stackTrace) {
-                    return ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
-                        child: Image.asset(defaultProductImage,
-                            width: MediaQuery.of(context).size.width,
-                            height: 120,
-                            fit: BoxFit.cover));
-                  })),
-          const Padding(padding: EdgeInsets.only(top: 10)),
-          const Text("Discount for all accessories",
-              style: TextStyle(
-                  fontSize: smallTextFontSize, fontWeight: FontWeight.bold))
-        ],
-      ),
     );
   }
 }

@@ -33,6 +33,7 @@ import 'package:simplibuy/reserve/presentation/screens/reserve_screen_completion
 import 'package:simplibuy/seller_edit_profile/presentation/screens/seller_edit_profile_screen.dart';
 import 'package:simplibuy/seller_home/presentation/bindings/seller_home_bindings.dart';
 import 'package:simplibuy/seller_home/presentation/screens/seller_home.dart';
+import 'package:simplibuy/seller_payments/presentation/bindings/seller_payments_bindings.dart';
 import 'package:simplibuy/seller_payments/presentation/screens/seller_payments_screen.dart';
 import 'package:simplibuy/seller_plan/presentation/screens/confirm_pro_sub.dart';
 import 'package:simplibuy/seller_plan/presentation/screens/pay_sub_screen.dart';
@@ -40,7 +41,10 @@ import 'package:simplibuy/seller_plan/presentation/screens/plans.dart';
 import 'package:simplibuy/seller_plan/presentation/screens/pro_plan.dart';
 import 'package:simplibuy/seller_product_categories/presentation/screens/seller_product_categories_screen.dart';
 import 'package:simplibuy/seller_product_detail/presentation/screens/seller_product_detail_screen.dart';
+import 'package:simplibuy/seller_products/presentation/bindings/seller_products_bindings.dart';
 import 'package:simplibuy/seller_products/presentation/screens/seller_products_screen.dart';
+import 'package:simplibuy/seller_profile/presentation/bindings/seller_profile_bindings.dart';
+import 'package:simplibuy/seller_profile/presentation/screens/seller_profile_screen.dart';
 import 'package:simplibuy/settings/presentation/screens/settings_screen.dart';
 import 'package:simplibuy/store_and_product/presentation/binding/product_binding.dart';
 import 'package:simplibuy/store_and_product/presentation/binding/products_list_binding.dart';
@@ -186,17 +190,17 @@ class MyApp extends StatelessWidget {
       page: () => SellerProductCategoriesScreen(),
     ),
     GetPage(
-      name: SELLER_PRODUCTS,
-      page: () => SellerProductsScreens(),
-    ),
+        name: SELLER_PRODUCTS,
+        page: () => SellerProductsScreens(),
+        binding: SellerProductsBindings()),
     GetPage(
       name: SELLER_PRODUCT_DETAIL,
       page: () => SellerProductDetailScreen(),
     ),
     GetPage(
-      name: SELLER_PAYMENTS,
-      page: () => SellerPaymentsScreen(),
-    ),
+        name: SELLER_PAYMENTS,
+        page: () => SellerPaymentsScreen(),
+        binding: SellerPaymentsBindings()),
     GetPage(
       name: ADD_BANK_SCREEN,
       page: () => AddBankScreen(),
@@ -206,9 +210,9 @@ class MyApp extends StatelessWidget {
       page: () => WithdrawToBankScreen(),
     ),
     GetPage(
-      name: SELLER_PROFILE_SCREEN,
-      page: () => WithdrawToBankScreen(),
-    ),
+        name: SELLER_PROFILE_SCREEN,
+        page: () => SellerProfileScreen(),
+        binding: SellerProfileBindings()),
     GetPage(
       name: SELLER_EDIT_PROFILE_SCREEN,
       page: () => SellerEditProfileScreen(),

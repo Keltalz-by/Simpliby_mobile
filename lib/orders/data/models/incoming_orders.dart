@@ -16,7 +16,7 @@ final orders = [
 ];
 
 final ordersA = [
-  AcceptedOrders("", "Ikenwa John", "1783HAJE3", "Paid"),
-  AcceptedOrders("", "Ikenwa John", "1783HAJE3", "Paid"),
-  AcceptedOrders("", "Ikenwa John", "1783HAJE3", "Paid")
+  AcceptedOrder("", "Ikenwa John", "1783HAJE3", "Paid"),
+  AcceptedOrder("", "Ikenwa John", "1783HAJE3", "Paid"),
+  AcceptedOrder("", "Ikenwa John", "1783HAJE3", "Paid")
 ];

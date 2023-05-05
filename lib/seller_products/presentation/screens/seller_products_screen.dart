@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
+import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/core/state/state.dart';
+import 'package:simplibuy/seller_products/data/models/seller_product.dart';
+import 'package:simplibuy/seller_products/presentation/controllers/seller_products_controller.dart';
 
 class SellerProductsScreens extends StatelessWidget {
   SellerProductsScreens({Key? key}) : super(key: key);
 
+  final SellerProductsController controller =
+      Get.find<SellerProductsController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,23 +49,40 @@ class SellerProductsScreens extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 )),
             const Padding(padding: EdgeInsets.only(top: defaultPadding)),
-            Flexible(
-                child: GridView.count(
-                    crossAxisCount: 2,
-                    physics: const ScrollPhysics(),
-                    crossAxisSpacing: 4.0,
-                    mainAxisSpacing: 18.0,
-                    shrinkWrap: true,
-                    children: List.generate(
-                        20,
-                        (index) => Center(
-                                child: showItemsGrid(context, () {
-                              Get.toNamed(SELLER_PRODUCT_DETAIL);
-                            })))))
+            showUI(context),
           ],
         ),
       ),
     );
+  }
+
+  Widget showUI(BuildContext context) {
+    return Obx(() {
+      if (controller.state is FinishedState) {
+        return Flexible(
+            child: GridView.count(
+                crossAxisCount: 2,
+                physics: const ScrollPhysics(),
+                crossAxisSpacing: 4.0,
+                mainAxisSpacing: 18.0,
+                shrinkWrap: true,
+                children: List.generate(
+                    controller.products.length,
+                    (index) => Center(
+                            child: showItemsGrid(
+                                context, controller.products[index], () {
+                          Get.toNamed(SELLER_PRODUCT_DETAIL);
+                        })))));
+      }
+      if (controller.state is LoadingState) {
+        return defaultLoading(context);
+      }
+      if (controller.state == ErrorState(errorType: InternetError())) {
+        return noInternetConnection(context);
+      } else {
+        return Container();
+      }
+    });
   }
 
   final actions = [
@@ -80,7 +103,8 @@ class SellerProductsScreens extends StatelessWidget {
     ),
   ];
 
-  Widget showItemsGrid(BuildContext context, VoidCallback onClick) {
+  Widget showItemsGrid(
+      BuildContext context, SellerProduct product, VoidCallback onClick) {
     return GestureDetector(
         onTap: () {
           onClick();
@@ -119,7 +143,7 @@ class SellerProductsScreens extends StatelessWidget {
                               height: 90,
                             );
                           },
-                          image: "")),
+                          image: product.img)),
                 ),
                 Expanded(
                     child: Row(
@@ -129,10 +153,10 @@ class SellerProductsScreens extends StatelessWidget {
                         constraints: const BoxConstraints(
                           maxWidth: 80,
                         ),
-                        child: const Text(
-                          'Fried rice and Chicken',
+                        child: Text(
+                          product.name,
                           maxLines: 2,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.normal,
                           ),

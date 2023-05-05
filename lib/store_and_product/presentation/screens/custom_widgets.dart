@@ -210,12 +210,11 @@ Widget imageSliders(BuildContext context, List<String> images) {
             width: MediaQuery.of(context).size.width,
             height: 250,
             margin: const EdgeInsets.symmetric(horizontal: 5.0),
-            decoration: const BoxDecoration(color: lightBlueColor),
             child: FadeInImage.assetNetwork(
                 fit: BoxFit.fill,
                 placeholder: defaultStoreImage,
                 imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset(defaultProductImage,
+                  return Image.asset(defaultStoreImageBig,
                       width: MediaQuery.of(context).size.width,
                       height: 120,
                       fit: BoxFit.cover);

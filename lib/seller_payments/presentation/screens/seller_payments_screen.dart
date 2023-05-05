@@ -1,13 +1,19 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
+import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/core/state/state.dart';
+import 'package:simplibuy/seller_payments/presentation/controllers/seller_payment_controller.dart';
+import 'package:simplibuy/seller_payments/presentation/screens/custom_widgets.dart';
+import 'package:simplibuy/seller_payments/presentation/screens/seller_payments_all_orders_screen.dart';
 
+// ignore: must_be_immutable
 class SellerPaymentsScreen extends StatelessWidget {
-  const SellerPaymentsScreen({Key? key}) : super(key: key);
+  SellerPaymentsScreen({Key? key}) : super(key: key);
+
+  SellerPaymentController controller = Get.find<SellerPaymentController>();
 
   @override
   Widget build(BuildContext context) {
@@ -54,32 +60,61 @@ class SellerPaymentsScreen extends StatelessWidget {
           orderButtons(context),
           const Padding(padding: EdgeInsets.only(top: 10)),
           transactionButton(),
-          Expanded(
-              child: ListView.separated(
-                  itemBuilder: (value, index) {
-                    return singleTransaction(context);
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Padding(padding: EdgeInsets.only(top: 5));
-                  },
-                  itemCount: 10))
+          showResult(context)
         ]),
       ),
     );
+  }
+
+  Widget showResult(BuildContext context) {
+    return Obx(() {
+      if (controller.state is FinishedState) {
+        return Expanded(
+            child: ListView.separated(
+                itemBuilder: (value, index) {
+                  return singleTransaction(context, controller.orderList[index],
+                      controller.isPaid ? Colors.green : Colors.yellow);
+                },
+                separatorBuilder: (context, index) {
+                  return const Padding(padding: EdgeInsets.only(top: 5));
+                },
+                itemCount: controller.orderList.length));
+      }
+      if (controller.state is LoadingState) {
+        return defaultLoading(context);
+      }
+      if (controller.state == ErrorState(errorType: EmptyListError())) {
+        return const Center(
+            child: Text(
+          "No transactions yet",
+          style: TextStyle(fontSize: smallTextFontSize),
+        ));
+      }
+      if (controller.state == ErrorState(errorType: InternetError())) {
+        return noInternetConnection(context);
+      } else {
+        return Container();
+      }
+    });
   }
 
   Widget transactionButton() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
-        Text(
+      children: [
+        const Text(
           "Transactions",
           style: TextStyle(fontSize: smallTextFontSize),
         ),
-        Text(
-          "View all",
-          style: TextStyle(fontSize: smallerTextFontSize),
+        GestureDetector(
+          child: const Text(
+            "View all",
+            style: TextStyle(fontSize: smallerTextFontSize),
+          ),
+          onTap: () {
+            Get.to(SellerAllPaymentsScreen());
+          },
         )
       ],
     );
@@ -156,16 +191,20 @@ class SellerPaymentsScreen extends StatelessWidget {
                   color: whiteColor,
                   borderRadius: BorderRadius.circular(2.0),
                 ),
-                child: GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      "Paid Orders",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: blackColor.withOpacity(0.8),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )),
+                child: GestureDetector(onTap: () {
+                  controller.getPaidOrders();
+                }, child: Obx(() {
+                  return Text(
+                    "Paid Orders",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: controller.isPaid
+                          ? blueColor
+                          : blackColor.withOpacity(0.8),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                })),
               ),
               const Padding(padding: EdgeInsets.only(left: 6)),
               Container(
@@ -176,59 +215,21 @@ class SellerPaymentsScreen extends StatelessWidget {
                   color: whiteColor,
                   borderRadius: BorderRadius.circular(2.0),
                 ),
-                child: GestureDetector(
-                    onTap: () {
-                      //  controller.getAcceptedOrders();
-                    },
-                    child: Text(
-                      "Unpaid Orders",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: blackColor.withOpacity(0.8),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )),
+                child: GestureDetector(onTap: () {
+                  controller.getUnpaidOrders();
+                }, child: Obx(() {
+                  return Text(
+                    "Unpaid Orders",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: controller.isPaid
+                          ? blackColor.withOpacity(0.8)
+                          : blueColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                })),
               )
             ]));
-  }
-
-  Widget singleTransaction(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          border: Border.all(
-            width: 2,
-            color: Colors.grey,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(7))),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Oni Mikel",
-                  style: TextStyle(fontSize: smallTextFontSize),
-                ),
-                Text(
-                  "FCMB",
-                  style: TextStyle(fontSize: smallTextFontSize),
-                ),
-                Text(
-                  "20th May, 2022",
-                  style: TextStyle(fontSize: smallerTextFontSize),
-                ),
-              ],
-            ),
-            const Text(
-              "N500",
-              style: TextStyle(color: Colors.green, fontSize: 20),
-            )
-          ]),
-    );
   }
 }

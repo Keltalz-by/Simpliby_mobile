@@ -68,19 +68,32 @@ class OrdersScreen extends StatelessWidget {
     }));
   }
 
-  showBottomSheetIncoingOrders() {
-    Get.bottomSheet(incomingOrdersBottomSheet(() {
-      Get.dialog(CustomDialog(
-          callback: () {},
-          buttonText: "Confirm Payment",
-          textDetail: "Offer Accepted"));
-    }, () {
-      Get.dialog(CustomDialog(
-          callback: () {},
-          buttonText: "Continue",
-          iconColor: Colors.black,
-          textDetail: "Offer Declined"));
-    }));
+  showBottomSheetIncoingOrders(BuildContext context) {
+    Get.bottomSheet(showStates(context));
+  }
+
+  Widget showStates(BuildContext context) {
+    return Obx(() {
+      if (controller.stateOrderDetails is LoadingState) {
+        return defaultLoading(context);
+      }
+      if (controller.stateOrderDetails is FinishedState) {
+        return incomingOrdersBottomSheet(() {
+          Get.dialog(CustomDialog(
+              callback: () {},
+              buttonText: "Confirm Payment",
+              textDetail: "Offer Accepted"));
+        }, () {
+          Get.dialog(CustomDialog(
+              callback: () {},
+              buttonText: "Continue",
+              iconColor: Colors.black,
+              textDetail: "Offer Declined"));
+        });
+      } else {
+        return Container();
+      }
+    });
   }
 
   Widget orderButtons(BuildContext context) {
@@ -152,7 +165,8 @@ class OrdersScreen extends StatelessWidget {
               itemBuilder: (context, position) {
                 return singleIncomingOrder(
                     context, controller.incomingOrdersList[position], () {
-                  showBottomSheetIncoingOrders();
+                  controller.getInOrderDetails();
+                  showBottomSheetIncoingOrders(context);
                 });
               }));
     });

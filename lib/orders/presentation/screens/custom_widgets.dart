@@ -82,7 +82,7 @@ Widget singleIncomingOrder(
 }
 
 Widget singleAcceptedOrder(
-    BuildContext context, AcceptedOrders order, VoidCallback onOrderClicked) {
+    BuildContext context, AcceptedOrder order, VoidCallback onOrderClicked) {
   return Container(
     width: MediaQuery.of(context).size.width,
     padding: const EdgeInsets.all(10),

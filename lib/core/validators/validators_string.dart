@@ -27,4 +27,15 @@ mixin ValidatorMixin {
       return "";
     }
   }
+
+  String getShortFieldErrors(String val) {
+    if (val.length < 2) {
+      return "length is too short";
+    }
+    if (val.isEmpty) {
+      return "This field cannot be empty";
+    } else {
+      return "";
+    }
+  }
 }

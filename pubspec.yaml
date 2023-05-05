@@ -58,7 +58,6 @@ dependencies:
   #dotted border
   dotted_border: ^2.0.0+3
   #autocompletion
-  autocomplete_textfield: ^2.1.0
 
 
 dev_dependencies:
