@@ -3,16 +3,31 @@ import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
+import 'package:simplibuy/core/utils/utils.dart';
 
-class SellerHomeScreen extends StatelessWidget {
+class SellerHomeScreen extends StatefulWidget {
   const SellerHomeScreen({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<SellerHomeScreen> {
+  bool isAvailable = false;
+
+  void _toggleAvailability(bool newValue) {
+    setState(() {
+      isAvailable = newValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: whiteColor.withAlpha(80),
         appBar: homeAppBar(
-            text: "Good morning",
+            text: greeting(),
             onPressed: () {
               Get.toNamed(NOTIFICATION_SCREEN);
             }),
@@ -56,17 +71,17 @@ class SellerHomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "Available",
             style: TextStyle(fontSize: 16.0),
           ),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           Switch(
-            value: true,
-            onChanged: (value) => {},
+            value: isAvailable,
+            onChanged: (value) => {_toggleAvailability(value)},
           ),
-          SizedBox(width: 16.0),
-          Text(
+          const SizedBox(width: 16.0),
+          const Text(
             "Unavailable",
             style: TextStyle(fontSize: 16.0),
           ),

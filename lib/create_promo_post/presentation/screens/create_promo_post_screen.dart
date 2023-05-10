@@ -72,7 +72,7 @@ class CreatePromoPostScreen extends StatelessWidget {
       alignment: Alignment.bottomLeft,
       child: Text(
         "Ensure that the size of your image fits our recommended dimension 8.54 X 3.75 inches",
-        style: TextStyle(fontSize: smallTextFontSize),
+        style: TextStyle(fontSize: 14),
       ),
     );
   }

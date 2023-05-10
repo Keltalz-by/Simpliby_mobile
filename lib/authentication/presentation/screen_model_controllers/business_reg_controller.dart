@@ -12,7 +12,7 @@ class BusinessRegController extends GetxController with ValidatorMixin {
   final RxString _nameError = "".obs;
   final RxString _locationError = "".obs;
   final Rx<File> _logo = File('').obs;
-  final RxList<File> _images = RxList<File>([]);
+  final Rx<File> _image = File('').obs;
   final RxString _descError = "".obs;
   final RxBool _isLogoSelected = false.obs;
   final RxBool _areImagesSelected = false.obs;
@@ -28,7 +28,7 @@ class BusinessRegController extends GetxController with ValidatorMixin {
   bool get areImagesSelected => _areImagesSelected.value;
   File get logo => _logo.value;
   // ignore: invalid_use_of_protected_member
-  List<File> get images => _images.value;
+  File get image => _image.value;
   String _country = "Nigeria";
 
   String get nameError => _nameError.value;
@@ -128,12 +128,10 @@ class BusinessRegController extends GetxController with ValidatorMixin {
   }
 
   uploadBusinessImages() {
-    ImagePicker()
-        .pickMultiImage(maxWidth: 200, maxHeight: 200, imageQuality: 100)
-        .then((value) {
+    ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
       if (value != null) {
-        List<File> files = images.map((image) => File(image.path)).toList();
-        _images.value = files;
+        final imageFile = File(value.path);
+        _image.value = imageFile;
         _areImagesSelected.value = true;
       }
     });

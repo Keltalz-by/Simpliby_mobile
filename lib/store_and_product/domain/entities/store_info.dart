@@ -10,7 +10,7 @@ class StoreInfo extends Equatable {
   final String email;
   final int followers;
   final int rating;
-  final List<String> storeImages;
+  final String storeImages;
 
   StoreInfo(
       this.storeId,

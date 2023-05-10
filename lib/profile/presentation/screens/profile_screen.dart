@@ -45,7 +45,10 @@ class ProfileScreen extends StatelessWidget {
                                       'assets/gifs/simpliby_loading.gif',
                                   imageErrorBuilder:
                                       (context, error, stackTrace) {
-                                    return const Icon(Icons.account_circle);
+                                    return const Icon(
+                                      Icons.account_circle,
+                                      size: 80,
+                                    );
                                   },
                                   image: controller.details.image)
                               : Image.file(
@@ -55,11 +58,11 @@ class ProfileScreen extends StatelessWidget {
                                 )),
                     )),
                 Obx(() => controller.isEditable
-                    ? defaultButtons(
+                    ? padding
+                    : defaultButtons(
                         pressed: () {},
                         text: '1k Following',
-                        size: const Size(140, 40))
-                    : padding),
+                        size: const Size(140, 40))),
                 inputFieldProfileName(),
                 padding,
                 inputFieldProfileLocation(),

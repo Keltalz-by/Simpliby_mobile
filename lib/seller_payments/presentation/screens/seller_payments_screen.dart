@@ -141,26 +141,53 @@ class SellerPaymentsScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Row(
+              children: [
+                Obx(() {
+                  return InkWell(
+                    onTap: controller.changeVisibility,
+                    child: Icon(
+                      controller.isVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      size: 18,
+                      color: whiteColor,
+                    ),
+                  );
+                }),
+                const Padding(padding: EdgeInsets.only(left: 5)),
+                const Text(
                   "Total amount sold",
                   style: TextStyle(
                       color: whiteColor, fontSize: smallerTextFontSize),
                 ),
-                Text(
-                  "This month ",
-                  style: TextStyle(
-                      color: whiteColor, fontSize: smallerTextFontSize),
-                )
-              ]),
+              ],
+            ),
+            const Text(
+              "This month ",
+              style:
+                  TextStyle(color: whiteColor, fontSize: smallerTextFontSize),
+            )
+          ]),
           const Padding(padding: EdgeInsets.only(top: 10)),
-          const Text(
-            "\$30,000",
-            style: TextStyle(
-                color: whiteColor, fontSize: 32, fontWeight: FontWeight.bold),
-          ),
+          Obx(() {
+            return controller.isVisible
+                ? const Text(
+                    "\$30,000",
+                    style: TextStyle(
+                        color: whiteColor,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold),
+                  )
+                : const Text(
+                    "***",
+                    style: TextStyle(
+                        color: whiteColor,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold),
+                  );
+          }),
           const Padding(padding: EdgeInsets.only(top: 30)),
           const Text(
             "Roban stores",
@@ -173,7 +200,7 @@ class SellerPaymentsScreen extends StatelessWidget {
 
   Widget orderButtons(BuildContext context) {
     return Container(
-        width: 290,
+        width: MediaQuery.of(context).size.width * 0.75,
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
           color: Colors.grey.withOpacity(0.3),
@@ -184,7 +211,6 @@ class SellerPaymentsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 130,
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(6.0),
                 decoration: BoxDecoration(
@@ -208,7 +234,6 @@ class SellerPaymentsScreen extends StatelessWidget {
               ),
               const Padding(padding: EdgeInsets.only(left: 6)),
               Container(
-                width: 130,
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(6.0),
                 decoration: BoxDecoration(

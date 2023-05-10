@@ -37,7 +37,7 @@ class StoreInfoScreen extends StatelessWidget {
             alignment: Alignment.center,
             clipBehavior: Clip.none,
             children: [
-              imageSliders(context, _controller.store.storeImages),
+              SellerProfileImage(context, _controller.store.storeImages),
               Positioned(
                   top: 40,
                   right: 20,
@@ -64,10 +64,14 @@ class StoreInfoScreen extends StatelessWidget {
               physics: const ScrollPhysics(),
               child: Column(children: [
                 const Padding(padding: EdgeInsets.only(top: 10)),
-                storeDescription(desc: _controller.store.about),
-                storeContactDetails(
-                    email: _controller.store.email,
-                    phoneNumber: _controller.store.phoneNumber),
+                Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: storeDescription(desc: _controller.store.about)),
+                Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: storeContactDetails(
+                        email: _controller.store.email,
+                        phoneNumber: _controller.store.phoneNumber)),
                 Align(
                   alignment: Alignment.topLeft,
                   child: storeFollowers(followers: 1000),

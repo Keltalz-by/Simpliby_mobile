@@ -21,29 +21,29 @@ class SellerProfileScreen extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 245, 243, 243),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
-              height: 320,
+              height: MediaQuery.of(context).size.height * 0.4,
               child: Stack(
-                alignment: Alignment.center,
-                clipBehavior: Clip.none,
+                alignment: Alignment.topCenter,
+                clipBehavior: Clip.hardEdge,
                 children: [
-                  imageSliders(
+                  SellerProfileImage(
                       context, controller.sellerProfileDetails.storeImages),
                   Positioned(
-                      top: 40,
+                      top: 20,
                       right: 20,
                       child: Align(
                         alignment: Alignment.center,
                         child: otherOptions(),
                       )),
                   Positioned(
-                    bottom: -10,
+                    bottom: 20,
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: storeLogo(context),
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    bottom: 20,
                     right: 10,
                     child: Align(
                       alignment: Alignment.bottomRight,
@@ -207,7 +207,7 @@ class SellerProfileScreen extends StatelessWidget {
       ),
     ];
     return PopupMenuButton<String>(
-      icon: const Icon(Icons.more_vert, color: blackColor),
+      icon: const Icon(Icons.more_vert, color: whiteColor),
       itemBuilder: (BuildContext context) {
         return actions;
       },

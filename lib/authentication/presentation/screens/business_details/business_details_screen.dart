@@ -108,7 +108,7 @@ class BusinessDetailsScreen extends StatelessWidget {
                 controller.uploadBusinessImages();
               },
               infoText: controller.areImagesSelected
-                  ? "${controller.images.length} images selected"
+                  ? "images selected"
                   : "No Images Selected");
         }),
         padding,

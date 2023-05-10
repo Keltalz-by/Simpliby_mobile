@@ -33,7 +33,6 @@ Widget storeNameAndAddress(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0), color: Colors.red),
         width: MediaQuery.of(context).size.width * 0.76,
-        height: 60,
         padding: const EdgeInsets.all(5),
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           Text(
@@ -189,7 +188,7 @@ Widget _chatToOrder() {
 }
 
 Widget followAndChat() {
-  return Container(
+  return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,31 +199,18 @@ Widget followAndChat() {
       ));
 }
 
-Widget imageSliders(BuildContext context, List<String> images) {
-  return CarouselSlider(
-    options: CarouselOptions(height: MediaQuery.of(context).size.height * 250),
-    items: images.map((image) {
-      return Builder(
-        builder: (BuildContext context) {
-          return Container(
+Widget SellerProfileImage(BuildContext context, String image) {
+  return FadeInImage.assetNetwork(
+      height: MediaQuery.of(context).size.height * 0.3,
+      fit: BoxFit.fill,
+      placeholder: defaultStoreImage,
+      imageErrorBuilder: (context, error, stackTrace) {
+        return Image.asset(defaultStoreImageBig,
             width: MediaQuery.of(context).size.width,
-            height: 250,
-            margin: const EdgeInsets.symmetric(horizontal: 5.0),
-            child: FadeInImage.assetNetwork(
-                fit: BoxFit.fill,
-                placeholder: defaultStoreImage,
-                imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset(defaultStoreImageBig,
-                      width: MediaQuery.of(context).size.width,
-                      height: 120,
-                      fit: BoxFit.cover);
-                },
-                image: image),
-          );
-        },
-      );
-    }).toList(),
-  );
+            height: MediaQuery.of(context).size.height * 0.3,
+            fit: BoxFit.cover);
+      },
+      image: image);
 }
 
 Widget storeRating({required int rating}) {
@@ -379,40 +365,55 @@ Widget productListContainer(
     required Product product,
     required VoidCallback onProductClick,
     required VoidCallback onAddBtnClicked}) {
-  return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.42,
+  return Container(
+      padding: const EdgeInsets.only(top: 5, left: 5),
+      width: MediaQuery.of(context).size.width * 0.38,
+      height: 180,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 2,
+            offset: const Offset(0, 0),
+          ),
+        ],
+      ),
       child: Stack(
           clipBehavior: Clip.none,
           alignment: Alignment.bottomRight,
           children: [
-            Card(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              elevation: 3,
-              child: GestureDetector(
-                  onTap: onProductClick,
-                  child: Column(children: [
-                    productImage(product.productImage[0]),
-                    Text(product.productName,
-                        style: const TextStyle(
-                            color: blackColor,
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold)),
-                    RichText(
-                        text: TextSpan(children: [
-                      TextSpan(
-                          text: '₦${product.productPrice}',
+            Positioned(
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: GestureDetector(
+                    onTap: onProductClick,
+                    child: Column(children: [
+                      productImage(product.productImage[0]),
+                      Text(product.productName,
+                          style: const TextStyle(
+                              color: blackColor,
+                              fontSize: smallTextFontSize,
+                              fontWeight: FontWeight.bold)),
+                      /* RichText(
+                          text: TextSpan(children: [*/
+                      Text('₦${product.productPrice}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               color: blackColor,
                               fontSize: 15,
                               fontWeight: FontWeight.bold)),
-                      const TextSpan(
-                          text: " View",
+                      /*  const TextSpan(
+                          text: " View Details",
                           style: TextStyle(
-                              color: blackColor, fontSize: smallerTextFontSize))
-                    ])),
-                  ])),
-            ),
+                              color: blackColor, fontSize: smallerTextFontSize))*/
+                      //])),
+                    ]))),
             Positioned(right: 1, bottom: 1, child: addSign(onAddBtnClicked))
           ]));
 }

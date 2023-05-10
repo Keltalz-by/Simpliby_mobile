@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -25,8 +24,8 @@ class AddBankScreen extends StatelessWidget {
                 "Upload te details of the bank account you would like to receive payments into. ",
                 style: TextStyle(fontSize: smallTextFontSize),
               ),
-              Padding(padding: EdgeInsets.only(top: 10)),
-              Align(
+              const Padding(padding: EdgeInsets.only(top: 10)),
+              const Align(
                 child: Text("Add bank"),
                 alignment: Alignment.centerLeft,
               ),
@@ -36,8 +35,8 @@ class AddBankScreen extends StatelessWidget {
                   maxLines: 1,
                   decoration:
                       customInputDecoration(hint: null, errorText: null)),
-              Padding(padding: EdgeInsets.only(top: 10)),
-              Align(
+              const Padding(padding: EdgeInsets.only(top: 10)),
+              const Align(
                 child: Text("Account number"),
                 alignment: Alignment.centerLeft,
               ),

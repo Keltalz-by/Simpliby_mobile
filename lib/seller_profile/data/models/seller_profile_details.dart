@@ -1,5 +1,5 @@
 class SellerProfileDetails {
-  final List<String> storeImages;
+  final String storeImages;
   final String storeLogo;
   final String storeName;
   final String desc;
@@ -12,7 +12,7 @@ class SellerProfileDetails {
       this.desc, this.email, this.number, this.followers, this.address);
 
   SellerProfileDetails.demo(
-      {this.storeImages = imges,
+      {this.storeImages = "",
       this.storeLogo = "",
       this.storeName = "Roban Stores",
       this.desc =
@@ -22,8 +22,6 @@ class SellerProfileDetails {
       this.number = "0901348394",
       this.address = "32, Olorunsogo street, Ejigbo, Lagos"});
 }
-
-const List<String> imges = [];
 
 class SellerSinglePromoPost {
   final String title;

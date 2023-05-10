@@ -19,7 +19,7 @@ Widget singleHistoryItem(BuildContext context, HistoryData data) {
           padding: const EdgeInsets.all(5),
           decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: lightBlueColor),
+              color: Color.fromARGB(255, 149, 194, 231)),
           child: Image.asset(
             'assets/images/simpliby_logo.png',
             width: 50,
@@ -27,14 +27,15 @@ Widget singleHistoryItem(BuildContext context, HistoryData data) {
           ),
         ),
         const Padding(padding: EdgeInsets.only(left: 10)),
-        _historyDetails(data)
+        _historyDetails(context, data)
       ],
     ),
   );
 }
 
-Widget _historyDetails(HistoryData data) {
-  return Column(
+Widget _historyDetails(BuildContext context, HistoryData data) {
+  return Expanded(
+      child: Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -64,7 +65,7 @@ Widget _historyDetails(HistoryData data) {
         style: const TextStyle(color: blackColor, fontSize: smallTextFontSize),
       ),
     ],
-  );
+  ));
 }
 
 Widget emptyHistory(BuildContext context) {

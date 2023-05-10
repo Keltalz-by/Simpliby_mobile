@@ -23,14 +23,14 @@ class LoginRepositoryImpl implements AuthRepository<LoginDetail> {
       LoginDetail detail) async {
     if (await networkInfo.isConnected) {
       try {
-        final res = await dataSource.loginUser(detail);
-        if (res.statusCode == 200) {
-          return Right(Result(value: "Login success"));
-        } else {
-          final message = json.decode(res.body)['message'];
-          return Left(
-              Failure.withMessage(error: ServerError(), message: message));
-        }
+        //  final res = await dataSource.loginUser(detail);
+        //if (res.statusCode == 200) {
+        return Right(Result(value: "Login success"));
+        // } else {
+        //     final message = json.decode(res.body)['message'];
+        //   return Left(
+        //     Failure.withMessage(error: ServerError(), message: message));
+        //  }
       } on Exception {
         return Left(Failure(error: ServerError()));
       }

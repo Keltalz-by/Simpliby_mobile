@@ -17,6 +17,9 @@ class SellerPaymentController extends GetxController {
   final RxBool _isPaid = true.obs;
   bool get isPaid => _isPaid.value;
 
+  final RxBool _isVisible = true.obs;
+  bool get isVisible => _isVisible.value;
+
   final RxList<PaymentOrders> _inOrders = (List<PaymentOrders>.of([])).obs;
 
   // ignore: invalid_use_of_protected_member
@@ -25,6 +28,10 @@ class SellerPaymentController extends GetxController {
 
   final _state = const State().obs;
   State get state => _state.value;
+
+  changeVisibility() {
+    _isVisible.value = !_isVisible.value;
+  }
 
   void _toggleIsPaid() {
     _isPaid.value = true;

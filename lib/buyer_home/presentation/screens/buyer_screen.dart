@@ -6,6 +6,7 @@ import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
+import 'package:simplibuy/core/utils/utils.dart';
 
 import '../../../core/reusable_widgets/reusable_widgets.dart';
 import '../../../core/state/state.dart';
@@ -22,7 +23,7 @@ class BuyerHomeScreen extends StatelessWidget {
     return Scaffold(
         drawer: navDrawer(),
         appBar: homeAppBar(
-            text: "Good morning",
+            text: greeting(),
             onPressed: () {
               Get.toNamed(NOTIFICATION_SCREEN);
             }),
@@ -101,6 +102,10 @@ class BuyerHomeScreen extends StatelessWidget {
                         "https://firebasestorage.googleapis.com/v0/b/fir-chatapp-f1bff.appspot.com/o/images%2FZhMQ0oPjDWTqSIGItRqm9wQkU452?alt=media&token=b203a1c0-1e97-4b59-835c-f9c1baa7c771",
                     username: "Ikenwa Ebuka"),
               ),
+              _titleAndIcon(
+                  data: Icons.settings,
+                  text: "Settings",
+                  onClick: () => Get.toNamed(SETTINGS_SCREEN)),
               _titleAndIcon(
                   data: Icons.person,
                   text: "My Account",

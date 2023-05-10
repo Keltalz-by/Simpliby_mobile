@@ -17,9 +17,9 @@ class SellerEditProfileScreen extends StatelessWidget {
             child: Column(children: [
           SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.35,
               child: Stack(
-                alignment: Alignment.center,
+                alignment: Alignment.topCenter,
                 clipBehavior: Clip.none,
                 children: [
                   storeImage(context),
@@ -65,14 +65,6 @@ class SellerEditProfileScreen extends StatelessWidget {
                   errorText: null,
                   hintText: "eg. 09017362923",
                   title: "Phone",
-                  isReq: false,
-                  onChanged: (value) {})),
-          Padding(
-              padding: EdgeInsets.all(10),
-              child: textFieldWithHeader(
-                  errorText: null,
-                  hintText: "eg. Simbi's enterprice",
-                  title: "Business Name",
                   isReq: false,
                   onChanged: (value) {})),
           Padding(
@@ -151,7 +143,7 @@ class SellerEditProfileScreen extends StatelessWidget {
         child: FadeInImage.assetNetwork(
             image: "",
             width: MediaQuery.of(context).size.width,
-            height: 120,
+            height: MediaQuery.of(context).size.height * 0.3,
             fit: BoxFit.cover,
             placeholder: defaultProductImage,
             imageErrorBuilder: (context, error, stackTrace) {
@@ -162,7 +154,7 @@ class SellerEditProfileScreen extends StatelessWidget {
                   child: Image.asset(
                     defaultProductImage,
                     width: MediaQuery.of(context).size.width,
-                    height: 120,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     fit: BoxFit.cover,
                   ));
             }));

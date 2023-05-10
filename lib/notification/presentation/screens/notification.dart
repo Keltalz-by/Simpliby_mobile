@@ -32,7 +32,7 @@ class NotificationScreen extends StatelessWidget {
             if (_controller.state is FinishedState) {
               return ListView.separated(
                   separatorBuilder: ((context, index) {
-                    return Container(padding: EdgeInsets.only(top: 4));
+                    return Container(padding: const EdgeInsets.all(10));
                   }),
                   itemCount: _controller.data.length,
                   itemBuilder: (context, index) {

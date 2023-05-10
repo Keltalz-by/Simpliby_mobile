@@ -28,30 +28,31 @@ class ProductsListScreen extends StatelessWidget {
           if (_controller.state is FinishedState) {
             return Container(
                 padding: const EdgeInsets.all(10),
-                child: GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    physics: const ScrollPhysics(),
-                    crossAxisSpacing: 2.0,
-                    mainAxisSpacing: 2.0,
-                    children: List.generate(
-                        _controller.product.length,
-                        (index) => Center(
-                            child: productListContainer(
-                                context: context,
-                                product: _controller.product[index],
-                                onProductClick: () =>
-                                    Get.toNamed(PRODUCT_SCREEN, arguments: [
-                                      _controller.product[index].productId,
-                                      args[1],
-                                      args[0]
-                                    ]),
-                                onAddBtnClicked: () {
-                                  _controller.addProductToCart(
-                                      index, args[1], args[0]);
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackAdded);
-                                })))));
+                child: Flexible(
+                    child: GridView.count(
+                        shrinkWrap: true,
+                        crossAxisCount: 2,
+                        physics: const ScrollPhysics(),
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                        children: List.generate(
+                            _controller.product.length,
+                            (index) => Center(
+                                child: productListContainer(
+                                    context: context,
+                                    product: _controller.product[index],
+                                    onProductClick: () =>
+                                        Get.toNamed(PRODUCT_SCREEN, arguments: [
+                                          _controller.product[index].productId,
+                                          args[1],
+                                          args[0]
+                                        ]),
+                                    onAddBtnClicked: () {
+                                      _controller.addProductToCart(
+                                          index, args[1], args[0]);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackAdded);
+                                    }))))));
           }
           return defaultLoading(context);
         }));

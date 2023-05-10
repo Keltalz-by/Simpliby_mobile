@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simplibuy/add_bank/presentation/screens/add_bank_screen.dart';
+import 'package:simplibuy/add_new_product/presentation/bindings/add_new_product_binding.dart';
 import 'package:simplibuy/add_new_product/presentation/screens/add_new_product.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/business_reg_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/login_screen_binding.dart';
@@ -182,9 +183,9 @@ class MyApp extends StatelessWidget {
       binding: OrdersBindings(),
     ),
     GetPage(
-      name: ADD_NEW_PRODUCT,
-      page: () => AddNewProductScreen(),
-    ),
+        name: ADD_NEW_PRODUCT,
+        page: () => AddNewProductScreen(),
+        binding: AddNewProductBinding()),
     GetPage(
       name: SELLER_PRODUCT_CATEGORIES,
       page: () => SellerProductCategoriesScreen(),

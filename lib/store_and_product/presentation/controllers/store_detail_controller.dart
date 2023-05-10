@@ -21,7 +21,8 @@ class StoreDetailController extends GetxController {
   List<StoreCategory> get categories => _categories.value;
 
   final Rx<StoreInfo> _store = StoreInfo(0, "name", "address", "logo", "about",
-      "phoneNumber", "email", 111, 2, []).obs;
+          "phoneNumber", "email", 111, 2, "")
+      .obs;
   // ignore: invalid_use_of_protected_member
   StoreInfo get store => _store.value;
 

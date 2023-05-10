@@ -60,7 +60,7 @@ class StoreRepositoryImpl implements StoreRepository {
                 "ebukaikenwa6419@gmail.com",
                 1000,
                 4,
-                ["", "", ""])));
+                "")));
       } on Exception {
         return Left(Failure(error: ServerError()));
       }
