@@ -53,7 +53,7 @@ class WithdrawToBankScreen extends StatelessWidget {
                   decoration:
                       customInputDecoration(hint: null, errorText: null)),
               const Padding(padding: EdgeInsets.only(top: 30)),
-              const Text(
+              Text(
                 "Your payment would be processed while you get credited only on saturdays ",
                 style: TextStyle(fontSize: smallerTextFontSize),
               ),

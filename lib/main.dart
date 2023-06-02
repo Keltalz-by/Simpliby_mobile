@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simplibuy/add_bank/presentation/screens/add_bank_screen.dart';
 import 'package:simplibuy/add_new_product/presentation/bindings/add_new_product_binding.dart';
 import 'package:simplibuy/add_new_product/presentation/screens/add_new_product.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/business_reg_screen_binding.dart';
+import 'package:simplibuy/authentication/presentation/screen_bindings/forgot_password_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/login_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/signup_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/verify_email_binding.dart';
 import 'package:simplibuy/authentication/presentation/screens/business_details/business_details_screen.dart';
+import 'package:simplibuy/authentication/presentation/screens/forgot_password/forgot_password.dart';
 import 'package:simplibuy/authentication/presentation/screens/login/login_screen.dart';
 import 'package:simplibuy/authentication/presentation/screens/signup/signup_screen.dart';
 import 'package:simplibuy/authentication/presentation/screens/verify_email/verify_email.dart';
@@ -60,6 +63,7 @@ import 'package:simplibuy/withdraw/presentation/screens/withdraw_to_bank_screen.
 import 'notification/presentation/screens/notification.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -69,13 +73,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      getPages: pages,
-      initialBinding: MainBinding(),
-      theme: ThemeData(
-          primarySwatch: Colors.blue, scaffoldBackgroundColor: whiteColor),
-      home: SplashScreen(),
+    return ScreenUtilInit(
+      designSize: const Size(428, 902),
+      minTextAdapt: true,
+      builder: (context, child) {
+        return GetMaterialApp(
+          title: 'Flutter Demo',
+          getPages: pages,
+          initialBinding: MainBinding(),
+          theme: ThemeData(
+              primarySwatch: Colors.blue, scaffoldBackgroundColor: whiteColor),
+          home: SplashScreen(),
+        );
+      },
     );
   }
 
@@ -102,6 +112,10 @@ class MyApp extends StatelessWidget {
         name: SIGNUP_ROUTE,
         page: () => SignUpForm(),
         binding: SignupScreenBinding()),
+    GetPage(
+        name: FORGOT_PASSWORD,
+        page: () => ForgotPassword(),
+        binding: ForgotPasswordBinding()),
     GetPage(
         name: VERIFY_EMAIL,
         page: () => VerifyEmail(),

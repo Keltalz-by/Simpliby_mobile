@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:simplibuy/core/constant.dart';
-
 import 'reusable_widgets.dart';
 
 class CustomDialog extends StatelessWidget {

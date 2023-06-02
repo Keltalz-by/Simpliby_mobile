@@ -77,7 +77,7 @@ class SettingsScreen extends StatelessWidget {
           const Padding(padding: EdgeInsets.only(left: 10)),
           Text(
             title,
-            style: const TextStyle(fontSize: smallTextFontSize),
+            style: TextStyle(fontSize: smallTextFontSize),
           ),
         ],
       ),
@@ -103,7 +103,7 @@ class SettingsScreen extends StatelessWidget {
           const Padding(padding: EdgeInsets.only(left: 10)),
           Text(
             title,
-            style: const TextStyle(fontSize: smallTextFontSize),
+            style: TextStyle(fontSize: smallTextFontSize),
           ),
         ],
       ),

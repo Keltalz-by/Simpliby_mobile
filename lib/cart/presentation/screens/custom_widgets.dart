@@ -26,7 +26,7 @@ Widget itemCounter(
   return Row(children: [
     itemCounterIcon(Icons.add_outlined, onAdded),
     Text(number.toString(),
-        style: const TextStyle(color: blackColor, fontSize: smallTextFontSize)),
+        style: TextStyle(color: blackColor, fontSize: smallTextFontSize)),
     itemCounterIcon(Icons.remove, onSubtracted)
   ]);
 }
@@ -39,7 +39,7 @@ Widget deleteTextButton(VoidCallback onDelete) {
         size: 20.0,
         color: blackColor,
       ),
-      label: const Text('Delete',
+      label: Text('Delete',
           style: TextStyle(color: blackColor, fontSize: smallTextFontSize)));
 }
 
@@ -56,7 +56,7 @@ Widget cartListSingleItem(ItemCartDetails details) {
         Text(details.itemName,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
+            style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: blackColor,
                 fontSize: smallTextFontSize)),
@@ -64,8 +64,7 @@ Widget cartListSingleItem(ItemCartDetails details) {
         Text(details.itemPrice.toString(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style:
-                const TextStyle(color: blackColor, fontSize: smallTextFontSize))
+            style: TextStyle(color: blackColor, fontSize: smallTextFontSize))
       ])
     ],
   );
@@ -96,7 +95,7 @@ Widget noDataInCart(VoidCallback startShoppingClicked) {
     children: [
       Image.asset('assets/images/no_cart_items.png'),
       const Padding(padding: EdgeInsets.only(top: 10)),
-      const Text(
+      Text(
         'Your Cart is Empty',
         style: TextStyle(
             color: blackColor,

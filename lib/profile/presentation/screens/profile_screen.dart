@@ -169,8 +169,7 @@ class ProfileScreen extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Text(title,
-          style: const TextStyle(
-              color: blackColor, fontSize: smallerTextFontSize)),
+          style: TextStyle(color: blackColor, fontSize: smallerTextFontSize)),
     );
   }
 
@@ -215,7 +214,7 @@ class ProfileScreen extends StatelessWidget {
                 child: ListBody(
               children: [
                 GestureDetector(
-                  child: const Text(
+                  child: Text(
                     'Camera',
                     style: TextStyle(fontSize: smallTextFontSize),
                   ),
@@ -225,7 +224,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 padding,
                 GestureDetector(
-                  child: const Text(
+                  child: Text(
                     'Gallery',
                     style: TextStyle(fontSize: smallTextFontSize),
                   ),

@@ -5,23 +5,20 @@ import 'package:simplibuy/authentication/data/datasources/registration_datasourc
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/failure/failure.dart';
 import 'package:simplibuy/core/network/network_info.dart';
-import 'package:simplibuy/core/prefs/shared_prefs.dart';
 import 'package:simplibuy/core/result/result.dart';
 
-class VerifyEmailRepoImpl {
+class ForgotPasswordRepoImpl {
   final NetworkInfo networkInfo;
   final RegistrationDataSource dataSource;
 
-  VerifyEmailRepoImpl({required this.networkInfo, required this.dataSource});
+  ForgotPasswordRepoImpl({required this.networkInfo, required this.dataSource});
 
-  Future<Either<Failure, Result<String>>> verifyEmail(
-      String userId, String otp) async {
+  Future<Either<Failure, Result<String>>> sendPaswordResetCode(
+      String email) async {
     if (await networkInfo.isConnected) {
       try {
-        final res = await dataSource.verifyEmail(userId, otp);
+        final res = await dataSource.sendCodePasswordReset(email);
         if (res.statusCode == 200) {
-          await SharedPrefs.initializeSharedPrefs();
-          SharedPrefs.setVerificationStatus(true);
           return Right(Result(value: "Successful"));
         } else {
           final message = json.decode(res.body)['message'];

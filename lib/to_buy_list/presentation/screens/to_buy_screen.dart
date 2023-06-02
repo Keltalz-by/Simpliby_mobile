@@ -19,13 +19,13 @@ class ToBuyScreen extends StatelessWidget {
             padding: const EdgeInsets.all(defaultPadding),
             child: Column(
               children: <Widget>[
-                const Text(
+                Text(
                   "Add the list of item(s) you want to buy, let's help you not to forget",
                   style:
                       TextStyle(color: blackColor, fontSize: smallTextFontSize),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 30)),
-                const Text(
+                Text(
                   "What do you want to buy?",
                   style: TextStyle(
                       color: blackColor, fontSize: smallerTextFontSize),

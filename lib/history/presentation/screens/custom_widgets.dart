@@ -44,25 +44,24 @@ Widget _historyDetails(BuildContext context, HistoryData data) {
         children: [
           Text(
             'Purchase ID: ${data.purchaseId}',
-            style: const TextStyle(
+            style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: blackColor,
                 fontSize: smallTextFontSize),
           ),
           Text(
             data.time,
-            style: const TextStyle(
-                color: blackColor, fontSize: smallerTextFontSize),
+            style: TextStyle(color: blackColor, fontSize: smallerTextFontSize),
           ),
         ],
       ),
       Text(
         'Status: ${data.status}',
-        style: const TextStyle(color: blackColor, fontSize: smallTextFontSize),
+        style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
       ),
       Text(
         'Total Amount: ${data.amount}',
-        style: const TextStyle(color: blackColor, fontSize: smallTextFontSize),
+        style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
       ),
     ],
   ));

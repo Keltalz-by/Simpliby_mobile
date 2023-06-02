@@ -37,7 +37,7 @@ class ReserveScreenCompletion extends StatelessWidget {
                   return RadioListTile(
                     value: 1,
                     groupValue: controller.selectedRadio,
-                    title: const Text(
+                    title: Text(
                       'Pay now',
                       style: TextStyle(fontSize: smallTextFontSize),
                     ),
@@ -49,7 +49,7 @@ class ReserveScreenCompletion extends StatelessWidget {
                   return RadioListTile(
                     value: 2,
                     groupValue: controller.selectedRadio,
-                    title: const Text(
+                    title: Text(
                       'Pay on arrival',
                       style: TextStyle(fontSize: smallTextFontSize),
                     ),
@@ -101,7 +101,7 @@ class ReserveScreenCompletion extends StatelessWidget {
                             value: false,
                             onChanged: (bool newValue) {},
                           ),
-                          const Text(
+                          Text(
                             'Remember this card next time',
                             style: TextStyle(fontSize: smallTextFontSize),
                           ),

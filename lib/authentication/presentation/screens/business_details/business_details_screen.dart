@@ -32,7 +32,7 @@ class BusinessDetailsScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         header(),
-        const Text("We want to verify that you own a store",
+        Text("We want to verify that you own a store",
             style: TextStyle(
                 color: blueColor,
                 fontSize: smallTextFontSize,

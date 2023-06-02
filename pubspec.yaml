@@ -46,6 +46,7 @@ dependencies:
   either_dart: ^0.2.0
   internet_connection_checker: ^0.0.1+4
   connectivity_plus: ^2.3.0
+  flutter_screenutil: ^5.7.0
   shared_preferences: '^2.0.15'
   # image picker
   image_picker: ^0.8.5+3
@@ -57,7 +58,7 @@ dependencies:
   flutter_credit_card: ^3.0.5
   #dotted border
   dotted_border: ^2.0.0+3
-  #autocompletion
+  
 
 
 dev_dependencies:

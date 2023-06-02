@@ -25,11 +25,11 @@ Widget NotificationSingleItem(NotificationData data) {
               child: Text(
                 data.name,
                 textAlign: TextAlign.start,
-                style: const TextStyle(fontSize: smallTextFontSize),
+                style: TextStyle(fontSize: smallTextFontSize),
               )),
           Text(
             data.details,
-            style: const TextStyle(fontSize: smallTextFontSize),
+            style: TextStyle(fontSize: smallTextFontSize),
           )
         ],
       ),

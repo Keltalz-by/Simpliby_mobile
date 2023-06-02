@@ -24,17 +24,17 @@ class SignupRepositoryImpl implements AuthRepository<SignupDetail> {
       SignupDetail detail) async {
     if (await networkInfo.isConnected) {
       try {
-        //       final res = await dataSource.registerUser(detail);
-        //     final message = json.decode(res.body)['message'];
-        //   if (res.statusCode == 201) {
-        //   final userId = json.decode(res.body)['data']['_id'];
-        // print(userId);
-        //   storeUserId(userId);
-        return Right(Result(value: "message"));
-        //      } else {
-        //      return Left(
-        //        Failure.withMessage(error: ServerError(), message: message));
-        //}
+        final res = await dataSource.registerUser(detail);
+        final message = json.decode(res.body)['message'];
+        if (res.statusCode == 201) {
+          final userId = json.decode(res.body)['data']['_id'];
+          print(userId);
+          storeUserId(userId);
+          return Right(Result(value: "message"));
+        } else {
+          return Left(
+              Failure.withMessage(error: ServerError(), message: message));
+        }
       } on Exception {
         return Left(Failure(error: ServerError()));
       }
@@ -70,8 +70,8 @@ class SignupRepositoryImpl implements AuthRepository<SignupDetail> {
     return Left(Failure(error: InternetError()));
   }
 
-  storeUserId(String id) {
-    SharedPrefs.initializeSharedPrefs();
+  storeUserId(String id) async {
+    await SharedPrefs.initializeSharedPrefs();
     return SharedPrefs.setUserId(id);
   }
 }

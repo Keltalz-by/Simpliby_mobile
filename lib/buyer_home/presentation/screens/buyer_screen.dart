@@ -67,7 +67,7 @@ class BuyerHomeScreen extends StatelessWidget {
                 return RichText(
                     text: TextSpan(
                         text: controller.state is ErrorState ? "" : "View all",
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: blackColor, fontSize: smallerTextFontSize),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
@@ -153,8 +153,8 @@ class BuyerHomeScreen extends StatelessWidget {
                         image: url)),
                 Text(
                   username,
-                  style: const TextStyle(
-                      color: whiteColor, fontSize: smallTextFontSize),
+                  style:
+                      TextStyle(color: whiteColor, fontSize: smallTextFontSize),
                   textAlign: TextAlign.center,
                 )
               ]),
@@ -169,7 +169,7 @@ class BuyerHomeScreen extends StatelessWidget {
       leading: Icon(data, color: blueColor),
       title: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
             color: blackColor,
             fontSize: smallTextFontSize,
             fontWeight: FontWeight.bold),
@@ -201,7 +201,7 @@ class BuyerHomeScreen extends StatelessWidget {
       child: InkWell(
           child: Column(
             children: [
-              const Text(
+              Text(
                 "Create a To-buy list",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -241,7 +241,7 @@ class BuyerHomeScreen extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: InkWell(
           child: Column(
-            children: const [
+            children: [
               Text(
                 "Create a To-buy list",
                 style: TextStyle(
@@ -269,7 +269,7 @@ class BuyerHomeScreen extends StatelessWidget {
           RichText(
               text: TextSpan(
                   text: "LogOut",
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: blackColor,
                       fontSize: smallTextFontSize,
                       fontWeight: FontWeight.bold),

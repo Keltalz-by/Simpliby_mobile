@@ -137,7 +137,7 @@ class StoreInfoScreen extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
+          children: [
             Text(
               'Categories',
               style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
@@ -157,12 +157,12 @@ class StoreInfoScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               'Popular',
               style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
             ),
             GestureDetector(
-              child: const Text(
+              child: Text(
                 'view all',
                 style:
                     TextStyle(color: blackColor, fontSize: smallerTextFontSize),

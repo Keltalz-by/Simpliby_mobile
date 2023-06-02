@@ -30,7 +30,7 @@ class SellerEditProfileScreen extends StatelessWidget {
                       child: storeLogo(context),
                     ),
                   ),
-                  const Positioned(
+                  Positioned(
                       child: Align(
                     alignment: Alignment.center,
                     child: Text(

@@ -15,7 +15,7 @@ PreferredSizeWidget homeAppBar(
       iconTheme: const IconThemeData(color: blackColor),
       title: Text(
         text,
-        style: const TextStyle(color: blackColor, fontSize: smallTextFontSize),
+        style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
       ),
       backgroundColor: whiteColor,
       actions: [
@@ -55,8 +55,7 @@ Widget customButtonWithIcon(
         ), //icon data for elevated button
         label: Text(
           text,
-          style:
-              const TextStyle(color: blackColor, fontSize: smallTextFontSize),
+          style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
         ), //label text
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.white,
@@ -142,7 +141,7 @@ Widget showEmptyFavorites(BuildContext context) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
+        children: [
           Icon(Icons.favorite_border, size: 40),
           Text(
             'No favorites yet',
@@ -197,7 +196,7 @@ Widget storesListSingleItem(
                     ),
                     Text(details.name,
                         maxLines: 1,
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: blackColor, fontSize: smallTextFontSize)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -262,8 +261,7 @@ Widget storesGridSingleItem(
               details.name,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                  fontSize: smallTextFontSize, color: blackColor),
+              style: TextStyle(fontSize: smallTextFontSize, color: blackColor),
             )),
             FavoriteButton(
               iconSize: 24,
@@ -279,8 +277,7 @@ Widget storesGridSingleItem(
             details.location,
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-                fontSize: smallerTextFontSize, color: blackColor),
+            style: TextStyle(fontSize: smallerTextFontSize, color: blackColor),
           )),
           const Padding(padding: EdgeInsets.only(top: 5))
         ],
@@ -293,7 +290,7 @@ Widget noInternet(VoidCallback startShoppingClicked) {
     children: [
       Image.asset('assets/images/no_network.png'),
       const Padding(padding: EdgeInsets.only(top: 10)),
-      const Text(
+      Text(
         'Oops!',
         style: TextStyle(
             color: blackColor,

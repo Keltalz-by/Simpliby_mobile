@@ -137,7 +137,7 @@ class AddNewProductScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text("Browse file",
                         style: TextStyle(
                             color: blueColor,

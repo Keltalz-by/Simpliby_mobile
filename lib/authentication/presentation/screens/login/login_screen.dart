@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/authentication/presentation/screens/forgot_password/forgot_password.dart';
@@ -20,20 +21,22 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            margin: const EdgeInsets.all(defaultPadding),
-            child: SingleChildScrollView(child: login(context))));
+        body: SafeArea(
+            child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+                child: SingleChildScrollView(child: login(context)))));
   }
 
   Widget login(BuildContext context) {
     return Column(
       children: [
         imageFromAssetsFolder(
-            width: 120.0,
-            height: 50.0,
-            path: 'assets/images/simplibuy_logo_small.png'),
+            width: 140.w,
+            height: 40.h,
+            path: 'assets/images/simplibuy_logo_small.png',
+            fit: BoxFit.fill),
         showConnectionError(context),
         signIn(),
         const Padding(
@@ -48,10 +51,8 @@ class LoginForm extends StatelessWidget {
           padding: EdgeInsets.only(top: defaultPadding),
         ),
         forgotPasswordAndVerifyEmail(() {
-          Get.to(const ForgotPassword());
-        }, () {
-          controller.resendOtp();
-        }),
+          Get.toNamed(FORGOT_PASSWORD);
+        }, () {}),
         const Padding(
           padding: EdgeInsets.only(top: defaultPadding),
         ),
@@ -93,15 +94,15 @@ class LoginForm extends StatelessWidget {
       RichText(
           text: TextSpan(
               text: "Forgot Password?",
-              style: const TextStyle(
-                  color: blueColor,
+              style: TextStyle(
+                  color: blackColor,
                   fontSize: smallerTextFontSize,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.w400),
               recognizer: TapGestureRecognizer()..onTap = onClick)),
       RichText(
           text: TextSpan(
-              text: "Verify Email",
-              style: const TextStyle(
+              text: "",
+              style: TextStyle(
                   color: blueColor,
                   fontSize: smallerTextFontSize,
                   fontWeight: FontWeight.bold),
@@ -110,7 +111,7 @@ class LoginForm extends StatelessWidget {
   }
 
   Widget signIn() {
-    return const Align(
+    return Align(
         alignment: Alignment.topLeft,
         child: Text(
           "Sign in",
@@ -123,7 +124,7 @@ class LoginForm extends StatelessWidget {
 
   Widget emailField() {
     return Column(children: [
-      const Align(
+      Align(
         alignment: Alignment.bottomLeft,
         child: Text("Email",
             style: TextStyle(color: blackColor, fontSize: smallerTextFontSize)),
@@ -146,7 +147,7 @@ class LoginForm extends StatelessWidget {
   Widget passwordField() {
     return Column(
       children: [
-        const Align(
+        Align(
           alignment: Alignment.bottomLeft,
           child: Text("Password",
               style:

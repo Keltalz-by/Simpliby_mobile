@@ -38,7 +38,7 @@ class AccountSuccess extends StatelessWidget {
   }
 
   Widget notice() {
-    return const Text("Hurray, your account is now live!",
+    return Text("Hurray, your account is now live!",
         style: TextStyle(color: blackColor, fontSize: smallTextFontSize));
   }
 

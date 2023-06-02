@@ -94,7 +94,7 @@ class SellerProductCategoriesScreen extends StatelessWidget {
                         },
                         image: "")),
               ),
-              const Text(
+              Text(
                 'Food',
                 style: TextStyle(
                   fontSize: smallTextFontSize,

@@ -88,7 +88,7 @@ class SignUpForm extends StatelessWidget {
   }
 
   Widget signUpText() {
-    return const Align(
+    return Align(
         alignment: Alignment.topLeft,
         child: Text(
           "Sign Up",
@@ -112,7 +112,7 @@ class SignUpForm extends StatelessWidget {
 
   Widget emailField() {
     return Column(children: [
-      const Align(
+      Align(
         alignment: Alignment.bottomLeft,
         child: Text("Email",
             style: TextStyle(color: blackColor, fontSize: smallerTextFontSize)),
@@ -134,7 +134,7 @@ class SignUpForm extends StatelessWidget {
 
   Widget nameField() {
     return Column(children: [
-      const Align(
+      Align(
         alignment: Alignment.bottomLeft,
         child: Text("Name",
             style: TextStyle(color: blackColor, fontSize: smallerTextFontSize)),
@@ -154,14 +154,14 @@ class SignUpForm extends StatelessWidget {
   }
 
   Widget notice() {
-    return const Text("By signing in, you accept our policy and terms",
+    return Text("By signing in, you accept our policy and terms",
         style: TextStyle(color: blackColor, fontSize: smallerTextFontSize));
   }
 
   Widget passwordField() {
     return Column(
       children: [
-        const Align(
+        Align(
           alignment: Alignment.bottomLeft,
           child: Text('Enter Password',
               style:
@@ -197,7 +197,7 @@ class SignUpForm extends StatelessWidget {
   Widget reenterPasswordField() {
     return Column(
       children: [
-        const Align(
+        Align(
           alignment: Alignment.bottomLeft,
           child: Text('Confirm Password',
               style:

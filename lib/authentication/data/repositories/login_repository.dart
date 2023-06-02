@@ -7,6 +7,7 @@ import 'package:simplibuy/authentication/data/models/login_details.dart';
 import 'package:simplibuy/authentication/domain/repositories/auth_repository.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/failure/failure.dart';
+import 'package:simplibuy/core/prefs/shared_prefs.dart';
 import 'package:simplibuy/core/result/result.dart';
 import '../../../core/network/network_info.dart';
 
@@ -23,14 +24,16 @@ class LoginRepositoryImpl implements AuthRepository<LoginDetail> {
       LoginDetail detail) async {
     if (await networkInfo.isConnected) {
       try {
-        //  final res = await dataSource.loginUser(detail);
-        //if (res.statusCode == 200) {
-        return Right(Result(value: "Login success"));
-        // } else {
-        //     final message = json.decode(res.body)['message'];
-        //   return Left(
-        //     Failure.withMessage(error: ServerError(), message: message));
-        //  }
+        final res = await dataSource.loginUser(detail);
+        if (res.statusCode == 200) {
+          final userId = json.decode(res.body)['data']['userId'];
+          storeUserId(userId);
+          return Right(Result(value: "Login success"));
+        } else {
+          final message = json.decode(res.body)['message'];
+          return Left(
+              Failure.withMessage(error: ServerError(), message: message));
+        }
       } on Exception {
         return Left(Failure(error: ServerError()));
       }
@@ -64,5 +67,10 @@ class LoginRepositoryImpl implements AuthRepository<LoginDetail> {
       }
     }
     return Left(Failure(error: InternetError()));
+  }
+
+  storeUserId(String id) async {
+    await SharedPrefs.initializeSharedPrefs();
+    return SharedPrefs.setUserId(id);
   }
 }

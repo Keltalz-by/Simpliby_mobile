@@ -30,7 +30,7 @@ Widget singlePromo(BuildContext context, SellerSinglePromoPost post) {
                 })),
         const Padding(padding: EdgeInsets.only(top: 10)),
         Text(post.title,
-            style: const TextStyle(
+            style: TextStyle(
                 fontSize: smallTextFontSize, fontWeight: FontWeight.bold))
       ],
     ),

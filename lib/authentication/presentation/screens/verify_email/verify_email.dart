@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:simplibuy/authentication/presentation/screen_model_controllers/verify_email_controller.dart';
@@ -26,32 +27,48 @@ class VerifyEmail extends StatelessWidget {
             onPressed: () {
               Get.back();
             }),
-        body: Container(
-          margin: const EdgeInsets.all(defaultPadding),
+        body: SafeArea(
+            child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: defaultPadding),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 40.0),
-                ),
                 notice(),
-                const Padding(
-                  padding: EdgeInsets.only(top: 40.0),
+                Padding(
+                  padding: EdgeInsets.only(top: 50.h),
                 ),
                 showConnectionError(context),
                 inputPin((data) {}, context),
-                const Padding(
-                  padding: EdgeInsets.only(top: defaultPadding),
+                Text("00:20",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: blackColor, fontSize: smallTextFontSize)),
+                SizedBox(
+                  height: 10.h,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: defaultPadding),
+                InkWell(
+                    onTap: () {
+                      controller.resendOtp(email);
+                    },
+                    child: Text("Resend Otp",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: blackColor, fontSize: smallTextFontSize))),
+                SizedBox(
+                  height: 60.h,
                 ),
-                continueButton(),
-                showLoadingOrServerError(context)
+                continueButton(context),
+                showLoadingOrServerError(context),
+                Obx(() {
+                  if (controller.state is FinishedState) {
+                    showVerifiedDialog(context);
+                  }
+                  return Container();
+                })
               ],
             ),
           ),
-        ));
+        )));
   }
 
   Widget showLoadingOrServerError(BuildContext context) {
@@ -79,7 +96,7 @@ class VerifyEmail extends StatelessWidget {
   }
 
   Widget notice() {
-    return const Align(
+    return Align(
         alignment: Alignment.bottomLeft,
         child: Text("We sent a code to your email Address",
             textAlign: TextAlign.center,
@@ -89,7 +106,7 @@ class VerifyEmail extends StatelessWidget {
   Widget inputPin(ValueChanged output, BuildContext context) {
     return Column(
       children: [
-        const Text("Enter your OTP code here",
+        Text("Enter your OTP code here",
             textAlign: TextAlign.center,
             style: TextStyle(color: blackColor, fontSize: smallTextFontSize)),
         const Padding(padding: EdgeInsets.only(top: 10.0)),
@@ -120,22 +137,12 @@ class VerifyEmail extends StatelessWidget {
     );
   }
 
-  Widget continueButton() {
-    return StreamBuilder(
-      builder: (context, snapshot) {
-        return defaultButtons(
-            pressed: () {
-              controller.verifyEmail(email);
-              Obx(() {
-                if (controller.state is FinishedState) {
-                  showVerifiedDialog(context);
-                }
-                return Container();
-              });
-            },
-            text: "Continue");
-      },
-    );
+  Widget continueButton(BuildContext context) {
+    return defaultButtons(
+        pressed: () {
+          controller.verifyEmail(email);
+        },
+        text: "Continue");
   }
 }
 

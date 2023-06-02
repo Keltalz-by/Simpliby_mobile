@@ -26,7 +26,7 @@ class PlanScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 18)),
             const Padding(padding: EdgeInsets.only(top: 10)),
-            const Text("Select a suitable subscription plan",
+            Text("Select a suitable subscription plan",
                 style:
                     TextStyle(color: blueColor, fontSize: smallTextFontSize)),
             const Padding(padding: EdgeInsets.only(top: 10)),
@@ -110,8 +110,7 @@ class PlanScreen extends StatelessWidget {
                     children: pts
                         .map((element) => Text(
                               '• $element',
-                              style:
-                                  const TextStyle(fontSize: smallTextFontSize),
+                              style: TextStyle(fontSize: smallTextFontSize),
                             ))
                         .toList(), // Convert the list of widgets to a list and pass it to children property
                   ),

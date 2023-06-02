@@ -44,7 +44,7 @@ class EnableLocation extends StatelessWidget {
   }
 
   Widget enableLocationText() {
-    return const Text("Enable Location",
+    return Text("Enable Location",
         style: TextStyle(color: blueColor, fontSize: smallTextFontSize));
   }
 
@@ -60,7 +60,7 @@ class EnableLocation extends StatelessWidget {
     return RichText(
         text: TextSpan(
             text: "Not now",
-            style: const TextStyle(
+            style: TextStyle(
                 color: blackColor,
                 fontSize: smallTextFontSize,
                 fontWeight: FontWeight.normal),
@@ -68,12 +68,12 @@ class EnableLocation extends StatelessWidget {
   }
 
   Widget enableLocationNotice() {
-    return const Text("This app requires your permission,",
+    return Text("This app requires your permission,",
         style: TextStyle(color: blackColor, fontSize: smallTextFontSize));
   }
 
   Widget enableLocationNotice2() {
-    return const Text("Allow Simpliby access your location?",
+    return Text("Allow Simpliby access your location?",
         style: TextStyle(color: blackColor, fontSize: smallTextFontSize));
   }
 

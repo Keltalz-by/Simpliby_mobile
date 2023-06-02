@@ -47,8 +47,7 @@ Widget storeNameAndAddress(
             overflow: TextOverflow.ellipsis,
             softWrap: false,
             storeAddress,
-            style: const TextStyle(
-                color: whiteColor, fontSize: smallerTextFontSize),
+            style: TextStyle(color: whiteColor, fontSize: smallerTextFontSize),
             maxLines: 2,
           ),
         ]),
@@ -68,7 +67,7 @@ Widget searchInput(VoidCallback onPressed) {
 
 Widget storeDescription({required String desc}) {
   return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    const Text(
+    Text(
       'About',
       style: TextStyle(color: Colors.grey, fontSize: smallerTextFontSize),
       textAlign: TextAlign.start,
@@ -115,8 +114,7 @@ Widget storeFollowers(
       decoration: decoration,
       child: RichText(
         text: TextSpan(
-          style:
-              const TextStyle(color: blackColor, fontSize: smallerTextFontSize),
+          style: TextStyle(color: blackColor, fontSize: smallerTextFontSize),
           children: <TextSpan>[
             TextSpan(
                 text: followers.toString(),
@@ -138,7 +136,7 @@ Widget _followStore() {
       child: FloatingActionButton.extended(
         heroTag: "follow",
         elevation: 1,
-        label: const Text(
+        label: Text(
           'Follow',
           style: TextStyle(color: whiteColor, fontSize: smallTextFontSize),
         ),
@@ -156,7 +154,7 @@ Widget chatToReserveItem(BuildContext context) {
       height: 50,
       width: MediaQuery.of(context).size.width * 0.85,
       child: ElevatedButton.icon(
-        label: const Text(
+        label: Text(
           'Chat to reseve an item',
           style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
         ),
@@ -174,7 +172,7 @@ Widget _chatToOrder() {
       child: FloatingActionButton.extended(
         heroTag: "chat",
         elevation: 1,
-        label: const Text(
+        label: Text(
           'Chat to Order',
           style: TextStyle(color: whiteColor, fontSize: smallTextFontSize),
         ),
@@ -217,7 +215,7 @@ Widget storeRating({required int rating}) {
   return Container(
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: Row(children: [
-        const Text(
+        Text(
           'Rating',
           style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
         ),
@@ -258,8 +256,7 @@ Widget singleCategoryItem(StoreCategory category, VoidCallback onPressed) {
                 child: Text(
               category.categoryName,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: whiteColor, fontSize: smallTextFontSize),
+              style: TextStyle(color: whiteColor, fontSize: smallTextFontSize),
             ))
           ])));
 }
@@ -340,7 +337,7 @@ Widget _productTexts(
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: whiteColor,
                           fontSize: smallerTextFontSize,
                           fontWeight: FontWeight.bold),
@@ -395,7 +392,7 @@ Widget productListContainer(
                     child: Column(children: [
                       productImage(product.productImage[0]),
                       Text(product.productName,
-                          style: const TextStyle(
+                          style: TextStyle(
                               color: blackColor,
                               fontSize: smallTextFontSize,
                               fontWeight: FontWeight.bold)),

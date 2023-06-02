@@ -51,7 +51,7 @@ class SellerAllPaymentsScreen extends StatelessWidget {
         return defaultLoading(context);
       }
       if (controller.state == ErrorState(errorType: EmptyListError())) {
-        return const Center(
+        return Center(
             child: Text(
           "No transactions yet",
           style: TextStyle(fontSize: smallTextFontSize),

@@ -83,7 +83,7 @@ class PaySubScreen extends StatelessWidget {
           value: false,
           onChanged: (bool newValue) {},
         ),
-        const Text(
+        Text(
           'Remember this card next time',
           style: TextStyle(fontSize: smallTextFontSize),
         ),

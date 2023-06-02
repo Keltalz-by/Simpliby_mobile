@@ -19,7 +19,6 @@ class RegistrationDataSource {
 
   Future<http.Response> loginUser(LoginDetail details) async {
     var url = Uri.parse('${BASE_URL}auth/login');
-
     final Map<String, dynamic> body = {
       'email': details.email,
       'password': details.password
@@ -51,8 +50,14 @@ class RegistrationDataSource {
     return response;
   }
 
+  Future<http.Response> sendCodePasswordReset(String email) async {
+    var url = Uri.parse('${BASE_URL}auth/forgotpassword');
+    final Map<String, dynamic> body = {'email': email};
+    var response = await http.post(url, body: body);
+    return response;
+  }
+
   Future<http.Response> registerBusiness(String uid, String email) async {
-    //not yet implmented
     var url = Uri.parse('${BASE_URL}auth/resendotp');
     final Map<String, dynamic> body = {'userId': uid, 'email': email};
     var response = await http.post(url, body: body);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:simplibuy/core/prefs/shared_prefs.dart';
 import 'dart:async';
 
 import '../core/constants/route_constants.dart';
@@ -16,7 +18,15 @@ class _MyHomePageState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () => Get.toNamed(USER_FIRST_TIME));
+    Timer(const Duration(seconds: 3), () async {
+      await SharedPrefs.initializeSharedPrefs();
+      if (SharedPrefs.isUserFirstTime() == false) {
+        Get.toNamed(USER_FIRST_TIME);
+        SharedPrefs.setUserFirstTimeStatus(true);
+      } else {
+        Get.toNamed(USER_TYPE);
+      }
+    });
   }
 
   @override
@@ -24,8 +34,8 @@ class _MyHomePageState extends State<SplashScreen> {
     return Scaffold(
         body: Center(
             child: imageFromAssetsFolder(
-                width: 320.0,
-                height: 150.0,
+                width: 180.w,
+                height: 150.h,
                 path: 'assets/images/simpliby_logo.png')));
   }
 }

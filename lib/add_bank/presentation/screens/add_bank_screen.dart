@@ -20,7 +20,7 @@ class AddBankScreen extends StatelessWidget {
           padding: const EdgeInsets.all(defaultPadding),
           child: Column(
             children: [
-              const Text(
+              Text(
                 "Upload te details of the bank account you would like to receive payments into. ",
                 style: TextStyle(fontSize: smallTextFontSize),
               ),

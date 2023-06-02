@@ -33,7 +33,7 @@ class SellerPaymentsScreen extends StatelessWidget {
                     Icons.add_box_outlined,
                     color: blackColor,
                   )),
-              const Text(
+              Text(
                 "Add Bank",
                 style:
                     TextStyle(color: blackColor, fontSize: smallTextFontSize),
@@ -84,7 +84,7 @@ class SellerPaymentsScreen extends StatelessWidget {
         return defaultLoading(context);
       }
       if (controller.state == ErrorState(errorType: EmptyListError())) {
-        return const Center(
+        return Center(
             child: Text(
           "No transactions yet",
           style: TextStyle(fontSize: smallTextFontSize),
@@ -103,12 +103,12 @@ class SellerPaymentsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
+        Text(
           "Transactions",
           style: TextStyle(fontSize: smallTextFontSize),
         ),
         GestureDetector(
-          child: const Text(
+          child: Text(
             "View all",
             style: TextStyle(fontSize: smallerTextFontSize),
           ),
@@ -157,14 +157,14 @@ class SellerPaymentsScreen extends StatelessWidget {
                   );
                 }),
                 const Padding(padding: EdgeInsets.only(left: 5)),
-                const Text(
+                Text(
                   "Total amount sold",
                   style: TextStyle(
                       color: whiteColor, fontSize: smallerTextFontSize),
                 ),
               ],
             ),
-            const Text(
+            Text(
               "This month ",
               style:
                   TextStyle(color: whiteColor, fontSize: smallerTextFontSize),
@@ -189,7 +189,7 @@ class SellerPaymentsScreen extends StatelessWidget {
                   );
           }),
           const Padding(padding: EdgeInsets.only(top: 30)),
-          const Text(
+          Text(
             "Roban stores",
             style: TextStyle(color: whiteColor, fontSize: smallerTextFontSize),
           )

@@ -48,21 +48,21 @@ Widget singleIncomingOrder(
               children: [
                 Text(
                   order.name,
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: blackColor,
                       fontSize: smallTextFontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Item ID: ${order.itemId}",
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: blackColor,
                       fontSize: smallTextFontSize,
                       fontWeight: FontWeight.normal),
                 ),
                 Text(
                   "Time: ${order.time}",
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: blackColor,
                       fontSize: smallTextFontSize,
                       fontWeight: FontWeight.normal),
@@ -125,7 +125,7 @@ Widget singleAcceptedOrder(
               children: [
                 Text(
                   order.name,
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: blackColor,
                       fontSize: smallTextFontSize,
                       fontWeight: FontWeight.bold),
@@ -133,7 +133,7 @@ Widget singleAcceptedOrder(
                 const Padding(padding: EdgeInsets.only(top: 6)),
                 Text(
                   "Ticket ID: ${order.ticketId}",
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: blackColor,
                       fontSize: smallTextFontSize,
                       fontWeight: FontWeight.normal),
@@ -141,7 +141,7 @@ Widget singleAcceptedOrder(
                 const Padding(padding: EdgeInsets.only(top: 6)),
                 Text(
                   "Status: ${order.status}",
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: blackColor,
                       fontSize: smallTextFontSize,
                       fontWeight: FontWeight.normal),
@@ -294,14 +294,14 @@ Widget personHeader() {
       children: [
         Text(
           "Ikenwa John",
-          style: const TextStyle(
+          style: TextStyle(
               color: blackColor,
               fontSize: smallTextFontSize,
               fontWeight: FontWeight.bold),
         ),
         Text(
           "09027901278",
-          style: const TextStyle(
+          style: TextStyle(
               color: blackColor,
               fontSize: smallTextFontSize,
               fontWeight: FontWeight.normal),

@@ -38,7 +38,12 @@ class LoginScreenController extends GetxController with ValidatorMixin {
       if (result.isLeft) {
         final err = ErrorState(errorType: result.left.error);
         err.setErrorMessage(result.left.message);
-        _state.value = err;
+        if (result.left.message == "Please verify your email") {
+          resetState();
+          Get.toNamed(VERIFY_EMAIL, arguments: _email);
+        } else {
+          _state.value = err;
+        }
       } else {
         await SharedPrefs.initializeSharedPrefs();
         final type = SharedPrefs.userType();
@@ -48,22 +53,6 @@ class LoginScreenController extends GetxController with ValidatorMixin {
         } else {
           Get.offAllNamed(SELLER_HOME_PAGE_ROUTE);
         }
-      }
-    }
-  }
-
-  resendOtp() async {
-    if (_validateEmailAndPassword()) {
-      _state.value = LoadingState();
-      SharedPrefs.initializeSharedPrefs();
-      final uid = SharedPrefs.userId();
-      final result = await _usecase_otp.resendOtp(uid, _email);
-      if (result.isLeft) {
-        final err = ErrorState(errorType: result.left.error);
-        err.setErrorMessage(result.left.message);
-        _state.value = err;
-      } else {
-        Get.toNamed(VERIFY_EMAIL, arguments: _email);
       }
     }
   }

@@ -56,7 +56,7 @@ class SellerProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: defaultPadding),
               child: Text(
                 controller.sellerProfileDetails.storeName,
-                style: const TextStyle(
+                style: TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.bold,
                     fontSize: smallTextFontSize),
@@ -140,7 +140,7 @@ class SellerProfileScreen extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border.all(color: blueColor, width: 2),
             borderRadius: const BorderRadius.all(Radius.circular(30))),
-        child: const Text(
+        child: Text(
           "Edit Profile",
           style: TextStyle(fontSize: smallTextFontSize, color: blackColor),
         ),
@@ -180,7 +180,7 @@ class SellerProfileScreen extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(color: blueColor, width: 2),
                 borderRadius: const BorderRadius.all(Radius.circular(30))),
-            child: const Text(
+            child: Text(
               "Create Promo post",
               style: TextStyle(fontSize: smallTextFontSize, color: blackColor),
             ),

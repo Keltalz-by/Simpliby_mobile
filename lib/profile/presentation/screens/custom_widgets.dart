@@ -10,8 +10,7 @@ Widget inputFieldProfile(
     Align(
       alignment: Alignment.bottomLeft,
       child: Text(title,
-          style: const TextStyle(
-              color: blackColor, fontSize: smallerTextFontSize)),
+          style: TextStyle(color: blackColor, fontSize: smallerTextFontSize)),
     ),
     Obx(() {
       return TextField(

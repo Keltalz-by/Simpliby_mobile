@@ -11,4 +11,9 @@ class VerifyEmailUsecase {
       String userId, String otp) async {
     return repository.verifyEmail(userId, otp);
   }
+
+  Future<Either<Failure, Result<String>>> resendOtp(
+      String userId, String email) async {
+    return repository.resendOtp(userId, email);
+  }
 }

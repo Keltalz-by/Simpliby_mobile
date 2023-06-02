@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simplibuy/core/constant.dart';
 
 Widget defaultButtons(
@@ -9,10 +10,12 @@ Widget defaultButtons(
   return ElevatedButton(
       onPressed: pressed,
       style: ElevatedButton.styleFrom(
-          primary: blueColor, minimumSize: size, shadowColor: blueColor),
+          backgroundColor: blueColor,
+          minimumSize: size,
+          shadowColor: blueColor),
       child: Text(
         text,
-        style: const TextStyle(color: whiteColor, fontSize: smallTextFontSize),
+        style: TextStyle(color: whiteColor, fontSize: smallTextFontSize),
       ));
 }
 
@@ -22,8 +25,8 @@ Widget defaultLoading(BuildContext context) {
       child: Center(
         child: Image.asset(
           "assets/gifs/simpliby_loading.gif",
-          height: 80.0,
-          width: 80.0,
+          height: 80.h,
+          width: 80.w,
         ),
       ));
 }
@@ -34,11 +37,11 @@ InputDecoration customInputDecoration(
       hintText: hint,
       errorText: errorText,
       labelText: label,
-      enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(width: 2, color: blueColor),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(width: 2.w, color: blueColor),
       ),
-      focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(width: 2, color: lightBlueColor),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(width: 2.w, color: lightBlueColor),
       ),
       suffixIcon: icon,
       errorBorder: const OutlineInputBorder(
@@ -49,7 +52,7 @@ InputDecoration customInputDecoration(
 Widget clickableSmallButton(
     {required VoidCallback onPressed,
     required String path,
-    double height = 30.0,
+    double height = 30,
     double width = 30.0}) {
   return Container(
       padding: const EdgeInsets.all(15.0),
@@ -67,13 +70,15 @@ Widget imageFromAssetsFolder(
     {required double width,
     required double height,
     required String path,
-    double padding = 15}) {
+    double padding = 15,
+    BoxFit fit = BoxFit.cover}) {
   return Container(
     padding: EdgeInsets.all(padding),
     child: Image.asset(
       path,
       height: height,
       width: width,
+      fit: fit,
     ),
   );
 }
@@ -84,12 +89,12 @@ Widget ordinaryAndClickableText(
     required VoidCallback onClicked}) {
   return RichText(
     text: TextSpan(
-      style: const TextStyle(color: blackColor, fontSize: smallerTextFontSize),
+      style: TextStyle(color: blackColor, fontSize: smallerTextFontSize),
       children: <TextSpan>[
         TextSpan(text: text),
         TextSpan(
             text: clickableText,
-            style: const TextStyle(
+            style: TextStyle(
                 color: blueColor,
                 fontSize: smallerTextFontSize,
                 fontWeight: FontWeight.bold),
@@ -134,7 +139,7 @@ Widget bottmNavItemWithIcon(
       RichText(
           text: TextSpan(
               text: text,
-              style: const TextStyle(
+              style: TextStyle(
                   color: blueColor,
                   fontSize: smallerTextFontSize,
                   fontWeight: FontWeight.bold),
@@ -152,7 +157,7 @@ Widget noInternetConnection(BuildContext context) {
         child: Row(children: [
           Image.asset('assets/images/no_nwk_auth.png'),
           const Padding(padding: EdgeInsets.only(left: 4)),
-          const Text(
+          Text(
             'No internet connection, please try again',
             style: TextStyle(color: whiteColor, fontSize: smallerTextFontSize),
           )
