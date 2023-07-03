@@ -26,11 +26,11 @@ class _MyWidgetState extends State<SellerHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: whiteColor.withAlpha(80),
-        appBar: homeAppBar(
-            text: greeting(),
-            onPressed: () {
-              Get.toNamed(NOTIFICATION_SCREEN);
-            }),
+        //    appBar: homeAppBar(
+        //    text: greeting(),
+        //      onPressed: () {
+        //    Get.toNamed(NOTIFICATION_SCREEN);
+        //    }),
         body: Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(defaultPadding),

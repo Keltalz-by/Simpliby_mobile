@@ -1,6 +1,7 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/data/models/fav_stores_model.dart';
 import 'package:simplibuy/core/constant.dart';
@@ -9,30 +10,54 @@ import 'package:simplibuy/buyer_home/domain/entities/strore_details.dart';
 import '../../../core/reusable_widgets/reusable_widgets.dart';
 
 PreferredSizeWidget homeAppBar(
-    {required String text, required VoidCallback onPressed}) {
+    {required String text,
+    required String name,
+    required VoidCallback onPressed,
+    required VoidCallback openDrawer}) {
   return AppBar(
-      elevation: 2,
+      elevation: 0,
       iconTheme: const IconThemeData(color: blackColor),
-      title: Text(
-        text,
-        style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
-      ),
+      leading: Padding(
+          padding: EdgeInsets.only(left: 20.w),
+          child: GestureDetector(
+              onTap: openDrawer,
+              child: Container(
+                  padding: EdgeInsets.all(6),
+                  decoration: ShapeDecoration(shadows: [
+                    BoxShadow(
+                        color: Colors.grey.withAlpha(150),
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 10.r)
+                  ], color: Colors.white, shape: CircleBorder()),
+                  child: Icon(Icons.menu)))),
+      title: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              text,
+              style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
+            ),
+            Text(
+              name,
+              style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
+            )
+          ]),
       backgroundColor: whiteColor,
       actions: [
         Padding(
-            padding: const EdgeInsets.only(right: 20.0),
+            padding: EdgeInsets.only(right: 20.w),
             child: GestureDetector(
                 onTap: onPressed,
-                child: Ink(
-                    decoration: const ShapeDecoration(shadows: [
-                      BoxShadow(color: Color.fromARGB(255, 129, 127, 127))
+                child: Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: ShapeDecoration(shadows: [
+                      BoxShadow(
+                          color: Colors.grey.withAlpha(150),
+                          offset: Offset(1.0, 1.0),
+                          blurRadius: 10.r)
                     ], color: Colors.white, shape: CircleBorder()),
-                    child: IconButton(
-                        color: blackColor,
-                        highlightColor: whiteColor,
-                        focusColor: whiteColor,
-                        onPressed: onPressed,
-                        icon: const Icon(Icons.notifications)))))
+                    child: Icon(Icons.notifications))))
       ]);
 }
 
@@ -87,7 +112,7 @@ Widget filterOption(VoidCallback onPressed) {
 
 Widget searchInputBlue(BuildContext context) {
   return SizedBox(
-      height: 45,
+      height: 55.h,
       width: MediaQuery.of(context).size.width * 0.78,
       child: Align(
           alignment: Alignment.center,
@@ -232,21 +257,24 @@ Widget storesListSingleItem(
 Widget storesGridSingleItem(
     {required StoreDetails details,
     required VoidCallback onPressed,
-    required VoidCallback onFavClicked}) {
+    required VoidCallback onFavClicked,
+    required BuildContext context}) {
   return Container(
-      width: 130,
-      decoration: const BoxDecoration(
+      width: MediaQuery.of(context).size.width * 0.35,
+      height: MediaQuery.of(context).size.width * 0.5,
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
-              offset: Offset(0.0, 1.0), //(x,y)
+              color: Colors.grey.withAlpha(100),
+              offset: Offset(0.0, 1.0),
               blurRadius: 6.0,
             ),
           ],
           borderRadius: BorderRadius.all(Radius.circular(8))),
-      clipBehavior: Clip.hardEdge,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
               splashColor: Colors.blue,
@@ -254,8 +282,9 @@ Widget storesGridSingleItem(
               radius: 20.0,
               onTap: onPressed,
               child: Image.asset("assets/images/buy.png",
-                  width: 130, height: 130)),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width * 0.35)),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Flexible(
                 child: Text(
               details.name,
@@ -272,14 +301,12 @@ Widget storesGridSingleItem(
               },
             )
           ]),
-          Flexible(
-              child: Text(
+          Text(
             details.location,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: smallerTextFontSize, color: blackColor),
-          )),
-          const Padding(padding: EdgeInsets.only(top: 5))
+            style: TextStyle(fontSize: 16.sp, color: blackColor),
+          ),
         ],
       ));
 }
@@ -312,12 +339,15 @@ Widget noInternet(VoidCallback startShoppingClicked) {
 Widget toBuyListSingleItem(String text, RxBool isBought, VoidCallback save) {
   return GestureDetector(
       child: SizedBox(
-          height: 30,
+          height: 30.h,
           child: Row(
             children: [
               Checkbox(
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   value: isBought.value,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                   onChanged: (value) =>
                       {isBought.value = !isBought.value, save()}),
               Text(

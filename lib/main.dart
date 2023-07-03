@@ -60,6 +60,8 @@ import 'package:simplibuy/to_buy_list/presentation/binding/to_buy_binding.dart';
 import 'package:simplibuy/to_buy_list/presentation/screens/to_buy_screen.dart';
 import 'package:simplibuy/withdraw/presentation/screens/withdraw_to_bank_screen.dart';
 
+import 'authentication/presentation/screen_bindings/enter_new_password_binding.dart';
+import 'authentication/presentation/screens/forgot_password/enter_new_password.dart';
 import 'notification/presentation/screens/notification.dart';
 
 void main() {
@@ -116,6 +118,10 @@ class MyApp extends StatelessWidget {
         name: FORGOT_PASSWORD,
         page: () => ForgotPassword(),
         binding: ForgotPasswordBinding()),
+    GetPage(
+        name: ENTER_NEW_PASSWORD,
+        page: () => EnterNewPassword(),
+        binding: EnterNewPasswordBinding()),
     GetPage(
         name: VERIFY_EMAIL,
         page: () => VerifyEmail(),

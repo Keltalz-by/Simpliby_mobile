@@ -5,7 +5,6 @@ import 'package:simplibuy/core/validators/validators_string.dart';
 import '../../../core/state/state.dart';
 import 'package:get/get.dart';
 
-
 class SignupScreenController extends GetxController with ValidatorMixin {
   final SignupUsecase _usecase;
 

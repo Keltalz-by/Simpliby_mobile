@@ -27,15 +27,17 @@ class SignupRepositoryImpl implements AuthRepository<SignupDetail> {
         final res = await dataSource.registerUser(detail);
         final message = json.decode(res.body)['message'];
         if (res.statusCode == 201) {
-          final userId = json.decode(res.body)['data']['_id'];
+          final userId = json.decode(res.body)['data'];
           print(userId);
           storeUserId(userId);
-          return Right(Result(value: "message"));
+          return Right(Result(value: message));
         } else {
           return Left(
               Failure.withMessage(error: ServerError(), message: message));
         }
       } on Exception {
+        // ebuka id 64a1725cffcef35ef6ac854e
+        //ebuka 0902 id 64a173c4ffcef35ef6ac855b
         return Left(Failure(error: ServerError()));
       }
     }
@@ -72,6 +74,6 @@ class SignupRepositoryImpl implements AuthRepository<SignupDetail> {
 
   storeUserId(String id) async {
     await SharedPrefs.initializeSharedPrefs();
-    return SharedPrefs.setUserId(id);
+    SharedPrefs.setUserId(id);
   }
 }

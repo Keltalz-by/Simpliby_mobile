@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/presentation/controller/stores_and_malls_controller.dart';
 import 'package:simplibuy/core/constant.dart';
@@ -17,16 +18,24 @@ class BuyerHomeScreen extends StatelessWidget {
 
   StoresAndMallsController controller = Get.find<StoresAndMallsController>();
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     controller.getToBuyList();
     return Scaffold(
+        key: _scaffoldKey,
         drawer: navDrawer(),
         appBar: homeAppBar(
-            text: greeting(),
-            onPressed: () {
-              Get.toNamed(NOTIFICATION_SCREEN);
-            }),
+          text: greeting(),
+          name: controller.userName,
+          onPressed: () {
+            Get.toNamed(NOTIFICATION_SCREEN);
+          },
+          openDrawer: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+        ),
         body: Column(children: [
           _createSearchView(context),
           Container(
@@ -79,7 +88,7 @@ class BuyerHomeScreen extends StatelessWidget {
               })),
           Expanded(
             child: _itemsList(context),
-          )
+          ),
         ]));
   }
 
@@ -191,69 +200,94 @@ class BuyerHomeScreen extends StatelessWidget {
   }
 
   Widget toBuyListContainer(BuildContext context) {
+    return Stack(children: [
+      Container(
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        width: MediaQuery.of(context).size.width,
+        height: 120,
+        decoration: const BoxDecoration(
+            color: lightBlueColor,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: InkWell(
+            child: Column(
+              children: [
+                Text(
+                  "Create a To-buy list",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: blackColor,
+                      fontSize: smallTextFontSize),
+                  textAlign: TextAlign.center,
+                ),
+                Expanded(
+                    child: Padding(
+                        padding: EdgeInsets.only(left: 15.w),
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return Container(height: 0.5);
+                          },
+                          itemCount: controller.toBuyModel.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Obx(() {
+                              return toBuyListSingleItem(
+                                  controller.toBuyModel[index].item,
+                                  controller.isBoughtRx[index], () {
+                                controller.saveIsBought(index);
+                              });
+                            });
+                          },
+                        )))
+              ],
+            ),
+            onTap: () => Get.toNamed(TO_BUY_SCREEN)),
+      ),
+      Positioned(top: 0, left: 0, child: smallYellowCircle()),
+      Positioned(top: 0, right: 0, child: smallYellowCircle()),
+      Positioned(bottom: 0, left: 0, child: smallYellowCircle()),
+      Positioned(bottom: 0, right: 0, child: smallYellowCircle())
+    ]);
+  }
+
+  Widget smallYellowCircle() {
     return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 10),
-      width: MediaQuery.of(context).size.width,
-      height: 120,
+      width: 10.w,
+      height: 10.h,
+      margin: const EdgeInsets.all(6),
       decoration: const BoxDecoration(
-          color: lightBlueColor,
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      child: InkWell(
-          child: Column(
-            children: [
-              Text(
-                "Create a To-buy list",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: whiteColor,
-                    fontSize: smallTextFontSize),
-                textAlign: TextAlign.center,
-              ),
-              Expanded(
-                  child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return Container(height: 0.5);
-                },
-                itemCount: controller.toBuyModel.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Obx(() {
-                    return toBuyListSingleItem(
-                        controller.toBuyModel[index].item,
-                        controller.isBoughtRx[index], () {
-                      controller.saveIsBought(index);
-                    });
-                  });
-                },
-              ))
-            ],
-          ),
-          onTap: () => Get.toNamed(TO_BUY_SCREEN)),
+        shape: BoxShape.circle,
+        color: Color.fromRGBO(235, 185, 10, 1),
+      ),
     );
   }
 
   Widget toBuyListEmpty(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 10),
-      width: MediaQuery.of(context).size.width,
-      height: 120,
-      decoration: const BoxDecoration(
-          color: lightBlueColor,
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      child: InkWell(
-          child: Column(
-            children: [
-              Text(
-                "Create a To-buy list",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: whiteColor,
-                    fontSize: smallTextFontSize),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-          onTap: () => Get.toNamed(TO_BUY_SCREEN)),
-    );
+    return Stack(children: [
+      Container(
+          padding: const EdgeInsets.only(top: 10, bottom: 10),
+          width: MediaQuery.of(context).size.width,
+          height: 70.h,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+              color: lightBlueColor,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Center(
+            // alignment: Alignment.center,
+            child: InkWell(
+                child: Text(
+                  "Create a To-buy list",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: blackColor,
+                      fontSize: smallTextFontSize),
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () => Get.toNamed(TO_BUY_SCREEN)),
+          )),
+      Positioned(top: 0, left: 0, child: smallYellowCircle()),
+      Positioned(top: 0, right: 0, child: smallYellowCircle()),
+      Positioned(bottom: 0, left: 0, child: smallYellowCircle()),
+      Positioned(bottom: 0, right: 0, child: smallYellowCircle())
+    ]);
   }
 
   Widget _logOut() {
@@ -296,15 +330,19 @@ class BuyerHomeScreen extends StatelessWidget {
           shrinkWrap: true,
           children: List.generate(
               controller.details.length,
-              (index) => Center(
-                  child: storesGridSingleItem(
-                      details: controller.details[index],
-                      onPressed: () => Get.toNamed(SINGLE_STORE_ROUTE,
-                          arguments: controller.details[index].id),
-                      onFavClicked: () {
-                        controller.addToFav(index);
-                        ScaffoldMessenger.of(context).showSnackBar(snackAdded);
-                      }))));
+              (index) => Padding(
+                  padding: EdgeInsets.only(top: 8.h),
+                  child: Center(
+                      child: storesGridSingleItem(
+                          details: controller.details[index],
+                          onPressed: () => Get.toNamed(SINGLE_STORE_ROUTE,
+                              arguments: controller.details[index].id),
+                          onFavClicked: () {
+                            controller.addToFav(index);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackAdded);
+                          },
+                          context: context)))));
     });
   }
 

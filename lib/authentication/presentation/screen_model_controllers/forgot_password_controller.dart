@@ -27,7 +27,7 @@ class ForgotPasswordController extends GetxController with ValidatorMixin {
         err.setErrorMessage(result.left.message);
         _state.value = err;
       } else {
-        _state.value = State();
+        Get.toNamed(VERIFY_EMAIL, arguments: _email);
         normalToast("Code has been sent to your email");
       }
     }

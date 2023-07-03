@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/domain/entities/strore_details.dart';
 import 'package:simplibuy/buyer_home/domain/usecases/stores_and_malls_usecase.dart';
+import 'package:simplibuy/core/prefs/shared_prefs.dart';
 import 'package:simplibuy/to_buy_list/data/model/item_to_buy.dart';
 import 'package:simplibuy/to_buy_list/domain/usecases/to_buy_usecase.dart';
 import '../../../core/state/state.dart';
@@ -11,6 +12,7 @@ class StoresAndMallsController extends GetxController {
   void onInit() {
     super.onInit();
     getStores();
+    getUserName();
   }
 
   final StoresAndMallsUsecase usecase;
@@ -25,6 +27,9 @@ class StoresAndMallsController extends GetxController {
 
   final RxBool _isStore = true.obs;
   bool get isStore => _isStore.value;
+
+  final RxString _userName = "John Doe".obs;
+  String get userName => _userName.value;
 
   final RxList<StoreDetails> _details = (List<StoreDetails>.of([])).obs;
   final RxList<ItemToBuy> _toBuyModel = (List<ItemToBuy>.of([])).obs;
@@ -69,6 +74,11 @@ class StoresAndMallsController extends GetxController {
         _state.value = FinishedState();
       }
     });
+  }
+
+  getUserName() {
+    SharedPrefs.initializeSharedPrefs();
+    _userName.value = SharedPrefs.userName();
   }
 
   addToFav(int position) {

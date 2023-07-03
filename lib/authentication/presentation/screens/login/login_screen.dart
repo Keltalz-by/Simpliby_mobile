@@ -25,7 +25,8 @@ class LoginForm extends StatelessWidget {
             child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+                margin: EdgeInsets.symmetric(
+                    vertical: 10.h, horizontal: defaultPadding),
                 child: SingleChildScrollView(child: login(context)))));
   }
 

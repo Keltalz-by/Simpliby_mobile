@@ -5,6 +5,7 @@ import 'package:simplibuy/authentication/presentation/screen_model_controllers/s
 import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/core/constant.dart';
 import '../../../../core/state/state.dart';
@@ -18,22 +19,22 @@ class SignUpForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            margin: const EdgeInsets.all(defaultPadding),
-            child: SingleChildScrollView(child: signUp(context))));
+        body: SafeArea(
+            child: Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: 10.h, horizontal: defaultPadding),
+                child: SingleChildScrollView(child: signUp(context)))));
   }
 
   Widget signUp(BuildContext context) {
     return Column(
       children: [
         imageFromAssetsFolder(
-            width: 120.0,
-            height: 50.0,
-            path: 'assets/images/simplibuy_logo_small.png'),
+            width: 140.w,
+            height: 40.h,
+            path: 'assets/images/simplibuy_logo_small.png',
+            fit: BoxFit.fill),
         showConnectionError(context),
-        const Padding(
-          padding: EdgeInsets.only(top: defaultPadding),
-        ),
         signUpText(),
         const Padding(
           padding: EdgeInsets.only(top: defaultPadding),

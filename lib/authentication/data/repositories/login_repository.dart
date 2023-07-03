@@ -25,12 +25,15 @@ class LoginRepositoryImpl implements AuthRepository<LoginDetail> {
     if (await networkInfo.isConnected) {
       try {
         final res = await dataSource.loginUser(detail);
+        final message = json.decode(res.body)['message'];
+
         if (res.statusCode == 200) {
-          final userId = json.decode(res.body)['data']['userId'];
-          storeUserId(userId);
-          return Right(Result(value: "Login success"));
+          final userId = json.decode(res.body)['data']['_id'];
+          final userEmail = json.decode(res.body)['data']['email'];
+          final userName = json.decode(res.body)['data']['name'];
+          storeUserDetails(userId, userEmail, userName);
+          return Right(Result(value: message));
         } else {
-          final message = json.decode(res.body)['message'];
           return Left(
               Failure.withMessage(error: ServerError(), message: message));
         }
@@ -69,8 +72,10 @@ class LoginRepositoryImpl implements AuthRepository<LoginDetail> {
     return Left(Failure(error: InternetError()));
   }
 
-  storeUserId(String id) async {
+  storeUserDetails(String id, String email, String name) async {
     await SharedPrefs.initializeSharedPrefs();
-    return SharedPrefs.setUserId(id);
+    SharedPrefs.setUserId(id);
+    SharedPrefs.setUserEmail(email);
+    SharedPrefs.setUserName(name);
   }
 }

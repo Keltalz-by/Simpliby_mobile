@@ -3,6 +3,7 @@ const LOGIN_ROUTE = '/login';
 const SINGLE_STORE_ROUTE = '/store';
 const SIGNUP_ROUTE = '/signup';
 const FORGOT_PASSWORD = '/forgot_password';
+const ENTER_NEW_PASSWORD = '/enter_new_password';
 const VERIFY_EMAIL = '/verify_email';
 const BUYER_HOME_PAGE_ROUTE = '/buyer_home';
 const SELLER_HOME_PAGE_ROUTE = '/seller_home';

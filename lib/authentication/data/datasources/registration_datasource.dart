@@ -57,9 +57,14 @@ class RegistrationDataSource {
     return response;
   }
 
-  Future<http.Response> registerBusiness(String uid, String email) async {
-    var url = Uri.parse('${BASE_URL}auth/resendotp');
-    final Map<String, dynamic> body = {'userId': uid, 'email': email};
+  Future<http.Response> resetPassword(
+      String userId, String password, String passwordConfirm) async {
+    var url = Uri.parse('${BASE_URL}auth/resetpassword');
+    final Map<String, dynamic> body = {
+      'userId': userId,
+      'password': password,
+      'passwordConfirm': passwordConfirm
+    };
     var response = await http.post(url, body: body);
     return response;
   }

@@ -39,10 +39,12 @@ class VerifyEmail extends StatelessWidget {
                 ),
                 showConnectionError(context),
                 inputPin((data) {}, context),
-                Text("00:20",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: blackColor, fontSize: smallTextFontSize)),
+                Obx(() {
+                  return Text(controller.countdown.value,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: blackColor, fontSize: smallTextFontSize));
+                }),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -140,7 +142,7 @@ class VerifyEmail extends StatelessWidget {
   Widget continueButton(BuildContext context) {
     return defaultButtons(
         pressed: () {
-          controller.verifyEmail(email);
+          controller.verifyEmail();
         },
         text: "Continue");
   }

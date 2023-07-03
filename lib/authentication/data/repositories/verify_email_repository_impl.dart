@@ -17,6 +17,8 @@ class VerifyEmailRepoImpl {
   Future<Either<Failure, Result<String>>> verifyEmail(
       String userId, String otp) async {
     if (await networkInfo.isConnected) {
+      print("UID is $userId");
+
       try {
         final res = await dataSource.verifyEmail(userId, otp);
         if (res.statusCode == 200) {
@@ -40,6 +42,7 @@ class VerifyEmailRepoImpl {
     if (await networkInfo.isConnected) {
       try {
         final res = await dataSource.resendOtp(userId, email);
+        print("Saved email is $email and id is $userId");
         if (res.statusCode == 200) {
           return Right(Result(value: "Successful"));
         } else {
