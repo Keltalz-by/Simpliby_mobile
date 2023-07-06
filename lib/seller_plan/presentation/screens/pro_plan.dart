@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -25,18 +26,18 @@ class ProPlanScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text("Get more flexibility with premium",
+            Text("Get more flexibility with premium",
                 style: TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: 25)),
+                    fontSize: 25.sp)),
             const Padding(padding: EdgeInsets.only(top: 10)),
-            const Text("Select a plan",
+            Text("Select a plan",
                 style: TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.normal,
-                    fontSize: 18)),
-            const Padding(padding: EdgeInsets.only(top: 30)),
+                    fontSize: 18.sp)),
+            Padding(padding: EdgeInsets.only(top: 30.h)),
             singlePlanOption(context)
           ],
         ),
@@ -55,19 +56,19 @@ class ProPlanScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            const Text("PRO",
+            Text("PRO",
                 style: TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: 24)),
+                    fontSize: 24.sp)),
             const Padding(padding: EdgeInsets.only(top: 5)),
-            const Text(
+            Text(
                 "Use the basic plan to start selling to a larger audience and much more",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.normal,
-                    fontSize: 16)),
+                    fontSize: 16.sp)),
             const Padding(padding: EdgeInsets.only(top: 5)),
             const Text("Switch plans >",
                 textAlign: TextAlign.center,
@@ -81,21 +82,21 @@ class ProPlanScreen extends StatelessWidget {
                   Get.toNamed(CONFIRM_PRO_SUB_SCREEN, arguments: "2,000");
                 },
                 text: "Subscribe Monthly N2,000",
-                size: Size(MediaQuery.of(context).size.width * 0.7, 70)),
+                size: Size(MediaQuery.of(context).size.width * 0.7, 70.h)),
             const Padding(padding: EdgeInsets.only(top: 15)),
             defaultButtons(
                 pressed: () {
                   Get.toNamed(CONFIRM_PRO_SUB_SCREEN, arguments: "10,000");
                 },
                 text: "Subscribe Every 6 months N10,000",
-                size: Size(MediaQuery.of(context).size.width * 0.7, 70)),
+                size: Size(MediaQuery.of(context).size.width * 0.7, 70.h)),
             const Padding(padding: EdgeInsets.only(top: 15)),
             defaultButtons(
                 pressed: () {
                   Get.toNamed(CONFIRM_PRO_SUB_SCREEN, arguments: "19,500");
                 },
                 text: "Subscribe yearly N19,500",
-                size: Size(MediaQuery.of(context).size.width * 0.7, 70)),
+                size: Size(MediaQuery.of(context).size.width * 0.7, 70.h)),
           ],
         ),
       ),

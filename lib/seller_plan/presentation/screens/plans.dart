@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -16,15 +17,16 @@ class PlanScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             imageFromAssetsFolder(
-                width: 120.0,
-                height: 50.0,
-                path: 'assets/images/simplibuy_logo_small.png'),
+                width: 140.w,
+                height: 40.h,
+                path: 'assets/images/simplibuy_logo_small.png',
+                fit: BoxFit.fill),
             const Padding(padding: EdgeInsets.only(top: 10)),
-            const Text("Want to reach out to more buyers and earn more?",
+            Text("Want to reach out to more buyers and earn more?",
                 style: TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: 18)),
+                    fontSize: smallTextFontSize)),
             const Padding(padding: EdgeInsets.only(top: 10)),
             Text("Select a suitable subscription plan",
                 style:
@@ -59,7 +61,7 @@ class PlanScreen extends StatelessWidget {
       },
       child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 100,
+          // height: 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
@@ -80,8 +82,8 @@ class PlanScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  width: 70,
-                  height: 70,
+                  width: 80.w,
+                  height: 80.h,
                   decoration: BoxDecoration(
                     color: color,
                     borderRadius: BorderRadius.circular(10),
@@ -91,9 +93,9 @@ class PlanScreen extends StatelessWidget {
                       children: [
                         Text(
                           planType,
-                          style: const TextStyle(
+                          style: TextStyle(
                               color: Colors.white,
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.bold),
                         ),
                         const Text(
@@ -103,7 +105,7 @@ class PlanScreen extends StatelessWidget {
                         ),
                       ]),
                 ),
-                const SizedBox(width: 16.0),
+                SizedBox(width: 16.w),
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

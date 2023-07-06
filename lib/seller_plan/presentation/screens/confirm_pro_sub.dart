@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -19,28 +20,29 @@ class ConfirmProSubScreen extends StatelessWidget {
             Align(
                 alignment: Alignment.topLeft,
                 child: imageFromAssetsFolder(
-                    width: 120.0,
-                    height: 50.0,
-                    path: 'assets/images/simplibuy_logo_small.png')),
+                    width: 140.w,
+                    height: 40.h,
+                    path: 'assets/images/simplibuy_logo_small.png',
+                    fit: BoxFit.fill)),
             const Padding(padding: EdgeInsets.only(top: 10)),
             Text(
                 "You are subscribing for the Basic mothly plan. You will charged NGN $args monthly and you can cancel at anytime,",
-                style: const TextStyle(
+                style: TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.normal,
-                    fontSize: 18)),
-            const Padding(padding: EdgeInsets.only(top: 30)),
+                    fontSize: 18.sp)),
+            Padding(padding: EdgeInsets.only(top: 30.h)),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              const Text("Total",
+              Text("Total",
                   style: TextStyle(
                       color: blackColor,
                       fontWeight: FontWeight.normal,
-                      fontSize: 18)),
+                      fontSize: 18.sp)),
               Text("NGN $args",
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: blackColor,
                       fontWeight: FontWeight.normal,
-                      fontSize: 18))
+                      fontSize: 18.sp))
             ]),
             const Divider(
               color: blackColor,
@@ -52,21 +54,45 @@ class ConfirmProSubScreen extends StatelessWidget {
                   Get.toNamed(PAY_SUB_SCREEN, arguments: args);
                 },
                 text: "Pay now"),
-            const Padding(padding: EdgeInsets.only(top: 40)),
-            const Text(
+            Padding(padding: EdgeInsets.only(top: 40.h)),
+            Text(
                 "By purchasing this plan, you agree that you are purchasing a subscription that is charged on a recurring monthly basis",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.normal,
-                    fontSize: 15)),
-            const Padding(padding: EdgeInsets.only(top: 20)),
-            const Text("You also agree to our Terms and privacy policy",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: blackColor,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 15)),
+                    fontSize: 15.sp)),
+            Padding(padding: EdgeInsets.only(top: 20.h)),
+            RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                      text: "You also agree to our ",
+                      style: TextStyle(
+                          color: blackColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 15.sp)),
+                  TextSpan(
+                      text: "Terms",
+                      style: TextStyle(
+                          color: blueColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 15.sp)),
+                  TextSpan(
+                      text: " and ",
+                      style: TextStyle(
+                          color: blackColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 15.sp)),
+                  TextSpan(
+                      text: "privacy policy",
+                      style: TextStyle(
+                          color: blueColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 15.sp)),
+                ],
+              ),
+            ),
           ],
         ),
       ),

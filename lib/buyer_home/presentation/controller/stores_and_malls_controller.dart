@@ -63,6 +63,18 @@ class StoresAndMallsController extends GetxController {
     }
   }
 
+  searchStore(String query) {
+    _state.value = LoadingState();
+    usecase.searchStoreOrMall(query).then((value) {
+      if (value.isLeft) {
+        _state.value = ErrorState(errorType: value.left.error);
+      } else {
+        _details.value = value.right.value;
+        _state.value = FinishedState();
+      }
+    });
+  }
+
   getStores() {
     _toggleIsStore();
     _state.value = LoadingState();

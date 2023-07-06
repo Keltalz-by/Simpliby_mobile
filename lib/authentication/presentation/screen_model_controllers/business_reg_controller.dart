@@ -54,8 +54,8 @@ class BusinessRegController extends GetxController with ValidatorMixin {
               address: _address,
               city: _city,
               country: _country,
-              images: const [],
-              logo: logo.toString()))
+              images: image.path,
+              logo: logo.path))
           .then((result) {
         if (result.isLeft) {
           final err = ErrorState(errorType: result.left.error);

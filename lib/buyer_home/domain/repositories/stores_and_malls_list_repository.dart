@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:either_dart/either.dart';
+import 'package:simplibuy/buyer_home/data/datasource/retrieve_stores_datasource.dart';
 import 'package:simplibuy/buyer_home/domain/entities/strore_details.dart';
 import 'package:simplibuy/core/failure/failure.dart';
 import '../../../core/result/result.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/network/network_info.dart';
-import 'package:simplibuy/core/result/result.dart';
 
 abstract class StoresAndMallsRepository {
   Future<Either<Failure, Result<List<StoreDetails>>>> getStores();
@@ -15,8 +17,9 @@ abstract class StoresAndMallsRepository {
 
 class StoresAndMallsRepositoryImpl implements StoresAndMallsRepository {
   final NetworkInfo networkInfo;
+  final RetrieveStoresDataSource dataSource;
 
-  StoresAndMallsRepositoryImpl(this.networkInfo);
+  StoresAndMallsRepositoryImpl(this.networkInfo, this.dataSource);
   @override
   Future<Either<Failure, Result<List<StoreDetails>>>> getMalls() async {
     if (await networkInfo.isConnected) {
@@ -71,8 +74,23 @@ class StoresAndMallsRepositoryImpl implements StoresAndMallsRepository {
 
   @override
   Future<Either<Failure, Result<List<StoreDetails>>>> searchStoreOrMall(
-      String query) {
-    // TODO: implement searchStoreOrMall
-    throw UnimplementedError();
+      String query) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final res = await dataSource.searchStores(query);
+        final message = json.decode(res.body)['message'];
+
+        if (res.statusCode == 200) {
+          return Right(Result(value: []));
+        } else {
+          return Left(
+              Failure.withMessage(error: ServerError(), message: message));
+        }
+      } on Exception {
+        return Left(Failure(error: ServerError()));
+      }
+    } else {
+      return Left(Failure(error: InternetError()));
+    }
   }
 }

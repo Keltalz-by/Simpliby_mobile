@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'reusable_widgets.dart';
 
@@ -58,7 +59,7 @@ class CustomDialog extends StatelessWidget {
   Widget setButtons() {
     return Container(
       child: defaultButtons(
-          pressed: callback, text: buttonText, size: const Size(60, 30)),
+          pressed: callback, text: buttonText, size:  Size(80.w, 40.h)),
     );
   }
 }

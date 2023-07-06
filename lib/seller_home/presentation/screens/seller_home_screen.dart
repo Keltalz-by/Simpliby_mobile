@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/utils/utils.dart';
+import 'package:simplibuy/seller_home/presentation/screens/custom_widgets.dart';
 
 class SellerHomeScreen extends StatefulWidget {
   const SellerHomeScreen({Key? key}) : super(key: key);
@@ -26,31 +28,34 @@ class _MyWidgetState extends State<SellerHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: whiteColor.withAlpha(80),
-        //    appBar: homeAppBar(
-        //    text: greeting(),
-        //      onPressed: () {
-        //    Get.toNamed(NOTIFICATION_SCREEN);
-        //    }),
-        body: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(defaultPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  "Ready to make some cool cash today?",
-                  style: TextStyle(
-                      color: blackColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                availabilitySwitch(context),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                optionsToClick(context),
-                mostPurchasedProducts()
-              ],
-            )));
+        appBar: sellerhomeAppBar(
+            text: greeting(),
+            name: "Roban Stores",
+            onPressed: () {
+              Get.toNamed(NOTIFICATION_SCREEN);
+            }),
+        body: SafeArea(
+            child: SingleChildScrollView(
+                child: Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(defaultPadding),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Ready to make some cool cash today?",
+                          style: TextStyle(
+                              color: blackColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        availabilitySwitch(context),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        optionsToClick(context),
+                        mostPurchasedProducts()
+                      ],
+                    )))));
   }
 
   Widget availabilitySwitch(BuildContext context) {
@@ -98,18 +103,24 @@ class _MyWidgetState extends State<SellerHomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // rgba(100, 188, 244, 0.3)
+
             customContainer(
                 MediaQuery.of(context).size.width * 0.4,
-                Color.fromARGB(255, 188, 217, 240),
+                Color.fromARGB(255, 187, 225, 248),
+                Color.fromRGBO(100, 188, 244, 1),
                 Icons.person_add_alt_1_outlined,
-                "Orders", () {
+                "Orders",
+                "View incoming orders, Accept or reject orders.", () {
               Get.toNamed(ORDERS_SCREEN);
             }),
             customContainer(
                 MediaQuery.of(context).size.width * 0.4,
-                Color.fromARGB(255, 189, 231, 191),
+                Color.fromARGB(255, 148, 241, 164),
+                Color.fromRGBO(17, 255, 55, 1),
                 Icons.production_quantity_limits,
-                "Add New Product", () {
+                "Add Product",
+                "Add new products to be displayed.", () {
               Get.toNamed(ADD_NEW_PRODUCT);
             })
           ],
@@ -117,9 +128,11 @@ class _MyWidgetState extends State<SellerHomeScreen> {
         const Padding(padding: EdgeInsets.only(top: 20)),
         customContainer(
             MediaQuery.of(context).size.width,
-            Color.fromARGB(255, 236, 187, 183),
+            Color.fromARGB(255, 247, 169, 173),
+            Color(0xffFA0611),
             Icons.card_giftcard,
-            "View Products", () {
+            "View Products",
+            "View your products to see your items displayed.", () {
           Get.toNamed(SELLER_PRODUCT_CATEGORIES);
         }),
         const Padding(padding: EdgeInsets.only(top: 20)),
@@ -127,18 +140,22 @@ class _MyWidgetState extends State<SellerHomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            customContainerInv(
+            customContainer(
                 MediaQuery.of(context).size.width * 0.4,
-                const Color.fromARGB(255, 137, 192, 238),
+                Color.fromARGB(255, 245, 222, 138),
+                const Color(0xffEBB90A),
                 Icons.task_alt_outlined,
-                "Records", () {
+                "Records",
+                "View your daily transactions and take records.", () {
               Get.toNamed(HISTORY_SCREEN);
             }),
-            customContainerInv(
+            customContainer(
                 MediaQuery.of(context).size.width * 0.4,
-                const Color.fromARGB(255, 137, 192, 238),
+                Color.fromARGB(255, 245, 222, 138),
+                const Color(0xffEBB90A),
                 Icons.payment_outlined,
-                "Payments", () {
+                "Payments",
+                "Withdraw your money or view your financial transactions", () {
               Get.toNamed(SELLER_PAYMENTS);
             })
           ],
@@ -152,94 +169,57 @@ class _MyWidgetState extends State<SellerHomeScreen> {
   }
 }
 
-Widget customContainer(double width, Color color, IconData icon, String text,
-    VoidCallback onClick) {
+Widget customContainer(double width, Color color, Color borderColor,
+    IconData icon, String text, String details, VoidCallback onClick) {
   return GestureDetector(
       onTap: () {
         onClick();
       },
       child: Container(
         width: width,
-        height: 130,
+        height: 200.h,
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              blurRadius: 4.0,
+              color: Colors.grey.withOpacity(0.9),
               offset: const Offset(0, 2),
             ),
           ],
           border: Border.all(
-            color: blueColor.withOpacity(0.7),
-            width: 2.0,
+            color: borderColor,
+            width: 1.2,
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(
               icon,
               size: 30.0,
               color: blackColor,
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 16.h),
             Text(
               text,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
               style: TextStyle(
-                fontSize: 24.0,
-                color: blackColor.withOpacity(0.8),
-                fontWeight: FontWeight.bold,
+                fontSize: 18.sp,
+                color: blackColor,
+                fontWeight: FontWeight.w600,
               ),
             ),
-          ],
-        ),
-      ));
-}
-
-Widget customContainerInv(double width, Color color, IconData icon, String text,
-    VoidCallback onClick) {
-  return GestureDetector(
-      onTap: () {
-        onClick();
-      },
-      child: Container(
-        width: width,
-        padding: EdgeInsets.all(12.0),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: blueColor.withOpacity(0.7),
-            width: 2.0,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              blurRadius: 3.0,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+            SizedBox(height: 16.h),
             Text(
-              text,
+              details,
+              textAlign: TextAlign.start,
               style: TextStyle(
-                fontSize: 24.0,
-                color: blackColor.withOpacity(0.8),
-                fontWeight: FontWeight.bold,
+                fontSize: 15.sp,
+                color: blackColor,
+                fontWeight: FontWeight.w400,
               ),
-            ),
-            SizedBox(height: 16.0),
-            Icon(
-              icon,
-              size: 30.0,
-              color: blackColor,
             ),
           ],
         ),

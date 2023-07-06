@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -28,10 +29,11 @@ class PaySubScreen extends StatelessWidget {
             Align(
                 alignment: Alignment.topLeft,
                 child: imageFromAssetsFolder(
-                    width: 120.0,
-                    height: 50.0,
-                    path: 'assets/images/simplibuy_logo_small.png')),
-            const Padding(padding: EdgeInsets.only(top: 20)),
+                    width: 140.w,
+                    height: 40.h,
+                    path: 'assets/images/simplibuy_logo_small.png',
+                    fit: BoxFit.fill)),
+            Padding(padding: EdgeInsets.only(top: 20.h)),
             payNowWidget(context)
           ],
         ),

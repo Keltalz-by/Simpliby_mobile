@@ -9,7 +9,7 @@ class BusinessRegDetails extends Equatable {
   final String address;
   final String city;
   final String country;
-  final List<String> images;
+  final String images;
   final String logo;
 
   BusinessRegDetails({

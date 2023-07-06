@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:simplibuy/buyer_home/data/datasource/retrieve_stores_datasource.dart';
 import 'package:simplibuy/buyer_home/domain/repositories/favorite_stores_repository.dart';
 import 'package:simplibuy/buyer_home/domain/repositories/stores_and_malls_list_repository.dart';
 import 'package:simplibuy/buyer_home/domain/usecases/stores_and_malls_fav_usecase.dart';
@@ -43,8 +44,10 @@ class BuyerHomeBottomNavScreensBindings implements Bindings {
         () => FavStoresRepoImpl(dao: Get.find<FavStoresDao>()));
     Get.lazyPut<StoresAndMallsFavUsecase>(() =>
         StoresAndMallsFavUsecase(Get.find<FavStoresAndMallsRepository>()));
-    Get.lazyPut<StoresAndMallsRepository>(
-        () => StoresAndMallsRepositoryImpl(info));
+
+    Get.lazyPut<RetrieveStoresDataSource>(() => RetrieveStoresDataSource());
+    Get.lazyPut<StoresAndMallsRepository>(() => StoresAndMallsRepositoryImpl(
+        info, Get.find<RetrieveStoresDataSource>()));
     Get.lazyPut<StoresAndMallsUsecase>(() => StoresAndMallsUsecase(
         repository: Get.find<StoresAndMallsRepository>()));
     Get.lazyPut<StoresAndMallsController>(() => StoresAndMallsController(
