@@ -7,22 +7,9 @@ import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/utils/utils.dart';
 import 'package:simplibuy/seller_home/presentation/screens/custom_widgets.dart';
 
-class SellerHomeScreen extends StatefulWidget {
-  const SellerHomeScreen({Key? key}) : super(key: key);
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _MyWidgetState createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<SellerHomeScreen> {
-  bool isAvailable = false;
-
-  void _toggleAvailability(bool newValue) {
-    setState(() {
-      isAvailable = newValue;
-    });
-  }
+class SellerHomeScreen extends StatelessWidget {
+  SellerHomeScreen({Key? key}) : super(key: key);
+  RxBool isOnline = true.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -60,39 +47,68 @@ class _MyWidgetState extends State<SellerHomeScreen> {
 
   Widget availabilitySwitch(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.7,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            blurRadius: 4.0,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            "Available",
-            style: TextStyle(fontSize: 16.0),
-          ),
-          const SizedBox(width: 8.0),
-          Switch(
-            value: isAvailable,
-            onChanged: (value) => {_toggleAvailability(value)},
-          ),
-          const SizedBox(width: 16.0),
-          const Text(
-            "Unavailable",
-            style: TextStyle(fontSize: 16.0),
-          ),
-        ],
-      ),
-    );
+        width: MediaQuery.of(context).size.width * 0.82,
+        padding: EdgeInsets.symmetric(vertical: 6.h),
+        decoration: BoxDecoration(
+          color: Colors.grey.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Obx(() => Container(
+                    width: MediaQuery.of(context).size.width * 0.38,
+                    padding: const EdgeInsets.all(6.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: isOnline.value ? whiteColor : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: GestureDetector(
+                        onTap: () {
+                          if (isOnline.value == false) {
+                            isOnline.value = true;
+                          }
+                        },
+                        child: Text(
+                          "Active",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: isOnline.value
+                                ? blueColor
+                                : blackColor.withOpacity(0.8),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )),
+                  )),
+              const Padding(padding: EdgeInsets.only(left: 6)),
+              Obx(() => Container(
+                    padding: const EdgeInsets.all(6.0),
+                    width: MediaQuery.of(context).size.width * 0.38,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: !isOnline.value ? whiteColor : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: GestureDetector(
+                        onTap: () {
+                          if (isOnline.value == true) {
+                            isOnline.value = false;
+                          }
+                        },
+                        child: Text(
+                          "Offline",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: isOnline.value
+                                ? blackColor.withOpacity(0.8)
+                                : blueColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )),
+                  ))
+            ]));
   }
 
   Widget optionsToClick(BuildContext context) {
