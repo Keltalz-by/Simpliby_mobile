@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constant.dart';
@@ -98,59 +99,67 @@ class OrdersScreen extends StatelessWidget {
 
   Widget orderButtons(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width * 0.78,
-        padding: const EdgeInsets.all(6),
+        width: MediaQuery.of(context).size.width * 0.82,
+        padding: EdgeInsets.symmetric(vertical: 6.h),
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(5.0),
+          color: Colors.grey.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(2.0),
-                ),
-                child: GestureDetector(onTap: () {
-                  controller.getIncomingOrders();
-                }, child: Obx(() {
-                  return Text(
-                    "Incoming Orders",
-                    style: TextStyle(
-                      fontSize: 18.0,
+              Obx(() => Container(
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    padding: const EdgeInsets.all(6.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
                       color: controller.isIncoming
-                          ? blueColor
-                          : blackColor.withOpacity(0.8),
-                      fontWeight: FontWeight.bold,
+                          ? whiteColor
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
-                  );
-                })),
-              ),
+                    child: GestureDetector(
+                        onTap: () {
+                          controller.getIncomingOrders();
+                        },
+                        child: Text(
+                          "Incoming orders",
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: controller.isIncoming
+                                ? blueColor
+                                : blackColor.withOpacity(0.8),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )),
+                  )),
               const Padding(padding: EdgeInsets.only(left: 6)),
-              Container(
-                padding: const EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(2.0),
-                ),
-                child: GestureDetector(onTap: () {
-                  controller.getAcceptedOrders();
-                }, child: Obx(() {
-                  return Text(
-                    "Accepted Orders",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: controller.isIncoming
-                          ? blackColor.withOpacity(0.8)
-                          : blueColor,
-                      fontWeight: FontWeight.bold,
+              Obx(() => Container(
+                    padding: const EdgeInsets.all(6.0),
+                    width: MediaQuery.of(context).size.width * 0.38,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: !controller.isIncoming
+                          ? whiteColor
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
-                  );
-                })),
-              )
+                    child: GestureDetector(
+                        onTap: () {
+                          controller.getAcceptedOrders();
+                        },
+                        child: Text(
+                          "Accepted Orders",
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: controller.isIncoming
+                                ? blackColor.withOpacity(0.8)
+                                : blueColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )),
+                  ))
             ]));
   }
 

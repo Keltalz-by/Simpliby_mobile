@@ -12,6 +12,9 @@ Widget defaultButtons(
       style: ElevatedButton.styleFrom(
           backgroundColor: blueColor,
           minimumSize: size,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.r),
+          ),
           shadowColor: blueColor),
       child: Text(
         text,

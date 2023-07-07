@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/orders/data/models/accepted_orders.dart';
@@ -25,23 +26,26 @@ Widget singleIncomingOrder(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(60),
                 child: FadeInImage.assetNetwork(
-                    width: 60,
-                    height: 60,
+                    width: 60.w,
+                    height: 60.h,
                     fit: BoxFit.cover,
                     placeholder: 'assets/gifs/simpliby_loading.gif',
                     imageErrorBuilder: (context, error, stackTrace) {
                       return const Icon(
                         Icons.account_circle,
-                        size: 35,
+                        size: 60,
                       );
                     },
                     image: order.image)),
+            SizedBox(
+              width: 20.w,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -75,7 +79,7 @@ Widget singleIncomingOrder(
         defaultButtons(
             pressed: onOrderClicked,
             text: "View Details",
-            size: const Size(230, 40))
+            size: Size(300.w, 37.h))
       ],
     ),
   );
@@ -108,14 +112,14 @@ Widget singleAcceptedOrder(
             ClipRRect(
                 borderRadius: BorderRadius.circular(60),
                 child: FadeInImage.assetNetwork(
-                    width: 60,
-                    height: 60,
+                    width: 60.w,
+                    height: 60.h,
                     fit: BoxFit.cover,
                     placeholder: 'assets/gifs/simpliby_loading.gif',
                     imageErrorBuilder: (context, error, stackTrace) {
                       return const Icon(
                         Icons.account_circle,
-                        size: 45,
+                        size: 60,
                       );
                     },
                     image: order.image)),
@@ -130,7 +134,7 @@ Widget singleAcceptedOrder(
                       fontSize: smallTextFontSize,
                       fontWeight: FontWeight.bold),
                 ),
-                const Padding(padding: EdgeInsets.only(top: 6)),
+                Padding(padding: EdgeInsets.only(top: 6.h)),
                 Text(
                   "Ticket ID: ${order.ticketId}",
                   style: TextStyle(
@@ -138,7 +142,7 @@ Widget singleAcceptedOrder(
                       fontSize: smallTextFontSize,
                       fontWeight: FontWeight.normal),
                 ),
-                const Padding(padding: EdgeInsets.only(top: 6)),
+                Padding(padding: EdgeInsets.only(top: 6.h)),
                 Text(
                   "Status: ${order.status}",
                   style: TextStyle(
@@ -150,7 +154,7 @@ Widget singleAcceptedOrder(
             )
           ],
         ),
-        const Padding(padding: EdgeInsets.only(top: 10)),
+        Padding(padding: EdgeInsets.only(top: 10.h)),
         defaultButtons(
             pressed: onOrderClicked, text: "Cancel", size: const Size(100, 30))
       ],
