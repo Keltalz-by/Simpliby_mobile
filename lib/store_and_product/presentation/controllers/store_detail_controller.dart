@@ -72,6 +72,7 @@ class StoreDetailController extends GetxController {
   }
 
   start(int id) {
+    print("The id is $id");
     _getStoreInfo(id);
     _getCategories(id);
     _getPopularProducts();

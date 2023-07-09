@@ -1,6 +1,7 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/string_constants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -86,9 +87,9 @@ Widget _titleAndIcon(
       ),
       label: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           color: blackColor,
-          fontSize: 15,
+          fontSize: 15.sp,
         ),
       ),
       onPressed: onClick);
@@ -100,8 +101,10 @@ Widget storeContactDetails(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _titleAndIcon(data: Icons.link, text: email),
-        _titleAndIcon(data: Icons.call, text: phoneNumber)
+        Expanded(
+          child: _titleAndIcon(data: Icons.link, text: email),
+        ),
+        Expanded(child: _titleAndIcon(data: Icons.call, text: phoneNumber))
       ]);
 }
 
@@ -265,13 +268,13 @@ Widget singleProductItem(BuildContext context, Product product,
     VoidCallback onPressed, VoidCallback addToCart) {
   return GestureDetector(
       onTap: onPressed,
-      child: Stack(clipBehavior: Clip.none, children: [
+      child: Stack(clipBehavior: Clip.antiAlias, children: [
         ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             child: FadeInImage.assetNetwork(
                 width: 110,
                 height: 120,
-                fit: BoxFit.contain,
+                fit: BoxFit.fill,
                 placeholder: defaultProductImage,
                 placeholderCacheHeight: 110,
                 placeholderCacheWidth: 120,
@@ -280,12 +283,14 @@ Widget singleProductItem(BuildContext context, Product product,
                     defaultProductImage,
                     width: 110,
                     height: 120,
+                    fit: BoxFit.fill,
                   );
                 },
                 image: product.productImage[0])),
         Positioned(
-          bottom: 0,
+          bottom: 2,
           left: 0,
+          right: 0,
           child: _productTexts(context, product.productName,
               product.productPrice.toString(), addToCart),
         )
@@ -300,50 +305,47 @@ const snackAdded = SnackBar(
 Widget _productTexts(
     BuildContext context, String name, String price, VoidCallback addToCart) {
   return SizedBox(
-      width: 100,
-      height: 40,
+      width: 114,
+      height: 50,
       child: Card(
-        color: Colors.white,
+        color: Colors.transparent,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(5),
-                bottomRight: Radius.circular(5))),
-        elevation: 3,
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10))),
         child: Row(children: [
           Expanded(
-              child: Opacity(
-            opacity: 0.5,
-            child: Container(
-                width: 80,
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius:
-                      BorderRadius.only(bottomLeft: Radius.circular(5)),
+              child: Container(
+            width: 80,
+            decoration: BoxDecoration(
+              color: Color(0xff434041).withOpacity(0.6),
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10)),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: const TextStyle(
+                      color: whiteColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
                 ),
-                child: Column(
-                  children: [
-                    Text(
-                      name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                      style: const TextStyle(
-                          color: whiteColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "₦$price View ",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                      style: TextStyle(
-                          color: whiteColor,
-                          fontSize: smallerTextFontSize,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
-                )),
+                Text(
+                  "₦$price View Details",
+                  maxLines: 1,
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: TextStyle(
+                      color: whiteColor,
+                      fontSize: smallerTextFontSize,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
           )),
           GestureDetector(
             onTap: addToCart,

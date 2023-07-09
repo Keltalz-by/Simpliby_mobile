@@ -15,6 +15,7 @@ class StoreInfoScreen extends StatelessWidget {
 
   final StoreDetailController _controller = Get.find<StoreDetailController>();
   final int id = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     _controller.start(id);
@@ -31,33 +32,25 @@ class StoreInfoScreen extends StatelessWidget {
 
   Widget _body(BuildContext context) {
     return Column(children: [
-      SizedBox(
-          height: 320,
-          child: Stack(
-            alignment: Alignment.center,
-            clipBehavior: Clip.none,
-            children: [
-              SellerProfileImage(context, _controller.store.storeImages),
-              Positioned(
-                  top: 40,
-                  right: 20,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: searchInput(() {}),
-                  )),
-              Positioned(
-                bottom: -10,
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: storeNameAndAddress(
-                      context: context,
-                      storeImage: _controller.store.storeImages[0],
-                      storeName: _controller.store.name,
-                      storeAddress: _controller.store.address),
-                ),
-              )
-            ],
-          )),
+      Stack(
+        clipBehavior: Clip.none,
+        children: [
+          SellerProfileImage(context, _controller.store.storeImages),
+          Positioned(
+            top: 0,
+            right: 10,
+            child: searchInput(() {}),
+          ),
+          Positioned(
+            bottom: -20,
+            child: storeNameAndAddress(
+                context: context,
+                storeImage: _controller.store.storeImages,
+                storeName: _controller.store.name,
+                storeAddress: _controller.store.address),
+          ),
+        ],
+      ),
       const Padding(padding: EdgeInsets.only(top: 10)),
       Expanded(
           child: SingleChildScrollView(
