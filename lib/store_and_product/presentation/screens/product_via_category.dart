@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
@@ -33,26 +34,30 @@ class ProductsListScreen extends StatelessWidget {
                         shrinkWrap: true,
                         crossAxisCount: 2,
                         physics: const ScrollPhysics(),
-                        crossAxisSpacing: 8.0,
-                        mainAxisSpacing: 8.0,
+                        crossAxisSpacing: 4.0,
+                        mainAxisSpacing: 6.0,
                         children: List.generate(
                             _controller.product.length,
-                            (index) => Center(
-                                child: productListContainer(
-                                    context: context,
-                                    product: _controller.product[index],
-                                    onProductClick: () =>
-                                        Get.toNamed(PRODUCT_SCREEN, arguments: [
-                                          _controller.product[index].productId,
-                                          args[1],
-                                          args[0]
-                                        ]),
-                                    onAddBtnClicked: () {
-                                      _controller.addProductToCart(
-                                          index, args[1], args[0]);
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackAdded);
-                                    }))))));
+                            (index) => Padding(
+                                padding: EdgeInsets.only(top: 8.h),
+                                child: Center(
+                                    child: productListContainer(
+                                        context: context,
+                                        product: _controller.product[index],
+                                        onProductClick: () => Get.toNamed(
+                                                PRODUCT_SCREEN,
+                                                arguments: [
+                                                  _controller
+                                                      .product[index].productId,
+                                                  args[1],
+                                                  args[0]
+                                                ]),
+                                        onAddBtnClicked: () {
+                                          _controller.addProductToCart(
+                                              index, args[1], args[0]);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackAdded);
+                                        })))))));
           }
           return defaultLoading(context);
         }));

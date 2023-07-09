@@ -51,7 +51,7 @@ class StoreInfoScreen extends StatelessWidget {
           ),
         ],
       ),
-      const Padding(padding: EdgeInsets.only(top: 10)),
+      const Padding(padding: EdgeInsets.only(top: 20)),
       Expanded(
           child: SingleChildScrollView(
               physics: const ScrollPhysics(),
@@ -84,7 +84,10 @@ class StoreInfoScreen extends StatelessWidget {
                     ? showPopular()
                     : Container(),
                 popularProducts(context),
-                const Padding(padding: EdgeInsets.only(top: 10)),
+                const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                        "Didn’t find what you intend to buy? Click here to chat with the seller")),
                 chatToReserveItem(context),
                 const Padding(padding: EdgeInsets.only(top: 10)),
               ])))
@@ -97,7 +100,8 @@ class StoreInfoScreen extends StatelessWidget {
         return defaultLoading(context);
       }
       if (_controller.popstate is FinishedState) {
-        return SizedBox(
+        return Container(
+            padding: EdgeInsets.all(10),
             height: 200,
             child: GridView.count(
                 crossAxisCount: 2,
@@ -175,8 +179,9 @@ class StoreInfoScreen extends StatelessWidget {
         return defaultLoading(context);
       }
       if (_controller.popstate is FinishedState) {
-        return SizedBox(
+        return Container(
             height: 100,
+            padding: EdgeInsets.all(10),
             child: ListView.separated(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,

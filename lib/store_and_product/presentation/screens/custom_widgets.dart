@@ -366,8 +366,8 @@ Widget productListContainer(
     required VoidCallback onAddBtnClicked}) {
   return Container(
       padding: const EdgeInsets.only(top: 5, left: 5),
-      width: MediaQuery.of(context).size.width * 0.38,
-      height: 180,
+      width: MediaQuery.of(context).size.width * 0.35,
+      height: 230.h,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -380,41 +380,33 @@ Widget productListContainer(
           ),
         ],
       ),
-      child: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.bottomRight,
-          children: [
-            Positioned(
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: GestureDetector(
-                    onTap: onProductClick,
-                    child: Column(children: [
-                      productImage(product.productImage[0]),
-                      Text(product.productName,
-                          style: TextStyle(
-                              color: blackColor,
-                              fontSize: smallTextFontSize,
-                              fontWeight: FontWeight.bold)),
-                      /* RichText(
+      child: Stack(clipBehavior: Clip.hardEdge, children: [
+        GestureDetector(
+            onTap: onProductClick,
+            child: Column(children: [
+              productImage(product.productImage[0]),
+              Text(product.productName,
+                  style: TextStyle(
+                      color: blackColor,
+                      fontSize: smallTextFontSize,
+                      fontWeight: FontWeight.bold)),
+              /* RichText(
                           text: TextSpan(children: [*/
-                      Text('₦${product.productPrice}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: blackColor,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold)),
-                      /*  const TextSpan(
+              Text('₦${product.productPrice}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      color: blackColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold)),
+              /*  const TextSpan(
                           text: " View Details",
                           style: TextStyle(
                               color: blackColor, fontSize: smallerTextFontSize))*/
-                      //])),
-                    ]))),
-            Positioned(right: 1, bottom: 1, child: addSign(onAddBtnClicked))
-          ]));
+              //])),
+            ])),
+        Positioned(right: 0, bottom: 0, child: addSign(onAddBtnClicked))
+      ]));
 }
 
 Widget productImage(String image) {
@@ -427,7 +419,12 @@ Widget productImage(String image) {
         fit: BoxFit.fill,
         placeholder: defaultProductImage,
         imageErrorBuilder: (context, error, stackTrace) {
-          return Image.asset(defaultProductImage);
+          return Image.asset(
+            defaultProductImage,
+            width: 120.w,
+            height: 120.h,
+            fit: BoxFit.contain,
+          );
         },
         image: image),
   );
@@ -439,7 +436,7 @@ Widget addSign(VoidCallback onPressed) {
           border: Border.all(color: Colors.grey),
           color: Colors.grey,
           borderRadius:
-              const BorderRadius.only(bottomRight: Radius.circular(15))),
+              const BorderRadius.only(bottomRight: Radius.circular(10))),
       child: InkWell(
           borderRadius: BorderRadius.circular(100.0),
           onTap: onPressed,

@@ -31,7 +31,8 @@ class ProductScreen extends StatelessWidget {
   }
 
   Widget _body(BuildContext context, Product product) {
-    return Column(
+    return SingleChildScrollView(
+        child: Column(
       children: [
         imageSlidersProduct(context, product.productImage),
         Container(
@@ -75,6 +76,6 @@ class ProductScreen extends StatelessWidget {
           ),
         )
       ],
-    );
+    ));
   }
 }
