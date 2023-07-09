@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
           initialBinding: MainBinding(),
           theme: ThemeData(
               primarySwatch: Colors.blue, scaffoldBackgroundColor: whiteColor),
-          home: PlanScreen(),
+          home: SplashScreen(),
         );
       },
     );

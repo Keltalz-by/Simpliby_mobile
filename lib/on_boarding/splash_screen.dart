@@ -36,6 +36,7 @@ class _MyHomePageState extends State<SplashScreen> {
             child: imageFromAssetsFolder(
                 width: 180.w,
                 height: 150.h,
+                fit: BoxFit.contain,
                 path: 'assets/images/simpliby_logo.png')));
   }
 }

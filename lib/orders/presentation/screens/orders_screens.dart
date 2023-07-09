@@ -17,6 +17,7 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 243, 243, 243),
       appBar: customAppBar(
           text: "Back",
@@ -90,7 +91,7 @@ class OrdersScreen extends StatelessWidget {
               buttonText: "Continue",
               iconColor: Colors.black,
               textDetail: "Offer Declined"));
-        });
+        }, context);
       } else {
         return Container();
       }

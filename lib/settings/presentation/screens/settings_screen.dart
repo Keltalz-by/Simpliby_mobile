@@ -15,7 +15,7 @@ class SettingsScreen extends StatelessWidget {
           onPressed: () {
             Get.back();
           }),
-      body: Container(
+      body: SingleChildScrollView(child: Container(
         padding: const EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
@@ -57,7 +57,7 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+     ) );
   }
 
   final div = const Divider(

@@ -112,7 +112,6 @@ Widget filterOption(VoidCallback onPressed) {
 
 Widget searchInputBlue(BuildContext context) {
   return SizedBox(
-      height: 55.h,
       width: MediaQuery.of(context).size.width * 0.78,
       child: Align(
           alignment: Alignment.center,
@@ -122,6 +121,7 @@ Widget searchInputBlue(BuildContext context) {
                 Icons.search,
                 color: blueColor,
               ),
+              contentPadding: EdgeInsets.all(8),
               enabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 borderSide: BorderSide(width: 3, color: blueColor),

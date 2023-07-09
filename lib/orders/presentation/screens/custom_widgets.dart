@@ -79,7 +79,7 @@ Widget singleIncomingOrder(
         defaultButtons(
             pressed: onOrderClicked,
             text: "View Details",
-            size: Size(300.w, 37.h))
+            size: Size(300.w, 48.h))
       ],
     ),
   );
@@ -176,10 +176,11 @@ Widget emptyOrder() {
   );
 }
 
-Widget incomingOrdersBottomSheet(VoidCallback onAccept, VoidCallback onReject) {
+Widget incomingOrdersBottomSheet(
+    VoidCallback onAccept, VoidCallback onReject, BuildContext context) {
   return SingleChildScrollView(
       child: Container(
-    padding: const EdgeInsets.all(35),
+    padding: EdgeInsets.only(left: 40.w, right: 40.w, top: 10.h, bottom: 40.h),
     decoration: BoxDecoration(
       color: whiteColor,
       boxShadow: [
@@ -189,27 +190,42 @@ Widget incomingOrdersBottomSheet(VoidCallback onAccept, VoidCallback onReject) {
           offset: const Offset(0, 2),
         ),
       ],
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Align(
+            alignment: Alignment.center,
+            child: Container(
+              width: 80.w,
+              height: 4.h,
+              decoration: BoxDecoration(
+                color: Colors.grey.withAlpha(100),
+                borderRadius: BorderRadius.all(Radius.circular(25.r)),
+              ),
+            )),
+        padding,
+        padding,
         personHeader(),
         padding,
         padding,
         Text(
           "Items",
-          style: TextStyle(color: Colors.grey, fontSize: 15),
+          style: TextStyle(color: Colors.grey, fontSize: 18.sp),
         ),
-        singleItemList("Rolon", "30"),
-        singleItemList("Rolon", "30"),
-        singleItemList("Rolon", "30"),
-        singleItemList("Rolon", "30"),
-        singleItemList("Rolon", "30"),
+        singleItemList("50ml Nivea Rolon", "30"),
+        padding,
+        singleItemList("Smart Collection Perfume", "30"),
+        padding,
+        singleItemList("Paracetamol Antedote", "30"),
+        padding,
+        singleItemList("Pears powder and body cream", "30"),
         padding,
         Text(
           "Amount",
-          style: TextStyle(color: Colors.grey, fontSize: 15),
+          style: TextStyle(color: Colors.grey, fontSize: 18.sp),
         ),
         Text(
           "\$180",
@@ -218,7 +234,7 @@ Widget incomingOrdersBottomSheet(VoidCallback onAccept, VoidCallback onReject) {
         padding,
         Text(
           "Status",
-          style: TextStyle(color: Colors.grey, fontSize: 15),
+          style: TextStyle(color: Colors.grey, fontSize: 18.sp),
         ),
         Text(
           "Paid",
@@ -227,7 +243,7 @@ Widget incomingOrdersBottomSheet(VoidCallback onAccept, VoidCallback onReject) {
         padding,
         Text(
           "Ticket ID",
-          style: TextStyle(color: Colors.grey, fontSize: 15),
+          style: TextStyle(color: Colors.grey, fontSize: 18.sp),
         ),
         Text(
           "KNS684B234HK",
@@ -236,7 +252,7 @@ Widget incomingOrdersBottomSheet(VoidCallback onAccept, VoidCallback onReject) {
         padding,
         Text(
           "Pickup time",
-          style: TextStyle(color: Colors.grey, fontSize: 15),
+          style: TextStyle(color: Colors.grey, fontSize: 18.sp),
         ),
         Text(
           "Monday 25th July, 2020",
@@ -248,9 +264,13 @@ Widget incomingOrdersBottomSheet(VoidCallback onAccept, VoidCallback onReject) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             defaultButtons(
-                pressed: onAccept, text: "Accept", size: Size(130, 50)),
+                pressed: onAccept,
+                text: "Accept",
+                size: Size(MediaQuery.of(context).size.width * 0.39, 45.h)),
             defaultButtons(
-                pressed: onReject, text: "Reject", size: Size(130, 50))
+                pressed: onReject,
+                text: "Reject",
+                size: Size(MediaQuery.of(context).size.width * 0.39, 45.h))
           ],
         )
       ],
@@ -262,7 +282,8 @@ const padding = Padding(padding: EdgeInsets.only(top: 6));
 
 Widget singleItemList(String name, String price) {
   return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         name,
@@ -289,10 +310,11 @@ Widget personHeader() {
             imageErrorBuilder: (context, error, stackTrace) {
               return const Icon(
                 Icons.account_circle,
-                size: 35,
+                size: 60,
               );
             },
             image: "")),
+    SizedBox(width: 8.w),
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -323,41 +345,81 @@ Widget acceptedOrdersBottomSheet(VoidCallback onCancel) {
     "Closed for the week"
   ];
 
-  return Container(
-      padding: const EdgeInsets.all(35),
-      decoration: BoxDecoration(
-        color: whiteColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 3.0,
-            offset: const Offset(0, 2),
+  return SingleChildScrollView(
+      child: Container(
+          padding: const EdgeInsets.all(35),
+          alignment: Alignment.topCenter,
+          decoration: BoxDecoration(
+            color: whiteColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 3.0,
+                offset: const Offset(0, 2),
+              ),
+            ],
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25.r),
+                topRight: Radius.circular(25.r)),
           ),
-        ],
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Autocomplete(optionsBuilder: (TextEditingValue textEditingValue) {
-            if (textEditingValue.text == '') {
-              return const Iterable<String>.empty();
-            } else {
-              List<String> matches = <String>[];
-              matches.addAll(suggestions);
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 80.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: Colors.grey.withAlpha(100),
+                  borderRadius: BorderRadius.all(Radius.circular(25.r)),
+                ),
+              ),
+              padding,
+              padding,
+              Text(
+                "Why do you want to cancel this order?",
+                style:
+                    TextStyle(color: blackColor, fontSize: smallTextFontSize),
+              ),
+              padding,
+              padding,
+              Autocomplete<String>(
+                optionsBuilder: (TextEditingValue textEditingValue) {
+                  if (textEditingValue.text == '') {
+                    return const Iterable<String>.empty();
+                  } else {
+                    List<String> matches = <String>[];
+                    matches.addAll(suggestions);
 
-              matches.retainWhere((s) {
-                return s
-                    .toLowerCase()
-                    .contains(textEditingValue.text.toLowerCase());
-              });
-              return matches;
-            }
-          }, onSelected: (String selection) {
-            print('You just selected $selection');
-          }),
-          defaultButtons(pressed: onCancel, text: "Cancel Order")
-        ],
-      ));
+                    matches.retainWhere((s) {
+                      return s
+                          .toLowerCase()
+                          .contains(textEditingValue.text.toLowerCase());
+                    });
+                    return matches;
+                  }
+                },
+                onSelected: (String selection) {
+                  print('You just selected $selection');
+                },
+                fieldViewBuilder: (BuildContext context,
+                    TextEditingController textEditingController,
+                    FocusNode focusNode,
+                    VoidCallback onFieldSubmitted) {
+                  return TextField(
+                    decoration: customInputDecoration(),
+                    controller: textEditingController,
+                    focusNode: focusNode,
+                    onSubmitted: (value) {
+                      onFieldSubmitted();
+                    },
+                  );
+                },
+              ),
+              SizedBox(
+                height: 200.h,
+              ),
+              defaultButtons(pressed: onCancel, text: "Cancel Order")
+            ],
+          )));
 }

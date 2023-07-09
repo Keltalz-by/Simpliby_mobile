@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -25,20 +26,32 @@ class SellerProductCategoriesScreen extends StatelessWidget {
           ]),
       body: Container(
         padding: const EdgeInsets.all(defaultPadding),
-        child: Expanded(
-            child: ListView.separated(
-                separatorBuilder: (context, value) {
-                  return const Padding(padding: EdgeInsets.only(top: 12));
-                },
-                itemCount: 5,
-                itemBuilder: (context, position) {
-                  return singleCategory(context, () {
-                    Get.toNamed(SELLER_PRODUCTS);
-                  });
-                })),
+        child: GridView.count(
+            crossAxisCount: 2,
+            physics: const ScrollPhysics(),
+            crossAxisSpacing: 4.0,
+            mainAxisSpacing: 18.0,
+            shrinkWrap: true,
+            children: List.generate(
+                categories.length,
+                (index) => Center(
+                        child: singleCategory(context, () {
+                      Get.toNamed(SELLER_PRODUCTS);
+                    }, categories[index])))),
       ),
     );
   }
+
+  final categories = [
+    "Food",
+    "Furniture",
+    "Cosmetics",
+    "Groceries",
+    "Gadgets",
+    "Health",
+    "Drinks",
+    "Books"
+  ];
 
   final actions = [
     const PopupMenuItem(
@@ -51,16 +64,20 @@ class SellerProductCategoriesScreen extends StatelessWidget {
     ),
   ];
 
-  Widget singleCategory(BuildContext context, VoidCallback onClick) {
+  Widget singleCategory(
+      BuildContext context, VoidCallback onClick, String categoryName) {
     return GestureDetector(
         onTap: () {
           onClick();
         },
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: 160,
+          alignment: Alignment.topLeft,
+          padding: EdgeInsets.all(10),
+          width: MediaQuery.of(context).size.width * 0.4,
+          height: MediaQuery.of(context).size.width * 0.4,
           decoration: BoxDecoration(
-            color: Colors.white,
+            border: Border.all(color: Color(0xff64BCF4)),
+            color: Color.fromARGB(255, 128, 199, 243),
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
@@ -72,32 +89,22 @@ class SellerProductCategoriesScreen extends StatelessWidget {
             ],
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: FadeInImage.assetNetwork(
-                        width: MediaQuery.of(context).size.width,
-                        height: 100,
-                        fit: BoxFit.cover,
-                        placeholder: 'assets/images/buy.png',
-                        imageErrorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            'assets/images/buy.png',
-                            width: MediaQuery.of(context).size.width,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          );
-                        },
-                        image: "")),
-              ),
               Text(
-                'Food',
+                categoryName,
                 style: TextStyle(
                   fontSize: smallTextFontSize,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(
+                'View Items in $categoryName category',
+                style: TextStyle(
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.normal,
                 ),
               ),

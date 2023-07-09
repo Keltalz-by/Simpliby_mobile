@@ -33,33 +33,35 @@ class CustomDialog extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          child: Column(children: [
-            Container(
-                padding: const EdgeInsets.all(15.0),
-                child: Icon(
-                  icon,
-                  color: iconColor,
-                  size: 150,
-                )),
-            Container(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
-                textDetail,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-            ),
-            setButtons()
-          ]),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(children: [
+                  Icon(
+                    icon,
+                    color: iconColor,
+                    size: 100,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    textDetail,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ]),
+                setButtons()
+              ]),
         ));
   }
 
   Widget setButtons() {
     return Container(
       child: defaultButtons(
-          pressed: callback, text: buttonText, size:  Size(80.w, 40.h)),
+          pressed: callback, text: buttonText, size: Size(80.w, 40.h)),
     );
   }
 }
