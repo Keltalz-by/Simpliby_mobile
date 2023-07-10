@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -38,16 +39,18 @@ class SellerProductsScreens extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
         child: Column(
           children: [
-            const Align(
+            Align(
                 alignment: Alignment.topLeft,
-                child: Text(
-                  "Food",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: blackColor,
-                      fontSize: 29,
-                      fontWeight: FontWeight.bold),
-                )),
+                child: Padding(
+                    padding: EdgeInsets.only(left: 10.w),
+                    child: Text(
+                      "Food",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: blackColor,
+                          fontSize: 29.sp,
+                          fontWeight: FontWeight.bold),
+                    ))),
             const Padding(padding: EdgeInsets.only(top: defaultPadding)),
             showUI(context),
           ],
@@ -59,20 +62,22 @@ class SellerProductsScreens extends StatelessWidget {
   Widget showUI(BuildContext context) {
     return Obx(() {
       if (controller.state is FinishedState) {
-        return Flexible(
+        return Expanded(
             child: GridView.count(
                 crossAxisCount: 2,
                 physics: const ScrollPhysics(),
                 crossAxisSpacing: 4.0,
-                mainAxisSpacing: 18.0,
+                mainAxisSpacing: 6.0,
                 shrinkWrap: true,
                 children: List.generate(
                     controller.products.length,
-                    (index) => Center(
+                    (index) => Padding(
+                        padding: EdgeInsets.all(6),
+                        child: Center(
                             child: showItemsGrid(
                                 context, controller.products[index], () {
                           Get.toNamed(SELLER_PRODUCT_DETAIL);
-                        })))));
+                        }))))));
       }
       if (controller.state is LoadingState) {
         return defaultLoading(context);
@@ -92,12 +97,13 @@ class SellerProductsScreens extends StatelessWidget {
     ),
     const PopupMenuItem(
       value: 'Delete',
-      child: Text('Delete Categosry'),
+      child: Text('Delete Items'),
     ),
   ];
 
   final delete_action = [
-    const PopupMenuItem(
+    PopupMenuItem(
+      height: 10.h,
       value: 'Delete',
       child: Text('Delete Product'),
     ),
@@ -111,6 +117,7 @@ class SellerProductsScreens extends StatelessWidget {
         },
         child: Container(
           width: MediaQuery.of(context).size.width * 0.4,
+          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -124,52 +131,63 @@ class SellerProductsScreens extends StatelessWidget {
             ],
           ),
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(60),
-                      child: FadeInImage.assetNetwork(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: 90,
-                          fit: BoxFit.fill,
-                          placeholder: 'assets/images/buy.png',
-                          imageErrorBuilder: (context, error, stackTrace) {
-                            return Image.asset(
-                              'assets/images/buy.png',
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              height: 90,
-                            );
-                          },
-                          image: product.img)),
-                ),
                 Expanded(
-                    child: Row(
+                    child: Container(
+                        clipBehavior: Clip.hardEdge,
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.width * 0.42,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.r),
+                          border: Border.all(color: blueColor, width: 2),
+                        ),
+                        child: ClipRRect(
+                            clipBehavior: Clip.hardEdge,
+                            borderRadius: BorderRadius.circular(20),
+                            child: FadeInImage.assetNetwork(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.42,
+                                fit: BoxFit.fill,
+                                placeholder: 'assets/images/buy.png',
+                                imageErrorBuilder:
+                                    (context, error, stackTrace) {
+                                  return Image.asset(
+                                    'assets/images/buy.png',
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.width *
+                                        0.42,
+                                    fit: BoxFit.fill,
+                                  );
+                                },
+                                image: product.img)))),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                        constraints: const BoxConstraints(
-                          maxWidth: 80,
-                        ),
-                        child: Text(
-                          product.name,
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        )),
+                    Expanded(
+                        child: Container(
+                            constraints: const BoxConstraints(
+                              maxWidth: 80,
+                            ),
+                            child: Text(
+                              product.name,
+                              maxLines: 2,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ))),
                     GestureDetector(
                       child: PopupMenuButton(
-                          padding: const EdgeInsets.all(1),
+                          padding: const EdgeInsets.all(0),
                           itemBuilder: (BuildContext context) {
                             return delete_action;
                           }),
                     )
                   ],
-                ))
+                )
               ]),
         ));
   }

@@ -115,7 +115,7 @@ PreferredSizeWidget customAppBar(
     elevation: 0.0,
     title: Text(
       text,
-      style: const TextStyle(color: blackColor, fontSize: 18.0),
+      style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
     ),
     backgroundColor: Colors.transparent,
     actions: actions,
@@ -125,7 +125,7 @@ PreferredSizeWidget customAppBar(
       icon: const Icon(
         Icons.arrow_back_ios,
         color: blackColor,
-        size: 17.0,
+        size: 15.0,
       ),
     ),
   );
