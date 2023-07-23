@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/buyer_home_drawers.dart';
+import 'package:simplibuy/chat_seller/presentation/screens/chat_seller.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/seller_home/presentation/controllers/seller_home_nav_controller.dart';
 import 'package:simplibuy/seller_home/presentation/screens/seller_home_screen.dart';
@@ -26,6 +27,8 @@ class SellerHomeDrawers extends StatelessWidget {
             return SellerPaymentsScreen();
           } else if (controller.currentPage == 2) {
             return SettingsScreen();
+          } else if (controller.currentPage == 3) {
+            return ChatSeller();
           }
           return SellerProfileScreen();
         }));

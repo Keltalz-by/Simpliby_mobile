@@ -73,26 +73,33 @@ Widget storeDescription({required String desc}) {
       style: TextStyle(color: Colors.grey, fontSize: smallerTextFontSize),
       textAlign: TextAlign.start,
     ),
-    Text(desc, style: const TextStyle(color: blackColor, fontSize: 17))
+    Text(desc, style: TextStyle(color: blackColor, fontSize: smallTextFontSize))
   ]);
 }
 
 Widget _titleAndIcon(
     {required IconData data, required String text, VoidCallback? onClick}) {
-  return TextButton.icon(
-      icon: Icon(
-        data,
-        color: blackColor,
-        size: 13,
-      ),
-      label: Text(
-        text,
-        style: TextStyle(
+  return InkWell(
+      onTap: () {
+        onClick!();
+      },
+      child: Row(children: [
+        Icon(
+          data,
           color: blackColor,
-          fontSize: 15.sp,
+          size: 16,
         ),
-      ),
-      onPressed: onClick);
+        SizedBox(
+          width: 8.w,
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            color: blackColor,
+            fontSize: smallTextFontSize,
+          ),
+        ),
+      ]));
 }
 
 Widget storeContactDetails(
@@ -101,10 +108,8 @@ Widget storeContactDetails(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: _titleAndIcon(data: Icons.link, text: email),
-        ),
-        Expanded(child: _titleAndIcon(data: Icons.call, text: phoneNumber))
+        _titleAndIcon(data: Icons.link, text: email),
+        _titleAndIcon(data: Icons.call, text: phoneNumber)
       ]);
 }
 
@@ -126,7 +131,7 @@ Widget storeFollowers(
                     fontSize: smallTextFontSize,
                     fontWeight: FontWeight.bold)),
             TextSpan(
-                text: 'Followers',
+                text: ' Followers',
                 style: TextStyle(color: color, fontSize: smallerTextFontSize)),
           ],
         ),

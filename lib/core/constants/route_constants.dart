@@ -36,3 +36,4 @@ const SELLER_PROFILE_SCREEN = "/seller_profile_screen";
 const SELLER_EDIT_PROFILE_SCREEN = "/seller_edit_profile_screen";
 const CREATE_PROMO_POST_SCREEN = "/create_promo_post_screen";
 const SETTINGS_SCREEN = "/settings_screen";
+const CHAT_SELLER_SCREEN = "/chat_seller_screen";

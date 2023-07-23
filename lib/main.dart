@@ -14,8 +14,10 @@ import 'package:simplibuy/authentication/presentation/screens/login/login_screen
 import 'package:simplibuy/authentication/presentation/screens/signup/signup_screen.dart';
 import 'package:simplibuy/authentication/presentation/screens/verify_email/verify_email.dart';
 import 'package:simplibuy/buyer_home/presentation/bindings/buyer_home_bottom_nav_screens_bindings.dart';
+import 'package:simplibuy/buyer_home/presentation/screens/buyer_screen.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/stores_and_malls_screen.dart';
 import 'package:simplibuy/cart/presentation/screens/cart_list_screen.dart';
+import 'package:simplibuy/chat_seller/presentation/screens/chat_seller.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/create_promo_post/presentation/screens/create_promo_post_screen.dart';
@@ -80,13 +82,13 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return GetMaterialApp(
-          title: 'Flutter Demo',
-          getPages: pages,
-          initialBinding: MainBinding(),
-          theme: ThemeData(
-              primarySwatch: Colors.blue, scaffoldBackgroundColor: whiteColor),
-          home: PlanScreen(),
-        );
+            title: 'Flutter Demo',
+            getPages: pages,
+            initialBinding: MainBinding(),
+            theme: ThemeData(
+                primarySwatch: Colors.blue,
+                scaffoldBackgroundColor: whiteColor),
+            home: PlanScreen());
       },
     );
   }
@@ -246,5 +248,9 @@ class MyApp extends StatelessWidget {
       name: SETTINGS_SCREEN,
       page: () => SettingsScreen(),
     ),
+    GetPage(
+      name: CHAT_SELLER_SCREEN,
+      page: () => ChatSeller(),
+    )
   ];
 }

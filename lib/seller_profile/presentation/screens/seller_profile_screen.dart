@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -29,14 +30,14 @@ class SellerProfileScreen extends StatelessWidget {
                   SellerProfileImage(
                       context, controller.sellerProfileDetails.storeImages),
                   Positioned(
-                      top: 20,
-                      right: 20,
+                      top: 15.h,
+                      right: 15.w,
                       child: Align(
                         alignment: Alignment.center,
                         child: otherOptions(),
                       )),
                   Positioned(
-                    bottom: 20,
+                    bottom: 20.h,
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: storeLogo(context),
@@ -53,27 +54,34 @@ class SellerProfileScreen extends StatelessWidget {
                 ],
               )),
           Padding(
-              padding: const EdgeInsets.only(left: defaultPadding),
+              padding: EdgeInsets.only(left: 20.w),
               child: Text(
                 controller.sellerProfileDetails.storeName,
                 style: TextStyle(
                     color: blackColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: smallTextFontSize),
+                    fontSize: 22.sp),
               )),
+          SizedBox(
+            height: 10.h,
+          ),
           Padding(
-              padding: const EdgeInsets.only(
-                  left: defaultPadding, right: defaultPadding),
+              padding: EdgeInsets.only(left: 20.w, right: 20.w),
               child:
                   storeDescription(desc: controller.sellerProfileDetails.desc)),
+          SizedBox(
+            height: 10.h,
+          ),
           Padding(
-              padding: const EdgeInsets.only(
-                  left: defaultPadding, right: defaultPadding),
+              padding: EdgeInsets.only(left: 20.w, right: 20.w),
               child: storeContactDetails(
                   email: controller.sellerProfileDetails.email,
                   phoneNumber: controller.sellerProfileDetails.number)),
+          SizedBox(
+            height: 10.h,
+          ),
           Padding(
-              padding: const EdgeInsets.only(left: defaultPadding),
+              padding: EdgeInsets.only(left: 20.w),
               child: Row(children: [
                 const Icon(
                   Icons.location_on,
@@ -111,12 +119,16 @@ class SellerProfileScreen extends StatelessWidget {
           return defaultLoading(context);
         }
         if (controller.statePosts is FinishedState) {
-          return Expanded(
+          return Flexible(
               child: Container(
-                  padding: const EdgeInsets.all(10),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
                   child: ListView.separated(
+                      shrinkWrap: true,
                       separatorBuilder: (BuildContext context, int pos) {
-                        return const Padding(padding: EdgeInsets.only(top: 10));
+                        return SizedBox(
+                          height: 10.h,
+                        );
                       },
                       itemCount: controller.promoPosts.length,
                       itemBuilder: (BuildContext context, int position) {
@@ -152,21 +164,23 @@ class SellerProfileScreen extends StatelessWidget {
   }
 
   Widget storeLogo(BuildContext context) {
-    return ClipOval(
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(50.r),
         child: FadeInImage.assetNetwork(
             image: controller.sellerProfileDetails.storeLogo,
-            width: 100,
-            height: 100,
+            width: 100.w,
+            height: 100.w,
             fit: BoxFit.cover,
             placeholder: defaultStoreImage,
             imageErrorBuilder: (context, error, stackTrace) {
-              return ClipOval(
+              return ClipRRect(
+                  borderRadius: BorderRadius.circular(50.r),
                   child: Image.asset(
-                defaultStoreImage,
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ));
+                    defaultStoreImage,
+                    width: 100.w,
+                    height: 100.h,
+                    fit: BoxFit.cover,
+                  ));
             }));
   }
 
@@ -175,13 +189,13 @@ class SellerProfileScreen extends StatelessWidget {
         alignment: Alignment.center,
         child: GestureDetector(
           child: Container(
-            padding:
-                const EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 10),
+            padding: EdgeInsets.only(
+                left: 45.w, right: 45.w, top: 10.h, bottom: 10.h),
             decoration: BoxDecoration(
                 border: Border.all(color: blueColor, width: 2),
-                borderRadius: const BorderRadius.all(Radius.circular(30))),
+                borderRadius: BorderRadius.all(Radius.circular(30.r))),
             child: Text(
-              "Create Promo post",
+              "Create a Promo post",
               style: TextStyle(fontSize: smallTextFontSize, color: blackColor),
             ),
           ),
