@@ -58,6 +58,7 @@ dependencies:
   flutter_credit_card: ^3.0.5
   #dotted border
   dotted_border: ^2.0.0+3
+  flutter_swiper_plus: ^2.0.4
   
 
 

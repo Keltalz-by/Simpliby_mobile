@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/seller_product_detail/presentation/screens/image_slider.dart';
 import 'package:simplibuy/store_and_product/presentation/screens/custom_widgets.dart';
 
 class SellerProductDetailScreen extends StatelessWidget {
@@ -16,7 +18,7 @@ class SellerProductDetailScreen extends StatelessWidget {
   Widget _body(BuildContext context) {
     return Column(
       children: [
-        imageSlidersProduct(context, [
+        ImageSliderWithIndicator(imageUrls: [
           "https://lremflickr.com/g/320/240/paris,girl/all",
           "https://lremflickr.com/g/320/240/paris,girl/all",
           "https://lremflickr.com/g/320/240/paris,girl/all",
@@ -41,6 +43,7 @@ class SellerProductDetailScreen extends StatelessWidget {
                   Radio(
                     value: 1,
                     groupValue: 1,
+                    activeColor: blueColor,
                     onChanged: (value) {},
                   ),
                   Text(
@@ -50,6 +53,7 @@ class SellerProductDetailScreen extends StatelessWidget {
                   Radio(
                     value: 2,
                     groupValue: 2,
+                    activeColor: blueColor,
                     onChanged: (value) {},
                   ),
                   Text(
@@ -77,8 +81,8 @@ class SellerProductDetailScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 14),
                         ),
                         SizedBox(
-                            width: 120.0,
-                            height: 60.0,
+                            width: 120.w,
+                            height: 60.h,
                             child: TextField(
                                 onChanged: (business) {},
                                 keyboardType: TextInputType.name,
@@ -94,8 +98,8 @@ class SellerProductDetailScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 14),
                         ),
                         SizedBox(
-                            width: 120.0,
-                            height: 60.0,
+                            width: 120.w,
+                            height: 60.h,
                             child: TextField(
                                 onChanged: (business) {},
                                 keyboardType: TextInputType.name,

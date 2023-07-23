@@ -347,7 +347,8 @@ Widget acceptedOrdersBottomSheet(VoidCallback onCancel) {
 
   return SingleChildScrollView(
       child: Container(
-          padding: const EdgeInsets.all(35),
+          padding:
+              EdgeInsets.only(top: 10.h, bottom: 25.h, left: 25.w, right: 25.w),
           alignment: Alignment.topCenter,
           decoration: BoxDecoration(
             color: whiteColor,

@@ -450,47 +450,53 @@ Widget addSign(VoidCallback onPressed) {
 }
 
 Widget imageSlidersProduct(BuildContext context, List<String> images) {
-  return CarouselSlider(
-    options: CarouselOptions(
-        clipBehavior: Clip.none,
-        viewportFraction: 1.0,
-        height: MediaQuery.of(context).size.height * 0.45),
-    items: images.map((image) {
-      return Builder(
-        builder: (BuildContext context) {
-          return Column(children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.45,
-              decoration: const BoxDecoration(
-                  color: whiteColor,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(0.0, 3.0),
-                        blurRadius: 18.0,
-                        blurStyle: BlurStyle.outer),
-                  ],
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20))),
-              child: FadeInImage.assetNetwork(
-                  fit: BoxFit.fill,
-                  placeholder: defaultProductImage,
-                  imageErrorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      defaultProductImage,
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.45,
-                    );
-                  },
-                  image: image),
-            ),
-          ]);
-        },
-      );
-    }).toList(),
-  );
+  return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.45,
+      decoration: const BoxDecoration(
+          color: whiteColor,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0.0, 3.0),
+                blurRadius: 18.0,
+                blurStyle: BlurStyle.outer),
+          ],
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20))),
+      child: CarouselSlider(
+        options: CarouselOptions(
+            clipBehavior: Clip.none,
+            onPageChanged: (i, reason) {
+              // item.sliderCurrentPosition =
+              i; //Storing Slider position on the list item
+              //   controller.dataList[index] = item; //For Flutter to rebuild the ui
+            },
+            enableInfiniteScroll: true,
+            viewportFraction: 1.0,
+            height: MediaQuery.of(context).size.height * 0.45),
+        items: images.map((image) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Column(children: [
+                FadeInImage.assetNetwork(
+                    fit: BoxFit.fill,
+                    placeholder: defaultProductImage,
+                    imageErrorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        defaultProductImage,
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.45,
+                        fit: BoxFit.cover,
+                      );
+                    },
+                    image: image),
+              ]);
+            },
+          );
+        }).toList(),
+      ));
 }
 
 Widget Indicator(int currentIndex, int count) {
@@ -498,8 +504,8 @@ Widget Indicator(int currentIndex, int count) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(count, (index) {
         return Container(
-          width: 8.0,
-          height: 8.0,
+          width: 12.w,
+          height: 12.h,
           margin: EdgeInsets.symmetric(horizontal: 2.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,

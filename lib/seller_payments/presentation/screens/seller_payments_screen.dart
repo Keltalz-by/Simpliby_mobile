@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -200,61 +201,69 @@ class SellerPaymentsScreen extends StatelessWidget {
 
   Widget orderButtons(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width * 0.75,
-        padding: const EdgeInsets.all(6),
+        width: MediaQuery.of(context).size.width * 0.82,
+        padding: EdgeInsets.symmetric(vertical: 6.h),
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(5.0),
+          color: Colors.grey.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(2.0),
-                ),
-                child: GestureDetector(onTap: () {
-                  controller.getPaidOrders();
-                }, child: Obx(() {
-                  return Text(
-                    "Paid Orders",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: controller.isPaid
-                          ? blueColor
-                          : blackColor.withOpacity(0.8),
-                      fontWeight: FontWeight.bold,
+              Obx(() => Container(
+                    width: MediaQuery.of(context).size.width * 0.38,
+                    padding: const EdgeInsets.all(6.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color:
+                          controller.isPaid ? whiteColor : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
-                  );
-                })),
-              ),
+                    child: GestureDetector(
+                        onTap: () {
+                          if (controller.isPaid == false) {
+                            controller.getPaidOrders();
+                          }
+                        },
+                        child: Text(
+                          "Paid Orders",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: controller.isPaid
+                                ? blueColor
+                                : blackColor.withOpacity(0.8),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )),
+                  )),
               const Padding(padding: EdgeInsets.only(left: 6)),
-              Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(2.0),
-                ),
-                child: GestureDetector(onTap: () {
-                  controller.getUnpaidOrders();
-                }, child: Obx(() {
-                  return Text(
-                    "Unpaid Orders",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: controller.isPaid
-                          ? blackColor.withOpacity(0.8)
-                          : blueColor,
-                      fontWeight: FontWeight.bold,
+              Obx(() => Container(
+                    padding: const EdgeInsets.all(6.0),
+                    width: MediaQuery.of(context).size.width * 0.38,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color:
+                          !controller.isPaid ? whiteColor : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
-                  );
-                })),
-              )
+                    child: GestureDetector(
+                        onTap: () {
+                          if (controller.isPaid == true) {
+                            controller.getUnpaidOrders();
+                          }
+                        },
+                        child: Text(
+                          "Unpaid Orders",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: controller.isPaid
+                                ? blackColor.withOpacity(0.8)
+                                : blueColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )),
+                  ))
             ]));
   }
 }
