@@ -15,8 +15,7 @@ class ImageSliderWithIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height *
-          0.45, // Adjust the height as per your requirement
+      height: MediaQuery.of(context).size.height * 0.45,
       child: Stack(
         clipBehavior: Clip.none,
         children: [

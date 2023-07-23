@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/seller_product_detail/presentation/screens/image_slider.dart';
 import 'package:simplibuy/store_and_product/presentation/controllers/product_controller.dart';
 import 'package:simplibuy/store_and_product/presentation/screens/custom_widgets.dart';
 
@@ -34,7 +35,7 @@ class ProductScreen extends StatelessWidget {
     return SingleChildScrollView(
         child: Column(
       children: [
-        imageSlidersProduct(context, product.productImage),
+        ImageSliderWithIndicator(imageUrls: product.productImage),
         Container(
           padding: const EdgeInsets.all(defaultPadding),
           child: Column(

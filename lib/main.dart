@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
                 primarySwatch: Colors.blue,
                 scaffoldBackgroundColor: whiteColor),
-            home: PlanScreen());
+            home: SplashScreen());
       },
     );
   }
