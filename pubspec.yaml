@@ -52,7 +52,7 @@ dependencies:
   image_picker: ^0.8.5+3
   # image slider
   carousel_slider: ^4.1.1
-  flutter_datetime_picker: ^1.5.1
+  #flutter_datetime_picker: ^1.5.1
   intl: ^0.18.0
   # add card details
   flutter_credit_card: ^3.0.5

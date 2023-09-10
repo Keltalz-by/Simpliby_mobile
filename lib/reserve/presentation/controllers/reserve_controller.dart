@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -15,7 +15,7 @@ class ReserveController extends GetxController {
   int get selectedRadio => _selectedRadio.value;
 
   Future<void> selectDate(BuildContext context) async {
-    final DateTime? picked = await DatePicker.showDatePicker(context,
+    /*  final DateTime? picked = await DatePicker.showDatePicker(context,
         showTitleActions: true,
         minTime: DateTime(2015, 8),
         maxTime: DateTime(2101), onConfirm: (date) {
@@ -23,7 +23,7 @@ class ReserveController extends GetxController {
     }, currentTime: DateTime.now(), locale: LocaleType.en);
     if (picked != null && picked != _selectedDate.value) {
       _selectedDate.value = picked;
-    }
+    }*/
   }
 
   Future<void> selectTime(BuildContext context) async {

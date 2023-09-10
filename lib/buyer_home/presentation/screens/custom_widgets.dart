@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:simplibuy/buyer_home/data/models/fav_stores_model.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/buyer_home/domain/entities/strore_details.dart';
 
@@ -95,8 +94,8 @@ Widget customButtonWithIcon(
 
 Widget filterOption(VoidCallback onPressed) {
   return Container(
-      height: 45,
-      width: 45,
+      height: 50.h,
+      width: 48.w,
       clipBehavior: Clip.hardEdge,
       decoration: const ShapeDecoration(
           color: blueColor,
@@ -113,6 +112,7 @@ Widget filterOption(VoidCallback onPressed) {
 Widget searchInputBlue(BuildContext context) {
   return SizedBox(
       width: MediaQuery.of(context).size.width * 0.78,
+      height: 50.h,
       child: Align(
           alignment: Alignment.center,
           child: TextField(
@@ -262,7 +262,7 @@ Widget storesGridSingleItem(
   return Container(
       width: MediaQuery.of(context).size.width * 0.35,
       height: MediaQuery.of(context).size.width * 0.5,
-      padding: const EdgeInsets.all(5),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
       decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -279,7 +279,7 @@ Widget storesGridSingleItem(
           InkWell(
               splashColor: Colors.blue,
               highlightColor: Colors.red,
-              radius: 20.0,
+              radius: 20.r,
               onTap: onPressed,
               child: Image.asset("assets/images/buy.png",
                   width: MediaQuery.of(context).size.width,
@@ -292,21 +292,23 @@ Widget storesGridSingleItem(
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: smallTextFontSize, color: blackColor),
             )),
-            FavoriteButton(
+            Flexible(
+                child: FavoriteButton(
               iconSize: 24,
               iconDisabledColor: lightBlueColor,
               iconColor: lightBlueColor,
               valueChanged: (isFavorite) {
                 onFavClicked();
               },
-            )
+            ))
           ]),
-          Text(
+          Flexible(
+              child: Text(
             details.location,
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 16.sp, color: blackColor),
-          ),
+          )),
         ],
       ));
 }

@@ -24,8 +24,8 @@ class UserType extends StatelessWidget {
               child: imageFromAssetsFolder(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.83,
-                  path: 'assets/on_boarding/on_boarding.png',
-                  padding: 0)),
+                  padding: 0,
+                  path: 'assets/on_boarding/on_boarding.png')),
           Positioned(bottom: 20.h, child: details(context))
         ],
       ),
@@ -67,13 +67,23 @@ class UserType extends StatelessWidget {
               children: [
                 start(context, () async {
                   await SharedPrefs.initializeSharedPrefs();
-                  SharedPrefs.setUserType(TYPEBUYER)
-                      .then((value) => {Get.toNamed(LOGIN_ROUTE)});
+                  if (SharedPrefs.isUserVerified() == true) {
+                    SharedPrefs.setUserType(TYPEBUYER)
+                        .then((value) => {Get.toNamed(BUYER_HOME_PAGE_ROUTE)});
+                  } else {
+                    SharedPrefs.setUserType(TYPEBUYER)
+                        .then((value) => {Get.toNamed(LOGIN_ROUTE)});
+                  }
                 }, "assets/on_boarding/on_buying.png", "Start Buying"),
                 start(context, () async {
                   await SharedPrefs.initializeSharedPrefs();
-                  SharedPrefs.setUserType(TYPESELLER)
-                      .then((value) => {Get.toNamed(LOGIN_ROUTE)});
+                  if (SharedPrefs.isUserVerified() == true) {
+                    SharedPrefs.setUserType(TYPESELLER)
+                        .then((value) => {Get.toNamed(SELLER_HOME_PAGE_ROUTE)});
+                  } else {
+                    SharedPrefs.setUserType(TYPESELLER)
+                        .then((value) => {Get.toNamed(LOGIN_ROUTE)});
+                  }
                 }, "assets/on_boarding/on_selling.png", "Start Selling"),
               ],
             ))

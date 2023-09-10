@@ -39,7 +39,7 @@ class BuyerHomeScreen extends StatelessWidget {
         body: Column(children: [
           _createSearchView(context),
           Container(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: EdgeInsets.only(left: 10.w, right: 10.w),
               child: _toBuyList(context)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -348,7 +348,7 @@ class BuyerHomeScreen extends StatelessWidget {
 
   Widget _createSearchView(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 12, bottom: 12),
+      padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
       child: search(context),
     );
   }

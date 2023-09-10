@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:simplibuy/authentication/domain/usecases/verify_email_usecase.dart';
 import 'package:simplibuy/authentication/presentation/screens/account_creation_success.dart';
 import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
-import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/prefs/shared_prefs.dart';
 import '../../../core/state/state.dart';
 

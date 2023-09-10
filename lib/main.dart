@@ -79,6 +79,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(428, 902),
+      useInheritedMediaQuery: true,
       minTextAdapt: true,
       builder: (context, child) {
         return GetMaterialApp(

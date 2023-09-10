@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/buyer_screen.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/fav_stores_screen.dart';
@@ -19,16 +20,20 @@ class BuyerBottomNavScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: bottomNavDrawer(),
-        body: Obx(() {
-          if (controller.currentPage == 0) {
-            return BuyerHomeScreen();
-          } else if (controller.currentPage == 1) {
-            return CartList();
-          } else if (controller.currentPage == 2) {
-            return HistoryScreen();
-          }
-          return FavStoresScreen();
-        }));
+        body: SafeArea(
+            child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: Obx(() {
+                  if (controller.currentPage == 0) {
+                    return BuyerHomeScreen();
+                  } else if (controller.currentPage == 1) {
+                    return CartList();
+                  } else if (controller.currentPage == 2) {
+                    return HistoryScreen();
+                  }
+                  return FavStoresScreen();
+                }))));
   }
 
   Widget bottomNavDrawer() {

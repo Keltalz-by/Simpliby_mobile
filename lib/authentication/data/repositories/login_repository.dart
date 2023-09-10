@@ -32,6 +32,7 @@ class LoginRepositoryImpl implements AuthRepository<LoginDetail> {
           final userEmail = json.decode(res.body)['data']['email'];
           final userName = json.decode(res.body)['data']['name'];
           storeUserDetails(userId, userEmail, userName);
+
           return Right(Result(value: message));
         } else {
           return Left(
@@ -77,5 +78,6 @@ class LoginRepositoryImpl implements AuthRepository<LoginDetail> {
     SharedPrefs.setUserId(id);
     SharedPrefs.setUserEmail(email);
     SharedPrefs.setUserName(name);
+    SharedPrefs.setVerificationStatus(true);
   }
 }
