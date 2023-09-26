@@ -337,11 +337,10 @@ class BuyerHomeScreen extends StatelessWidget {
                           details: controller.details[index],
                           onPressed: () => Get.toNamed(SINGLE_STORE_ROUTE,
                               arguments: controller.details[index].id),
-                          isFav: controller.isFav(controller.details[index].id),
+                          isFav: controller.favStores
+                              .contains(controller.details[index]),
                           onFavClicked: () {
                             controller.addToFav(index);
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackAdded);
                           },
                           context: context))))));
     });

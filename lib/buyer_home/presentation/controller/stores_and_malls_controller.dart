@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:simplibuy/buyer_home/domain/entities/strore_details.dart';
 import 'package:simplibuy/buyer_home/domain/usecases/stores_and_malls_usecase.dart';
 import 'package:simplibuy/core/prefs/shared_prefs.dart';
+import 'package:simplibuy/core/utils/utils.dart';
 import 'package:simplibuy/to_buy_list/data/model/item_to_buy.dart';
 import 'package:simplibuy/to_buy_list/domain/usecases/to_buy_usecase.dart';
 import '../../../core/state/state.dart';
@@ -35,14 +36,15 @@ class StoresAndMallsController extends GetxController {
   final RxList<StoreDetails> _favStores = (List<StoreDetails>.of([])).obs;
   final RxList<ItemToBuy> _toBuyModel = (List<ItemToBuy>.of([])).obs;
 
-  // ignore: invalid_use_of_protected_member
   List<StoreDetails> get details => _details.value;
   List<StoreDetails> get favStores => _favStores.value;
-  // ignore: invalid_use_of_protected_member
   List<ItemToBuy> get toBuyModel => _toBuyModel.value;
 
   final _state = const State().obs;
   State get state => _state.value;
+
+  final _stateFav = const State().obs;
+  State get stateFav => _stateFav.value;
 
   final _stateToBuy = const State().obs;
   State get stateToBuy => _stateToBuy.value;
@@ -72,8 +74,10 @@ class StoresAndMallsController extends GetxController {
   getFavStores() async {
     final res = await usecaseFav.getAllFavoriteStoresAndMalls();
     if (res.isLeft) {
+      _stateFav.value = ErrorState(errorType: res.left.error);
     } else {
       _favStores.value = res.right.value;
+      _stateFav.value = FinishedState();
     }
   }
 
@@ -111,9 +115,13 @@ class StoresAndMallsController extends GetxController {
     if (isFav(details[position].id).isTrue) {
       _favStores.remove(details[position]);
       usecaseFav.removeStoreFromFavorite(details[position].id);
+      toast("Removed from Favorites");
+      refresh();
     } else {
       _favStores.add(details[position]);
       usecaseFav.addStoreToFavorite(details[position]);
+      toast("Added to Favorites");
+      refresh();
     }
   }
 
@@ -147,5 +155,12 @@ class StoresAndMallsController extends GetxController {
     final valuess = isBoughtRx[index];
     final iid = _toBuyModel[index].id;
     await usecaseToBuy.changeIsBought(iid, valuess.value);
+  }
+
+  void removeFromFav(int position) {
+    usecaseFav.removeStoreFromFavorite(_favStores[position].id);
+    _favStores.remove(_favStores[position]);
+    toast("Removed from Favorites");
+    _favStores.refresh();
   }
 }

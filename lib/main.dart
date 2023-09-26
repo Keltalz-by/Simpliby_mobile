@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/forgot_password_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/login_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/signup_screen_binding.dart';
@@ -32,6 +33,7 @@ import 'package:simplibuy/to_buy_list/presentation/screens/to_buy_screen.dart';
 import 'authentication/presentation/screen_bindings/enter_new_password_binding.dart';
 import 'authentication/presentation/screens/forgot_password/enter_new_password.dart';
 import 'notification/presentation/screens/notification.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,14 +51,17 @@ class MyApp extends StatelessWidget {
       useInheritedMediaQuery: true,
       minTextAdapt: true,
       builder: (context, child) {
-        return GetMaterialApp(
-            title: 'Flutter Demo',
-            getPages: pages,
-            initialBinding: MainBinding(),
-            theme: ThemeData(
-                primarySwatch: Colors.blue,
-                scaffoldBackgroundColor: whiteColor),
-            home: SplashScreen());
+        return OverlaySupport.global(
+            child: GetMaterialApp(
+                title: 'Flutter Demo',
+                getPages: pages,
+                builder: BotToastInit(),
+                initialBinding: MainBinding(),
+                navigatorObservers: [BotToastNavigatorObserver()],
+                theme: ThemeData(
+                    primarySwatch: Colors.blue,
+                    scaffoldBackgroundColor: whiteColor),
+                home: SplashScreen()));
       },
     );
   }

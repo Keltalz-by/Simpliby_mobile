@@ -258,7 +258,7 @@ Widget storesGridSingleItem(
     {required StoreDetails details,
     required VoidCallback onPressed,
     required VoidCallback onFavClicked,
-    required RxBool isFav,
+    required bool isFav,
     required BuildContext context}) {
   return Container(
       width: MediaQuery.of(context).size.width * 0.35,
@@ -295,7 +295,7 @@ Widget storesGridSingleItem(
                     TextStyle(fontSize: smallTextFontSize, color: blackColor),
               ),
             ),
-            Obx(() => isFav.isFalse
+            !isFav
                 ? InkWell(
                     onTap: () {
                       onFavClicked();
@@ -312,7 +312,7 @@ Widget storesGridSingleItem(
                       Icons.favorite_rounded,
                       color: Colors.red,
                       size: 18,
-                    )))
+                    ))
           ]),
           Flexible(
               child: Text(

@@ -21,14 +21,14 @@ class FavStoresScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //controller.getFavorites();
+    controller.getFavStores();
     return Scaffold(
         appBar: customAppBar(
           text: "My Favorites",
           onPressed: () => navController.changePage(0),
         ),
         body: Obx((() {
-          if (controller.state == ErrorState(errorType: EmptyListError())) {
+          if (controller.stateFav == ErrorState(errorType: EmptyListError())) {
             return showEmptyFavorites(context);
           }
           return Container(
@@ -45,21 +45,19 @@ class FavStoresScreen extends StatelessWidget {
 
   Widget favList() {
     return ListView.builder(
-        itemCount: controller.details.length,
+        itemCount: controller.favStores.length,
         itemBuilder: (context, position) {
-          /* var item = controller.details[position].id;*/
           return Dismissible(
               key: UniqueKey(),
               onDismissed: (direction) {
-                //     controller.removeFromFav(position);
-                ScaffoldMessenger.of(context).showSnackBar(snackRemoved);
+                controller.removeFromFav(position);
               },
               background: Container(color: Colors.red),
-              child: storesListSingleItem(
+              child: Obx(() => storesListSingleItem(
                   onFavClicked: null,
-                  details: controller.details[position],
+                  details: controller.favStores[position],
                   onClick: () => Get.toNamed(SINGLE_STORE_ROUTE,
-                      arguments: controller.details[position].id)));
+                      arguments: controller.favStores[position].id))));
         });
   }
 }
