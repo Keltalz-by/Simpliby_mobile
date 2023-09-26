@@ -192,66 +192,65 @@ Widget storesListSingleItem(
     required VoidCallback onClick,
     required VoidCallback? onFavClicked}) {
   return Card(
-      margin: const EdgeInsets.all(5),
+      margin: EdgeInsets.all(10),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8))),
       elevation: 5,
       color: Colors.white,
-      child: GestureDetector(
-          onTap: onClick,
-          child: Row(
-            children: [
-              Image.asset("assets/images/shoprite_small.png"),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: RatingBar.builder(
-                          initialRating: 3,
-                          itemSize: 11,
-                          minRating: 1,
-                          onRatingUpdate: (rating) {},
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemBuilder: (context, _) =>
-                              const Icon(Icons.star, color: Colors.amber)),
-                    ),
-                    Text(details.name,
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: blackColor, fontSize: smallTextFontSize)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Container(
+          padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 7.w),
+          child: GestureDetector(
+              onTap: onClick,
+              child: Row(
+                children: [
+                  Image.asset(
+                    "assets/images/shoprite_small.png",
+                    width: 100.w,
+                    height: 100.h,
+                    fit: BoxFit.cover,
+                  ),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(details.location,
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: RatingBar.builder(
+                              initialRating: 3,
+                              itemSize: 11,
+                              minRating: 1,
+                              onRatingUpdate: (rating) {},
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemBuilder: (context, _) =>
+                                  const Icon(Icons.star, color: Colors.amber)),
+                        ),
+                        Text(details.name,
+                            maxLines: 1,
+                            style: TextStyle(
+                                color: blackColor,
+                                fontSize: smallTextFontSize)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(details.location,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    color: blackColor, fontSize: 15)),
+                          ],
+                        ),
+                        Text(details.address,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
-                                color: blackColor, fontSize: 15)),
-                        onFavClicked != null
-                            ? FavoriteButton(
-                                iconSize: 24,
-                                iconDisabledColor: lightBlueColor,
-                                iconColor: lightBlueColor,
-                                valueChanged: (isFavorite) {
-                                  onFavClicked();
-                                },
-                              )
-                            : Container(),
+                                color: blackColor, fontSize: 15))
                       ],
                     ),
-                    Text(details.address,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(color: blackColor, fontSize: 15))
-                  ],
-                ),
-              )
-            ],
-          )));
+                  )
+                ],
+              ))));
 }
 
 Widget storesGridSingleItem(

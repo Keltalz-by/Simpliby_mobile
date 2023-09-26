@@ -46,6 +46,8 @@ class FavStoresScreen extends StatelessWidget {
   Widget favList() {
     return ListView.builder(
         itemCount: controller.favStores.length,
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         itemBuilder: (context, position) {
           return Dismissible(
               key: UniqueKey(),

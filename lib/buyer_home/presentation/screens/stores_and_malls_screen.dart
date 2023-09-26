@@ -34,6 +34,8 @@ class StoresAndMallsScreen extends StatelessWidget {
   Widget storesList() {
     return ListView.builder(
         itemCount: controller.details.length,
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         itemBuilder: (context, position) {
           return storesListSingleItem(
               details: controller.details[position],

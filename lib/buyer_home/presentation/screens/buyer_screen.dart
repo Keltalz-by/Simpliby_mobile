@@ -324,7 +324,8 @@ class BuyerHomeScreen extends StatelessWidget {
 
       return GridView.count(
           crossAxisCount: 2,
-          physics: const ScrollPhysics(),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           crossAxisSpacing: 4.0,
           mainAxisSpacing: 6.0,
           shrinkWrap: true,
