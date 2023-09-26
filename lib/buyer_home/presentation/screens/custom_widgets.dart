@@ -258,11 +258,11 @@ Widget storesGridSingleItem(
     {required StoreDetails details,
     required VoidCallback onPressed,
     required VoidCallback onFavClicked,
+    required RxBool isFav,
     required BuildContext context}) {
   return Container(
       width: MediaQuery.of(context).size.width * 0.35,
-      height: MediaQuery.of(context).size.width * 0.5,
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
       decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -282,25 +282,37 @@ Widget storesGridSingleItem(
               radius: 20.r,
               onTap: onPressed,
               child: Image.asset("assets/images/buy.png",
+                  fit: BoxFit.cover,
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width * 0.35)),
+                  height: 140.h)),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Flexible(
-                child: Text(
-              details.name,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: smallTextFontSize, color: blackColor),
-            )),
-            Flexible(
-                child: FavoriteButton(
-              iconSize: 24,
-              iconDisabledColor: lightBlueColor,
-              iconColor: lightBlueColor,
-              valueChanged: (isFavorite) {
-                onFavClicked();
-              },
-            ))
+              child: Text(
+                details.name,
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+                style:
+                    TextStyle(fontSize: smallTextFontSize, color: blackColor),
+              ),
+            ),
+            Obx(() => isFav.isFalse
+                ? InkWell(
+                    onTap: () {
+                      onFavClicked();
+                    },
+                    child: const Icon(
+                      Icons.favorite_border,
+                      size: 18,
+                    ))
+                : InkWell(
+                    onTap: () {
+                      onFavClicked();
+                    },
+                    child: const Icon(
+                      Icons.favorite_rounded,
+                      color: Colors.red,
+                      size: 18,
+                    )))
           ]),
           Flexible(
               child: Text(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
-import 'package:simplibuy/authentication/presentation/screens/forgot_password/forgot_password.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/core/constant.dart';

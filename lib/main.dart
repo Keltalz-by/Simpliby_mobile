@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:simplibuy/authentication/presentation/screen_bindings/business_reg_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/forgot_password_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/login_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/signup_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/verify_email_binding.dart';
-import 'package:simplibuy/authentication/presentation/screens/business_details/business_details_screen.dart';
 import 'package:simplibuy/authentication/presentation/screens/forgot_password/forgot_password.dart';
 import 'package:simplibuy/authentication/presentation/screens/login/login_screen.dart';
 import 'package:simplibuy/authentication/presentation/screens/signup/signup_screen.dart';
@@ -16,7 +14,6 @@ import 'package:simplibuy/cart/presentation/screens/cart_list_screen.dart';
 import 'package:simplibuy/chat_seller/presentation/screens/chat_seller.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
-import 'package:simplibuy/create_promo_post/presentation/screens/create_promo_post_screen.dart';
 import 'package:simplibuy/history/presentation/screens/history_screen.dart';
 import 'package:simplibuy/main_binding.dart';
 import 'package:get/get.dart';
@@ -24,7 +21,6 @@ import 'package:simplibuy/buyer_home/presentation/screens/buyer_home_drawers.dar
 import 'package:simplibuy/notification/presentation/binding/notification_binding.dart';
 import 'package:simplibuy/on_boarding/splash_screen.dart';
 import 'package:simplibuy/on_boarding/user_first_time.dart';
-import 'package:simplibuy/on_boarding/user_type.dart';
 import 'package:simplibuy/profile/presentation/binding/profile_screen_binding.dart';
 import 'package:simplibuy/profile/presentation/screens/profile_screen.dart';
 import 'package:simplibuy/reserve/presentation/bindings/reserve_binding.dart';
@@ -66,14 +62,9 @@ class MyApp extends StatelessWidget {
   }
 
   final pages = [
-    // GetPage(name: "SPLASH", page: () => SplashScreen()),
     GetPage(
       name: USER_FIRST_TIME,
       page: () => const UserFirstTime(),
-    ),
-    GetPage(
-      name: USER_TYPE,
-      page: () => const UserType(),
     ),
     GetPage(
         name: LOGIN_ROUTE,
@@ -96,7 +87,6 @@ class MyApp extends StatelessWidget {
         page: () => VerifyEmail(),
         binding: VerifyEmailBinding(),
         arguments: "email"),
-
     GetPage(
         name: PROFILE_SCREEN,
         page: () => ProfileScreen(),
@@ -138,14 +128,6 @@ class MyApp extends StatelessWidget {
         name: NOTIFICATION_SCREEN,
         page: () => NotificationScreen(),
         binding: NotificationBinding()),
-    GetPage(
-        name: BUSINESS_DETAILS_SCREEN,
-        page: () => BusinessDetailsScreen(),
-        binding: BusinessRegScreenBinding()),
-    GetPage(
-      name: CREATE_PROMO_POST_SCREEN,
-      page: () => CreatePromoPostScreen(),
-    ),
     GetPage(
       name: SETTINGS_SCREEN,
       page: () => SettingsScreen(),

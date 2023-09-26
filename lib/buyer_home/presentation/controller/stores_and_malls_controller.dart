@@ -13,10 +13,10 @@ class StoresAndMallsController extends GetxController {
     super.onInit();
     getStores();
     getUserName();
+    getFavStores();
   }
 
   final StoresAndMallsUsecase usecase;
-  // ignore: non_constant_identifier_names
   final StoresAndMallsFavUsecase usecaseFav;
   final ToBuyUsecase usecaseToBuy;
 
@@ -32,10 +32,12 @@ class StoresAndMallsController extends GetxController {
   String get userName => _userName.value;
 
   final RxList<StoreDetails> _details = (List<StoreDetails>.of([])).obs;
+  final RxList<StoreDetails> _favStores = (List<StoreDetails>.of([])).obs;
   final RxList<ItemToBuy> _toBuyModel = (List<ItemToBuy>.of([])).obs;
 
   // ignore: invalid_use_of_protected_member
   List<StoreDetails> get details => _details.value;
+  List<StoreDetails> get favStores => _favStores.value;
   // ignore: invalid_use_of_protected_member
   List<ItemToBuy> get toBuyModel => _toBuyModel.value;
 
@@ -60,6 +62,18 @@ class StoresAndMallsController extends GetxController {
       getStores();
     } else {
       getMalls();
+    }
+  }
+
+  RxBool isFav(int id) {
+    return _favStores.any((element) => element.id == id).obs;
+  }
+
+  getFavStores() async {
+    final res = await usecaseFav.getAllFavoriteStoresAndMalls();
+    if (res.isLeft) {
+    } else {
+      _favStores.value = res.right.value;
     }
   }
 
@@ -94,7 +108,13 @@ class StoresAndMallsController extends GetxController {
   }
 
   addToFav(int position) {
-    usecaseFav.addStoreToFavorite(details[position]);
+    if (isFav(details[position].id).isTrue) {
+      _favStores.remove(details[position]);
+      usecaseFav.removeStoreFromFavorite(details[position].id);
+    } else {
+      _favStores.add(details[position]);
+      usecaseFav.addStoreToFavorite(details[position]);
+    }
   }
 
   getMalls() {

@@ -333,16 +333,17 @@ class BuyerHomeScreen extends StatelessWidget {
               (index) => Padding(
                   padding: EdgeInsets.only(top: 8.h),
                   child: Center(
-                      child: storesGridSingleItem(
+                      child: Obx(() => storesGridSingleItem(
                           details: controller.details[index],
                           onPressed: () => Get.toNamed(SINGLE_STORE_ROUTE,
                               arguments: controller.details[index].id),
+                          isFav: controller.isFav(controller.details[index].id),
                           onFavClicked: () {
                             controller.addToFav(index);
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackAdded);
                           },
-                          context: context)))));
+                          context: context))))));
     });
   }
 

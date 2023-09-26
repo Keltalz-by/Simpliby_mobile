@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
-
 import '../core/constants/route_constants.dart';
 import '../core/reusable_widgets/reusable_widgets.dart';
 
@@ -34,7 +33,7 @@ class _SwipeableWidgetExampleState extends State<UserFirstTime> {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                           onTap: () {
-                            Get.offNamed(USER_TYPE);
+                            Get.offNamed(LOGIN_ROUTE);
                           },
                           child: Text(
                             "Skip",
@@ -164,7 +163,7 @@ class _SwipeableWidgetExampleState extends State<UserFirstTime> {
                     defaultButtons(
                         pressed: () {
                           if (_currentPage == 2) {
-                            Get.offAllNamed(USER_TYPE);
+                            Get.offAllNamed(LOGIN_ROUTE);
                           } else {
                             if (_currentPage == 1) {
                               setState(() {

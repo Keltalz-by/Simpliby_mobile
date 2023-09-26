@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/prefs/shared_prefs.dart';
 import 'dart:async';
-
 import '../core/constants/route_constants.dart';
 import '../core/reusable_widgets/reusable_widgets.dart';
 
@@ -21,10 +20,15 @@ class _MyHomePageState extends State<SplashScreen> {
     Timer(const Duration(seconds: 3), () async {
       await SharedPrefs.initializeSharedPrefs();
       if (SharedPrefs.isUserFirstTime() == false) {
-        Get.toNamed(USER_FIRST_TIME);
+        Get.offNamed(USER_FIRST_TIME);
         SharedPrefs.setUserFirstTimeStatus(true);
       } else {
-        Get.toNamed(USER_TYPE);
+        if (SharedPrefs.userId().isEmpty ||
+            SharedPrefs.isUserVerified() == false) {
+          Get.offNamed(LOGIN_ROUTE);
+        } else {
+          Get.offNamed(BUYER_HOME_PAGE_ROUTE);
+        }
       }
     });
   }

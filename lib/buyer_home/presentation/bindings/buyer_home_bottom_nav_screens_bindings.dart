@@ -4,7 +4,6 @@ import 'package:simplibuy/buyer_home/domain/repositories/favorite_stores_reposit
 import 'package:simplibuy/buyer_home/domain/repositories/stores_and_malls_list_repository.dart';
 import 'package:simplibuy/buyer_home/domain/usecases/stores_and_malls_fav_usecase.dart';
 import 'package:simplibuy/buyer_home/domain/usecases/stores_and_malls_usecase.dart';
-import 'package:simplibuy/buyer_home/presentation/controller/fav_screen_controller.dart';
 import 'package:simplibuy/buyer_home/presentation/controller/stores_and_malls_controller.dart';
 import 'package:simplibuy/core/local_db/cart_dao.dart';
 import 'package:simplibuy/core/local_db/fav_stores_dao.dart';
@@ -30,7 +29,6 @@ class BuyerHomeBottomNavScreensBindings implements Bindings {
     NetworkInfoImpl info = Get.find();
     _getStoresAndMallsController(info);
     _getCartListControllers();
-    _getFavStoresControllers();
     _getHistoryController(info);
   }
 
@@ -63,13 +61,6 @@ class BuyerHomeBottomNavScreensBindings implements Bindings {
         () => CartListUsecase(repository: Get.find<CartListRepository>()));
     Get.lazyPut<CartListController>(
         () => CartListController(usecase: Get.find<CartListUsecase>()));
-  }
-
-  _getFavStoresControllers() {
-    Get.lazyPut(() =>
-        StoresAndMallsFavUsecase(Get.find<FavStoresAndMallsRepository>()));
-    Get.lazyPut<FavScreenController>(() =>
-        FavScreenController(usecase: Get.find<StoresAndMallsFavUsecase>()));
   }
 
   _getHistoryController(NetworkInfo info) {

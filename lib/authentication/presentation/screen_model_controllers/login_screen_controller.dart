@@ -1,15 +1,12 @@
 import 'package:get/get.dart';
 import 'package:simplibuy/authentication/data/models/login_details.dart';
 import 'package:simplibuy/authentication/domain/usecases/login_usecase.dart';
-import 'package:simplibuy/authentication/domain/usecases/resend_otp_usecase.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
-import 'package:simplibuy/core/prefs/shared_prefs.dart';
 import 'package:simplibuy/core/validators/validators_string.dart';
 import '../../../core/state/state.dart';
 
 class LoginScreenController extends GetxController with ValidatorMixin {
   final LoginUsecase _usecase;
-  final ResendOtpUsecase _usecase_otp;
   final RxString _emailError = "".obs;
   final RxString _passwordError = "".obs;
   final RxBool _isVisible = true.obs;
@@ -24,7 +21,7 @@ class LoginScreenController extends GetxController with ValidatorMixin {
   final _state = const State().obs;
   State get state => _state.value;
 
-  LoginScreenController(this._usecase, this._usecase_otp);
+  LoginScreenController(this._usecase);
 
   changeVisibility() {
     _isVisible.value = !_isVisible.value;
@@ -45,14 +42,8 @@ class LoginScreenController extends GetxController with ValidatorMixin {
           _state.value = err;
         }
       } else {
-        await SharedPrefs.initializeSharedPrefs();
-        final type = SharedPrefs.userType();
         Get.delete<LoginScreenController>();
-        if (type == TYPEBUYER) {
-          Get.offAllNamed(BUYER_HOME_PAGE_ROUTE);
-        } else {
-          Get.offAllNamed(SELLER_HOME_PAGE_ROUTE);
-        }
+        Get.offAllNamed(BUYER_HOME_PAGE_ROUTE);
       }
     }
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:simplibuy/buyer_home/presentation/controller/fav_screen_controller.dart';
+import 'package:simplibuy/buyer_home/presentation/controller/stores_and_malls_controller.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/state/state.dart';
@@ -14,14 +14,14 @@ import '../controller/buyer_home_navigation_controller.dart';
 class FavStoresScreen extends StatelessWidget {
   FavStoresScreen({Key? key}) : super(key: key);
 
-  FavScreenController controller = Get.find<FavScreenController>();
+  StoresAndMallsController controller = Get.find<StoresAndMallsController>();
 
   BuyerHomeNavigationController navController =
       Get.find<BuyerHomeNavigationController>();
 
   @override
   Widget build(BuildContext context) {
-    controller.getFavorites();
+    //controller.getFavorites();
     return Scaffold(
         appBar: customAppBar(
           text: "My Favorites",
@@ -51,7 +51,7 @@ class FavStoresScreen extends StatelessWidget {
           return Dismissible(
               key: UniqueKey(),
               onDismissed: (direction) {
-                controller.removeFromFav(position);
+                //     controller.removeFromFav(position);
                 ScaffoldMessenger.of(context).showSnackBar(snackRemoved);
               },
               background: Container(color: Colors.red),
