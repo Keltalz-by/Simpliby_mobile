@@ -28,12 +28,19 @@ import 'package:simplibuy/reserve/presentation/bindings/reserve_binding.dart';
 import 'package:simplibuy/reserve/presentation/screens/reserve_screen.dart';
 import 'package:simplibuy/reserve/presentation/screens/reserve_screen_completion.dart';
 import 'package:simplibuy/settings/presentation/screens/settings_screen.dart';
+import 'package:simplibuy/store_and_product/presentation/binding/product_binding.dart';
+import 'package:simplibuy/store_and_product/presentation/binding/products_list_binding.dart';
+import 'package:simplibuy/store_and_product/presentation/screens/product_screen.dart';
 import 'package:simplibuy/to_buy_list/presentation/binding/to_buy_binding.dart';
 import 'package:simplibuy/to_buy_list/presentation/screens/to_buy_screen.dart';
 import 'authentication/presentation/screen_bindings/enter_new_password_binding.dart';
 import 'authentication/presentation/screens/forgot_password/enter_new_password.dart';
 import 'notification/presentation/screens/notification.dart';
 import 'package:overlay_support/overlay_support.dart';
+
+import 'store_and_product/presentation/binding/store_info_binding.dart';
+import 'store_and_product/presentation/screens/product_via_category.dart';
+import 'store_and_product/presentation/screens/store_info_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -93,6 +100,14 @@ class MyApp extends StatelessWidget {
         binding: VerifyEmailBinding(),
         arguments: "email"),
     GetPage(
+        name: PRODUCTS_LIST_SCREEN,
+        page: () => ProductsListScreen(),
+        binding: ProductListBinding()),
+    GetPage(
+        name: PRODUCT_SCREEN,
+        page: () => ProductScreen(),
+        binding: ProductBinding()),
+    GetPage(
         name: PROFILE_SCREEN,
         page: () => ProfileScreen(),
         binding: ProfileScreenBinding()),
@@ -111,6 +126,11 @@ class MyApp extends StatelessWidget {
       page: () => CartList(),
       binding: BuyerHomeBottomNavScreensBindings(),
     ),
+    GetPage(
+        name: SINGLE_STORE_ROUTE,
+        arguments: "id",
+        page: () => StoreInfoScreen(),
+        binding: StoreInfoBinding()),
     GetPage(
       name: HISTORY_SCREEN,
       page: () => HistoryScreen(),
