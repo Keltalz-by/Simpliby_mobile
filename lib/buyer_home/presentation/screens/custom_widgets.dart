@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/buyer_home/domain/entities/strore_details.dart';
 
+import '../../../core/reusable_widgets/cache_image.dart';
 import '../../../core/reusable_widgets/reusable_widgets.dart';
 
 PreferredSizeWidget homeAppBar(
@@ -203,11 +204,13 @@ Widget storesListSingleItem(
               onTap: onClick,
               child: Row(
                 children: [
-                  Image.asset(
-                    "assets/images/shoprite_small.png",
+                  ImageCacheR(
+                    "",
+                    errorPlaceHolder: "assets/images/shoprite_small.png",
+                    topBottom: 20.r,
+                    topRadius: 20.r,
                     width: 100.w,
                     height: 100.h,
-                    fit: BoxFit.cover,
                   ),
                   Flexible(
                     child: Column(
@@ -278,11 +281,12 @@ Widget storesGridSingleItem(
           InkWell(
               splashColor: Colors.blue,
               highlightColor: Colors.red,
-              radius: 20.r,
               onTap: onPressed,
-              child: Image.asset("assets/images/buy.png",
-                  fit: BoxFit.cover,
+              child: ImageCacheR("",
+                  errorPlaceHolder: "assets/images/buy.png",
                   width: MediaQuery.of(context).size.width,
+                  topBottom: 20.r,
+                  topRadius: 20.r,
                   height: 140.h)),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Flexible(

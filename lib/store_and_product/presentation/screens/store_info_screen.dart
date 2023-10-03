@@ -107,26 +107,29 @@ class StoreInfoScreen extends StatelessWidget {
         return defaultLoading(context);
       }
       if (_controller.popstate is FinishedState) {
-        return GridView.count(
-            crossAxisCount: 3,
-            scrollDirection: Axis.vertical,
-            physics: const BouncingScrollPhysics(),
-            crossAxisSpacing: 15.w,
-            shrinkWrap: true,
-            mainAxisSpacing: 15.h,
-            children: List.generate(
-                _controller.product.length,
-                (index) => Obx(() => singleProductItem(
-                        context,
-                        _controller.product[index],
-                        () => Get.toNamed(PRODUCT_SCREEN, arguments: [
-                              _controller.product[index].productId,
-                              _controller.store.name,
-                              id
-                            ]), () {
-                      _controller.addProductToCart(index);
-                      ScaffoldMessenger.of(context).showSnackBar(snackAdded);
-                    }))));
+        return Padding(
+            padding: EdgeInsets.only(left: 10.w),
+            child: GridView.count(
+                crossAxisCount: 3,
+                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
+                crossAxisSpacing: 15.w,
+                shrinkWrap: true,
+                mainAxisSpacing: 15.h,
+                children: List.generate(
+                    _controller.product.length,
+                    (index) => Obx(() => singleProductItem(
+                            context,
+                            _controller.product[index],
+                            () => Get.toNamed(PRODUCT_SCREEN, arguments: [
+                                  _controller.product[index].productId,
+                                  _controller.store.name,
+                                  id
+                                ]), () {
+                          _controller.addProductToCart(index);
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(snackAdded);
+                        })))));
       }
       return Container();
     });
@@ -140,11 +143,12 @@ class StoreInfoScreen extends StatelessWidget {
           children: [
             Text(
               'Categories',
-              style: TextStyle(color: blackColor, fontSize: 24.sp),
+              style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
             ),
             Text(
               'view all',
-              style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
+              style:
+                  TextStyle(color: blackColor, fontSize: smallerTextFontSize),
             )
           ],
         ));
@@ -158,7 +162,7 @@ class StoreInfoScreen extends StatelessWidget {
           children: [
             Text(
               'Popular',
-              style: TextStyle(color: blackColor, fontSize: 24.sp),
+              style: TextStyle(color: blackColor, fontSize: smallTextFontSize),
             ),
             GestureDetector(
               child: Text(

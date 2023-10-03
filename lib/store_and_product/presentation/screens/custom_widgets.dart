@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/string_constants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:simplibuy/core/reusable_widgets/cache_image.dart';
 import 'package:simplibuy/core/utils/utils.dart';
 import 'package:simplibuy/store_and_product/domain/entities/product.dart';
 
@@ -16,19 +17,13 @@ Widget storeNameAndAddress(
     required String storeAddress}) {
   return Row(
     children: [
-      Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
+      ImageCacheR(
+        "",
+        topBottom: 8,
+        topRadius: 8,
         width: MediaQuery.of(context).size.width * 0.18,
         height: 60,
-        child: FadeInImage.assetNetwork(
-            width: MediaQuery.of(context).size.width * 0.18,
-            height: 60,
-            fit: BoxFit.contain,
-            placeholder: defaultStoreImage,
-            imageErrorBuilder: (context, error, stackTrace) {
-              return Image.asset(defaultStoreImage);
-            },
-            image: storeImage),
+        errorPlaceHolder: defaultStoreImage,
       ),
       Container(
         decoration: BoxDecoration(
@@ -104,13 +99,13 @@ Widget _titleAndIcon(
 
 Widget storeContactDetails(
     {required String email, required String phoneNumber}) {
-  return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _titleAndIcon(data: Icons.link, text: email),
-        _titleAndIcon(data: Icons.call, text: phoneNumber)
-      ]);
+  return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    _titleAndIcon(data: Icons.link, text: email),
+    SizedBox(
+      height: 10.h,
+    ),
+    _titleAndIcon(data: Icons.call, text: phoneNumber)
+  ]);
 }
 
 Widget storeFollowers(
@@ -206,17 +201,12 @@ Widget followAndChat() {
 }
 
 Widget SellerProfileImage(BuildContext context, String image) {
-  return FadeInImage.assetNetwork(
-      height: MediaQuery.of(context).size.height * 0.3,
-      fit: BoxFit.fill,
-      placeholder: defaultStoreImage,
-      imageErrorBuilder: (context, error, stackTrace) {
-        return Image.asset(defaultStoreImageBig,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.3,
-            fit: BoxFit.cover);
-      },
-      image: image);
+  return ImageCacheR(
+    "",
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height * 0.3,
+    errorPlaceHolder: defaultStoreImageBig,
+  );
 }
 
 Widget storeRating({required int rating}) {
@@ -249,21 +239,14 @@ Widget singleCategoryItem(StoreCategory category, VoidCallback onPressed) {
       child: GestureDetector(
           onTap: onPressed,
           child: Stack(alignment: Alignment.center, children: [
-            ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: FadeInImage.assetNetwork(
-                    width: 120,
-                    height: 120,
-                    fit: BoxFit.fill,
-                    placeholder: defaultProductImage,
-                    imageErrorBuilder: (context, error, stackTrace) {
-                      return Image.asset(
-                        defaultProductImage,
-                        width: 120.w,
-                        height: 120.h,
-                      );
-                    },
-                    image: category.categoryImage)),
+            const ImageCacheR(
+              "",
+              topBottom: 10,
+              topRadius: 10,
+              width: 120,
+              height: 120,
+              errorPlaceHolder: defaultProductImage,
+            ),
             Positioned(
                 child: Text(
               category.categoryName,
@@ -298,22 +281,14 @@ Widget singleProductItem(BuildContext context, Product product,
                   Colors.transparent,
                   BlendMode.srcOver,
                 ),
-                child: FadeInImage.assetNetwork(
-                    width: 120.w,
-                    height: 140.h,
-                    fit: BoxFit.cover,
-                    placeholder: defaultProductImage,
-                    placeholderCacheHeight: 110,
-                    placeholderCacheWidth: 120,
-                    imageErrorBuilder: (context, error, stackTrace) {
-                      return Image.asset(
-                        "assets/images/test_prod.png",
-                        width: 120.w,
-                        height: 140.h,
-                        fit: BoxFit.cover,
-                      );
-                    },
-                    image: product.productImage[0]))),
+                child: ImageCacheR(
+                  "",
+                  width: 120.w,
+                  height: 140.h,
+                  topRadius: 10,
+                  topBottom: 10,
+                  errorPlaceHolder: "assets/images/test_prod.png",
+                ))),
         Positioned(
           bottom: 0,
           left: 0,
@@ -391,9 +366,9 @@ Widget productListContainer(
     required VoidCallback onProductClick,
     required VoidCallback onAddBtnClicked}) {
   return Container(
-      padding: const EdgeInsets.only(top: 5, left: 5),
+      padding: const EdgeInsets.only(top: 5),
       width: MediaQuery.of(context).size.width * 0.35,
-      height: 230.h,
+      height: 215.h,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -439,20 +414,14 @@ Widget productImage(String image) {
   return Container(
     padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
-    child: FadeInImage.assetNetwork(
-        width: 70,
-        height: 80,
-        fit: BoxFit.fill,
-        placeholder: defaultProductImage,
-        imageErrorBuilder: (context, error, stackTrace) {
-          return Image.asset(
-            defaultProductImage,
-            width: 120.w,
-            height: 120.h,
-            fit: BoxFit.contain,
-          );
-        },
-        image: image),
+    child: ImageCacheR(
+      image,
+      // width: 100.w,
+      height: 110.h,
+      topBottom: 8.0,
+      topRadius: 8.0,
+      errorPlaceHolder: defaultProductImage,
+    ),
   );
 }
 

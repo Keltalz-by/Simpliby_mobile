@@ -61,6 +61,8 @@ dependencies:
   #dotted border
   dotted_border: ^2.0.0+3
   flutter_swiper_plus: ^2.0.4
+  flutter_cache_manager: ^3.3.1
+  cached_network_image: ^3.2.3
   
 
 

@@ -33,7 +33,7 @@ class ProductsListScreen extends StatelessWidget {
                     child: GridView.count(
                         shrinkWrap: true,
                         crossAxisCount: 2,
-                        physics: const ScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         crossAxisSpacing: 4.0,
                         mainAxisSpacing: 6.0,
                         children: List.generate(

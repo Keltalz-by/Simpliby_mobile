@@ -34,7 +34,7 @@ class ProductScreen extends StatelessWidget {
     return SingleChildScrollView(
         child: Column(
       children: [
-        //  ImageSliderWithIndicator(imageUrls: product.productImage),
+         //ImageSliderWithIndicator(imageUrls: product.productImage),
         Container(
           padding: const EdgeInsets.all(defaultPadding),
           child: Column(
