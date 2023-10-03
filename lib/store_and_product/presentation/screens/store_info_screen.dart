@@ -108,7 +108,7 @@ class StoreInfoScreen extends StatelessWidget {
       }
       if (_controller.popstate is FinishedState) {
         return Padding(
-            padding: EdgeInsets.only(left: 10.w),
+            padding: EdgeInsets.only(left: 12.w),
             child: GridView.count(
                 crossAxisCount: 3,
                 scrollDirection: Axis.vertical,
@@ -187,6 +187,7 @@ class StoreInfoScreen extends StatelessWidget {
       if (_controller.popstate is FinishedState) {
         return Container(
             height: 120.h,
+            padding: EdgeInsets.only(left: 10.w, right: 10.w),
             child: ListView.separated(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),

@@ -7,6 +7,7 @@ import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/buyer_home/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
+import 'package:simplibuy/core/reusable_widgets/cache_image.dart';
 import 'package:simplibuy/core/utils/utils.dart';
 
 import '../../../core/reusable_widgets/reusable_widgets.dart';
@@ -149,17 +150,12 @@ class BuyerHomeScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Column(children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: FadeInImage.assetNetwork(
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                        placeholder: 'assets/gifs/simpliby_loading.gif',
-                        imageErrorBuilder: (context, error, stackTrace) {
-                          return const Icon(Icons.account_circle);
-                        },
-                        image: url)),
+                ImageCacheCircle(
+                  url,
+                  width: 80,
+                  height: 80,
+                  errorPlaceHolder: "assets/images/test_cht_image.png",
+                ),
                 Text(
                   username,
                   style:

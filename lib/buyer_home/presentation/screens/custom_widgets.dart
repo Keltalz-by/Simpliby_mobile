@@ -212,6 +212,9 @@ Widget storesListSingleItem(
                     width: 100.w,
                     height: 100.h,
                   ),
+                  SizedBox(
+                    width: 8.w,
+                  ),
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
