@@ -9,6 +9,7 @@ import '../../../core/constants/route_constants.dart';
 import '../../../core/error_types/error_types.dart';
 import '../../../core/state/state.dart';
 import '../../domain/entities/product.dart';
+import 'image_page_view.dart';
 
 // ignore: must_be_immutable
 class ProductScreen extends StatelessWidget {
@@ -32,50 +33,54 @@ class ProductScreen extends StatelessWidget {
 
   Widget _body(BuildContext context, Product product) {
     return SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
-      children: [
-         //ImageSliderWithIndicator(imageUrls: product.productImage),
-        Container(
-          padding: const EdgeInsets.all(defaultPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Padding(padding: EdgeInsets.only(top: 30)),
-              Text(product.productName,
-                  style: const TextStyle(
-                      color: blackColor,
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold)),
-              const Padding(padding: EdgeInsets.only(top: 10)),
-              Text(product.productDescription,
-                  style: const TextStyle(
-                      color: blackColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal)),
-              const Padding(padding: EdgeInsets.only(top: 20)),
-              Text('Price: ${product.productPrice}',
-                  style: const TextStyle(color: blackColor, fontSize: 20)),
-              const Padding(padding: EdgeInsets.only(top: 10)),
-              Text('Shelf details: ${product.shelfDetails}',
-                  style: const TextStyle(color: blackColor, fontSize: 20)),
-              const Padding(padding: EdgeInsets.only(top: 20)),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                defaultButtons(
-                    pressed: () {
-                      Get.toNamed(RESERVE_SCREEN);
-                    },
-                    text: 'Reserve',
-                    size: mediumWidthButtonSize),
-                iconAsBtn(() {
-                  _controller.addProductToCart(args[1], args[2]);
-                  ScaffoldMessenger.of(context).showSnackBar(snackAdded);
-                })
-              ])
-            ],
-          ),
-        )
-      ],
-    ));
+          children: [
+            ImagePageView(images: product.productImage),
+            Container(
+              padding: const EdgeInsets.all(defaultPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Padding(padding: EdgeInsets.only(top: 30)),
+                  Text(product.productName,
+                      style: const TextStyle(
+                          color: blackColor,
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold)),
+                  const Padding(padding: EdgeInsets.only(top: 10)),
+                  Text(product.productDescription,
+                      style: const TextStyle(
+                          color: blackColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal)),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  Text('Price: ${product.productPrice}',
+                      style: const TextStyle(color: blackColor, fontSize: 20)),
+                  const Padding(padding: EdgeInsets.only(top: 10)),
+                  Text('Shelf details: ${product.shelfDetails}',
+                      style: const TextStyle(color: blackColor, fontSize: 20)),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        defaultButtons(
+                            pressed: () {
+                              Get.toNamed(RESERVE_SCREEN);
+                            },
+                            text: 'Reserve',
+                            size: mediumWidthButtonSize),
+                        iconAsBtn(() {
+                          _controller.addProductToCart(args[1], args[2]);
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(snackAdded);
+                        })
+                      ])
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }
