@@ -34,11 +34,12 @@ class StoreInfoScreen extends StatelessWidget {
   Widget _body(BuildContext context) {
     return CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
       SliverAppBar(
-        expandedHeight: 220,
-        pinned: true,
-        iconTheme: const IconThemeData(color: Colors.black),
-        elevation: 0,
+        expandedHeight: 550.h,
+        pinned: false,
+        iconTheme: const IconThemeData(color: Colors.white),
         stretch: true,
+        scrolledUnderElevation: 0,
+        elevation: 0,
         actions: [
           Padding(
               padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
@@ -46,44 +47,52 @@ class StoreInfoScreen extends StatelessWidget {
         ],
         backgroundColor: Colors.transparent,
         flexibleSpace: FlexibleSpaceBar(
-            background: Column(children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              SellerProfileImage(context, _controller.store.storeImages),
-              Positioned(
-                bottom: -20,
-                child: storeNameAndAddress(
-                    context: context,
-                    storeImage: _controller.store.storeImages,
-                    storeName: _controller.store.name,
-                    storeAddress: _controller.store.address),
-              ),
+            stretchModes: const [
+              StretchMode.zoomBackground,
             ],
-          ),
-        ])),
+            collapseMode: CollapseMode.parallax,
+            background: Column(children: [
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  SellerProfileImage(context, _controller.store.storeImages),
+                  Positioned(
+                    bottom: -20,
+                    child: storeNameAndAddress(
+                        context: context,
+                        storeImage: _controller.store.storeImages,
+                        storeName: _controller.store.name,
+                        storeAddress: _controller.store.address),
+                  ),
+                ],
+              ),
+            ])),
+        bottom: PreferredSize(
+            preferredSize: const Size(double.maxFinite, 260),
+            child: Column(children: [
+              Padding(padding: EdgeInsets.only(top: 25.h)),
+              Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: storeDescription(desc: _controller.store.about)),
+              Padding(padding: EdgeInsets.only(top: 15.h)),
+              Padding(
+                  padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                  child: storeContactDetails(
+                      email: _controller.store.email,
+                      phoneNumber: _controller.store.phoneNumber)),
+              Align(
+                alignment: Alignment.topLeft,
+                child: storeFollowers(followers: 1000),
+              ),
+              Padding(padding: EdgeInsets.only(top: 5.h)),
+              followAndChat(),
+              Padding(padding: EdgeInsets.only(top: 15.h)),
+              storeRating(rating: 4),
+              Padding(padding: EdgeInsets.only(top: 15.h)),
+            ])),
       ),
       SliverToBoxAdapter(
-          child: SingleChildScrollView(
-              child: Column(children: [
-        Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: storeDescription(desc: _controller.store.about)),
-        Padding(padding: EdgeInsets.only(top: 15.h)),
-        Padding(
-            padding: EdgeInsets.only(left: 10.w, right: 10.w),
-            child: storeContactDetails(
-                email: _controller.store.email,
-                phoneNumber: _controller.store.phoneNumber)),
-        Align(
-          alignment: Alignment.topLeft,
-          child: storeFollowers(followers: 1000),
-        ),
-        Padding(padding: EdgeInsets.only(top: 15.h)),
-        followAndChat(),
-        Padding(padding: EdgeInsets.only(top: 15.h)),
-        storeRating(rating: 4),
-        Padding(padding: EdgeInsets.only(top: 15.h)),
+          child: Column(children: [
         _controller.catstate is FinishedState ? showCategories() : Container(),
         Padding(padding: EdgeInsets.only(top: 8.h)),
         showCategoriesList(context),
@@ -97,7 +106,7 @@ class StoreInfoScreen extends StatelessWidget {
                 "Didn't find what you intend to buy? Click here to chat with the seller")),
         chatToReserveItem(context),
         const Padding(padding: EdgeInsets.only(top: 10)),
-      ])))
+      ])),
     ]);
   }
 
