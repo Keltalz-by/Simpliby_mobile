@@ -145,6 +145,7 @@ class StoresAndMallsController extends GetxController {
         _stateToBuy.value = ErrorState(errorType: result.left.error);
       } else {
         _toBuyModel.value = result.right.value;
+        _toBuyModel.refresh();
         isBoughtRx = result.right.value.map((e) => RxBool(e.isBought)).toList();
         _stateToBuy.value = FinishedState();
       }

@@ -48,7 +48,6 @@ class ToBuyScreen extends StatelessWidget {
                           size: mediumWidthButtonSize,
                           text: "Add to List",
                           pressed: () {
-                            controller.addToList();
                             _showBottomSheet(
                                 context,
                                 controller.details.isEmpty
@@ -87,7 +86,7 @@ class ToBuyScreen extends StatelessWidget {
             ),
             InkWell(
                 child: const Icon(Icons.edit, size: 25),
-                onTap: () => {_showBottomSheet(context, index)}),
+                onTap: () => {_showBottomSheetEdit(context, index)}),
             InkWell(
                 child: const Icon(Icons.delete, size: 25),
                 onTap: () => {controller.removeFromList(index)}),
@@ -96,8 +95,7 @@ class ToBuyScreen extends StatelessWidget {
   }
 
   void _showBottomSheet(BuildContext context, int index) {
-    final tController = TextEditingController.fromValue(
-        TextEditingValue(text: controller.details[index].item));
+    final tController = TextEditingController();
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
@@ -125,7 +123,48 @@ class ToBuyScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: defaultButtons(
                           pressed: () {
-                            controller.updateItem(tController.text, index);
+                            controller.addToList(tController.text);
+                            Navigator.pop(context);
+                          },
+                          text: "Save",
+                          size: const Size(90.0, 40)))
+                ],
+              ),
+            ));
+  }
+
+  void _showBottomSheetEdit(BuildContext context, int index) {
+    final singleItem = controller.details[index];
+    final tController = TextEditingController(text: singleItem.item);
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+        backgroundColor: whiteColor,
+        context: context,
+        isScrollControlled: true,
+        builder: (context) => Container(
+              //height: 200,
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                  top: defaultPadding,
+                  left: defaultPadding,
+                  right: defaultPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextField(
+                    controller: tController,
+                    autofocus: true,
+                  ),
+                  const Padding(padding: EdgeInsets.only(top: defaultPadding)),
+                  Align(
+                      alignment: Alignment.center,
+                      child: defaultButtons(
+                          pressed: () {
+                            controller.updateSingleModel(
+                                tController.text, singleItem.id);
                             Navigator.pop(context);
                           },
                           text: "Save",

@@ -32,29 +32,24 @@ class ToBuyController extends GetxController {
     });
   }
 
-  void addToList() async {
+  void addToList(String item) async {
     ItemToBuy toBuyModel = ItemToBuy(
-        id: DateTime.now().millisecondsSinceEpoch,
-        item: "...",
-        isBought: false);
+        id: DateTime.now().millisecondsSinceEpoch, item: item, isBought: false);
     _details.add(toBuyModel);
     _state.refresh();
     await _usecase.addItemToBuy(toBuyModel);
   }
 
+  updateSingleModel(String item, int id) async {
+    await _usecase.updateItem(item, id);
+    _details.where((p0) => p0.id == id).first.item = item;
+    _details.refresh();
+  }
+
   void removeFromList(int index) async {
-    // ignore: invalid_use_of_protected_member
     int? iid = _details.value[index].id;
     await _usecase.removeItemToBuy(iid);
     _details.removeAt(index);
-  }
-
-  void updateItem(String item, int index) async {
-    // ignore: invalid_use_of_protected_member
-    int? iid = _details.value[index].id;
-    await _usecase.updateItem(item, iid);
-    _details[index].item = item;
-    _details.refresh();
   }
 
   changeIsBought(int index) async {

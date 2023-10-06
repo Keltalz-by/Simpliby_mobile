@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
                 navigatorObservers: [BotToastNavigatorObserver()],
                 theme: ThemeData(
                     primarySwatch: Colors.blue,
+                    fontFamily: "Inter",
                     scaffoldBackgroundColor: whiteColor),
                 home: SplashScreen()));
       },

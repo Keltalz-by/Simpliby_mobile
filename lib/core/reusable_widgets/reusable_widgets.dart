@@ -18,7 +18,11 @@ Widget defaultButtons(
           shadowColor: blueColor),
       child: Text(
         text,
-        style: TextStyle(color: whiteColor, fontSize: smallTextFontSize),
+        style: TextStyle(
+            color: whiteColor,
+            fontSize: smallTextFontSize,
+            fontWeight: FontWeight.w700,
+            fontFamily: appFontFamily),
       ));
 }
 
