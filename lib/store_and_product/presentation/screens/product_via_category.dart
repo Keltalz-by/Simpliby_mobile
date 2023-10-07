@@ -55,8 +55,7 @@ class ProductsListScreen extends StatelessWidget {
                                         onAddBtnClicked: () {
                                           _controller.addProductToCart(
                                               index, args[1], args[0]);
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackAdded);
+                                          snackAdded;
                                         })))))));
           }
           return defaultLoading(context);

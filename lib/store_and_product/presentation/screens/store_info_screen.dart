@@ -136,8 +136,7 @@ class StoreInfoScreen extends StatelessWidget {
                                   id
                                 ]), () {
                           _controller.addProductToCart(index);
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(snackAdded);
+                          snackAdded;
                         })))));
       }
       return Container();

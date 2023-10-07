@@ -73,8 +73,7 @@ class ProductScreen extends StatelessWidget {
                             size: mediumWidthButtonSize),
                         iconAsBtn(() {
                           _controller.addProductToCart(args[1], args[2]);
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(snackAdded);
+                          snackAdded;
                         })
                       ])
                 ],
