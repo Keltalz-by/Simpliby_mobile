@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/cart/domain/entities/item_cart_detail.dart';
 import 'package:simplibuy/cart/presentation/controllers/cart_list_controller.dart';
@@ -8,9 +9,7 @@ import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/core/state/state.dart';
 import '../../../buyer_home/presentation/controller/buyer_home_navigation_controller.dart';
 import '../../../core/constants/route_constants.dart';
-import '../../../core/local_db/cart_dao.dart';
 
-// ignore: must_be_immutable
 class CartList extends StatelessWidget {
   CartList({Key? key}) : super(key: key);
 
@@ -23,6 +22,7 @@ class CartList extends StatelessWidget {
   Widget build(BuildContext context) {
     controller.getAllItemsInCart();
     return Scaffold(
+        backgroundColor: Color(0xFFF9F9FA),
         appBar: customAppBar(
             text: "Cart",
             onPressed: () {
@@ -37,7 +37,7 @@ class CartList extends StatelessWidget {
               if (controller.state == ErrorState(errorType: EmptyListError())) {
                 return noDataInCart(() => controller.startShopping());
               } else {
-                return ListView(children: [
+                return Column(children: [
                   cartList(context),
                   const Padding(padding: EdgeInsets.only(top: 10)),
                   Obx(() {
@@ -61,10 +61,9 @@ class CartList extends StatelessWidget {
   }
 
   Widget cartList(BuildContext context) {
-    return Obx(() => SizedBox(
-        height: MediaQuery.of(context).size.height * 0.56,
-        width: MediaQuery.of(context).size.width,
+    return Obx(() => Expanded(
         child: ListView.builder(
+            physics: BouncingScrollPhysics(),
             itemCount: controller.cartItems.length,
             itemBuilder: (context, position) {
               return singleCartItem(controller.cartItems[position], () {
@@ -78,42 +77,36 @@ class CartList extends StatelessWidget {
   }
 
   Widget calculations(BuildContext context) {
-    return Obx(() => SizedBox(
-        height: 120,
-        child: Card(
-            margin: const EdgeInsets.all(8),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8))),
-            elevation: 2,
+    return Obx(() => Container(
+        margin: const EdgeInsets.all(8),
+        decoration: const BoxDecoration(
             color: Colors.white,
-            child: Container(
-                padding: EdgeInsets.all(10),
-                child: ListView(
-                  children: [
-                    calculationInfo(
-                        'Subtotal', '₦${controller.totalPriceInCart}'),
-                    const Padding(padding: EdgeInsets.only(top: 10)),
-                    calculationInfo(
-                        'Reserve Charges', '₦${controller.charges}'),
-                    const Padding(padding: EdgeInsets.only(top: 10)),
-                    const Divider(
-                      color: Colors.black,
-                    ),
-                    const Padding(padding: EdgeInsets.only(top: 10)),
-                    calculationInfo('Total', '₦${controller.totalPrice}',
-                        weight: FontWeight.bold)
-                  ],
-                )))));
+            borderRadius: BorderRadius.all(Radius.circular(8))),
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            calculationInfo('Subtotal', '₦${controller.totalPriceInCart}'),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            calculationInfo('Reserve Charges', '₦${controller.charges}'),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            const Divider(
+              color: Colors.black,
+            ),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            calculationInfo('Total', '₦${controller.totalPrice}',
+                weight: FontWeight.bold)
+          ],
+        )));
   }
 
   Widget singleCartItem(ItemCartDetails details, VoidCallback ondelete,
       VoidCallback onadd, VoidCallback onreduce) {
-    return Card(
+    return Container(
         margin: const EdgeInsets.all(5),
-        shape: const RoundedRectangleBorder(
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        decoration: const BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(8))),
-        elevation: 2,
-        color: Colors.white,
         child: Column(
           children: [
             const Padding(padding: EdgeInsets.only(top: 10)),

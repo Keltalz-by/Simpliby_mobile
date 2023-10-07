@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simplibuy/cart/domain/entities/item_cart_detail.dart';
 import 'package:simplibuy/core/constant.dart';
+import 'package:simplibuy/core/reusable_widgets/cache_image.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 
 Widget itemCounterIcon(IconData icon, VoidCallback onPressed) {
@@ -45,27 +47,42 @@ Widget deleteTextButton(VoidCallback onDelete) {
 
 Widget cartListSingleItem(ItemCartDetails details) {
   return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Image.asset("assets/images/cart_test.png"),
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(details.storeName,
-            maxLines: 1,
-            style: const TextStyle(color: blackColor, fontSize: 15)),
-        const Padding(padding: EdgeInsets.only(top: 5)),
-        Text(details.itemName,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: blackColor,
-                fontSize: smallTextFontSize)),
-        const Padding(padding: EdgeInsets.only(top: 5)),
-        Text(details.itemPrice.toString(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: blackColor, fontSize: smallTextFontSize))
-      ])
+      ImageCacheR(
+        "",
+        width: 80.w,
+        height: 80.h,
+        errorPlaceHolder: "assets/images/buy.png",
+      ),
+      SizedBox(
+        width: 19.w,
+      ),
+      Container(
+          height: 80.h,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(details.storeName,
+                    maxLines: 1,
+                    style: const TextStyle(color: blackColor, fontSize: 15)),
+                const Padding(padding: EdgeInsets.only(top: 5)),
+                Text(details.itemName,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: blackColor,
+                        fontSize: smallTextFontSize)),
+                const Padding(padding: EdgeInsets.only(top: 5)),
+                Text(details.itemPrice.toString(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: blackColor, fontSize: smallTextFontSize))
+              ]))
     ],
   );
 }
