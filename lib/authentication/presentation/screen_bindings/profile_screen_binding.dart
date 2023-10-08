@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
+import 'package:simplibuy/authentication/domain/repositories/profile_repository.dart';
 
 import '../../../core/network/network_info.dart';
-import '../../data/repository/profile_repository_impl.dart';
-import '../../domain/repository/profile_repository.dart';
+import '../../data/repositories/profile_repository_impl.dart';
 import '../../domain/usecases/profile_usecase.dart';
-import '../controllers/profile_screen_controller.dart';
+import '../screen_model_controllers/profile_screen_controller.dart';
 
 class ProfileScreenBinding implements Bindings {
   @override

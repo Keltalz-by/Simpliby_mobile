@@ -1,9 +1,8 @@
 import 'package:either_dart/either.dart';
-import 'package:simplibuy/profile/domain/repository/profile_repository.dart';
-
+import 'package:simplibuy/authentication/domain/entities/profile_details.dart';
+import 'package:simplibuy/authentication/domain/repositories/profile_repository.dart';
 import '../../../core/failure/failure.dart';
 import '../../../core/result/result.dart';
-import '../entities/profile_details.dart';
 
 class ProfileUsecase {
   final ProfileRepository repo;

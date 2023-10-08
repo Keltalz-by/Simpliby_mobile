@@ -1,10 +1,10 @@
+import 'package:either_dart/either.dart';
+import 'package:simplibuy/authentication/domain/entities/profile_details.dart';
+import 'package:simplibuy/authentication/domain/repositories/profile_repository.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/network/network_info.dart';
-import 'package:simplibuy/profile/domain/entities/profile_details.dart';
 import 'package:simplibuy/core/result/result.dart';
 import 'package:simplibuy/core/failure/failure.dart';
-import 'package:either_dart/src/either.dart';
-import 'package:simplibuy/profile/domain/repository/profile_repository.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final NetworkInfo info;

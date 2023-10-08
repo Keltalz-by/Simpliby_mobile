@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:simplibuy/authentication/domain/entities/profile_details.dart';
 import 'package:simplibuy/core/validators/validators_string.dart';
-import 'package:simplibuy/profile/domain/entities/profile_details.dart';
-import 'package:simplibuy/profile/domain/usecases/profile_usecase.dart';
+import 'package:simplibuy/authentication/domain/usecases/profile_usecase.dart';
 
 import '../../../core/state/state.dart';
 

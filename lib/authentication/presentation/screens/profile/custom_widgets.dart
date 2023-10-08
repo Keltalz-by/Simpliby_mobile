@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/constant.dart';
-import '../../../core/reusable_widgets/reusable_widgets.dart';
+import '../../../../core/constant.dart';
+import '../../../../core/reusable_widgets/reusable_widgets.dart';
 
 Widget inputFieldProfile(
     String title, Function(String) onChanged, String error, String? hint) {

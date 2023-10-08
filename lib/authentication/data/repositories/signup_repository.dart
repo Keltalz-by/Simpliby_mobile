@@ -36,8 +36,6 @@ class SignupRepositoryImpl implements AuthRepository<SignupDetail> {
               Failure.withMessage(error: ServerError(), message: message));
         }
       } on Exception {
-        // ebuka id 64a1725cffcef35ef6ac854e
-        //ebuka 0902 id 64a173c4ffcef35ef6ac855b
         return Left(Failure(error: ServerError()));
       }
     }

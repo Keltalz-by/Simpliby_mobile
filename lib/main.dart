@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/forgot_password_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/login_screen_binding.dart';
+import 'package:simplibuy/authentication/presentation/screen_bindings/profile_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/signup_screen_binding.dart';
 import 'package:simplibuy/authentication/presentation/screen_bindings/verify_email_binding.dart';
 import 'package:simplibuy/authentication/presentation/screens/forgot_password/forgot_password.dart';
@@ -22,8 +23,7 @@ import 'package:simplibuy/buyer_home/presentation/screens/buyer_home_drawers.dar
 import 'package:simplibuy/notification/presentation/binding/notification_binding.dart';
 import 'package:simplibuy/on_boarding/splash_screen.dart';
 import 'package:simplibuy/on_boarding/user_first_time.dart';
-import 'package:simplibuy/profile/presentation/binding/profile_screen_binding.dart';
-import 'package:simplibuy/profile/presentation/screens/profile_screen.dart';
+import 'package:simplibuy/authentication/presentation/screens/profile/profile_screen.dart';
 import 'package:simplibuy/reserve/presentation/bindings/reserve_binding.dart';
 import 'package:simplibuy/reserve/presentation/screens/reserve_screen.dart';
 import 'package:simplibuy/reserve/presentation/screens/reserve_screen_completion.dart';

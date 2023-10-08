@@ -9,7 +9,7 @@ abstract class CartDao {
   @Query('SELECT * FROM ItemCartDetails')
   Stream<List<ItemCartDetails>> getAllCartItems();
 
-  @insert
+  @Insert(onConflict: OnConflictStrategy.replace)
   Future<void> addToCart(ItemCartDetails item);
 
   @Query('DELETE FROM ItemCartDetails WHERE id = :id')

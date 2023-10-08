@@ -4,7 +4,7 @@ import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/core/state/state.dart';
-import 'package:simplibuy/profile/presentation/controllers/profile_screen_controller.dart';
+import 'package:simplibuy/authentication/presentation/screen_model_controllers/profile_screen_controller.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
