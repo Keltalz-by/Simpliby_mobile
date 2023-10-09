@@ -5,6 +5,8 @@ import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/orders/data/models/accepted_orders.dart';
 import 'package:simplibuy/orders/data/models/incoming_orders.dart';
 
+import '../../../core/reusable_widgets/cache_image.dart';
+
 Widget singleIncomingOrder(
     BuildContext context, IncomingOrder order, VoidCallback onOrderClicked) {
   return Container(
@@ -29,20 +31,12 @@ Widget singleIncomingOrder(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(60),
-                child: FadeInImage.assetNetwork(
-                    width: 60.w,
-                    height: 60.h,
-                    fit: BoxFit.cover,
-                    placeholder: 'assets/gifs/simpliby_loading.gif',
-                    imageErrorBuilder: (context, error, stackTrace) {
-                      return const Icon(
-                        Icons.account_circle,
-                        size: 60,
-                      );
-                    },
-                    image: order.image)),
+            ImageCacheCircle(
+              order.image,
+              width: 60.w,
+              height: 60.h,
+              errorPlaceHolder: "assets/images/test_cht_image.png",
+            ),
             SizedBox(
               width: 20.w,
             ),
@@ -109,20 +103,12 @@ Widget singleAcceptedOrder(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(60),
-                child: FadeInImage.assetNetwork(
-                    width: 60.w,
-                    height: 60.h,
-                    fit: BoxFit.cover,
-                    placeholder: 'assets/gifs/simpliby_loading.gif',
-                    imageErrorBuilder: (context, error, stackTrace) {
-                      return const Icon(
-                        Icons.account_circle,
-                        size: 60,
-                      );
-                    },
-                    image: order.image)),
+            ImageCacheCircle(
+              order.image,
+              width: 60.w,
+              height: 60.h,
+              errorPlaceHolder: "assets/images/test_cht_image.png",
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

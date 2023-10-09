@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:get/get.dart';
-import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/reusable_widgets/custom_dialog_two_button.dart';
+import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/reserve/presentation/controllers/reserve_controller.dart';
 import 'package:simplibuy/core/reusable_widgets/custom_dialog.dart';
@@ -147,9 +147,7 @@ class ReserveScreenCompletion extends StatelessWidget {
       builder: (BuildContext context) {
         return CustomDialogTwoButton(
           callback1: () {},
-          callback2: () {
-            Get.offNamed(STORES_LIST_ROUTE);
-          },
+          callback2: () {},
           dialogIcon: Icons.sentiment_dissatisfied,
           buttonText1: "Try again",
           buttonText2: "Try another store",

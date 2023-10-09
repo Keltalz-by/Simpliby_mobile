@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:simplibuy/buyer_home/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/reusable_widgets/custom_dialog.dart';
@@ -36,19 +35,11 @@ class OrdersScreen extends StatelessWidget {
               if (controller.state is LoadingState) {
                 return defaultLoading(context);
               }
-              if (controller.state == ErrorState(errorType: InternetError())) {
-                return noInternet(() {
-                  controller.reload();
-                });
-              }
+              if (controller.state == ErrorState(errorType: InternetError())) {}
               if (controller.state == ErrorState(errorType: EmptyListError())) {
                 return emptyOrder();
               }
-              if (controller.state == ErrorState(errorType: ServerError())) {
-                return noInternet(() {
-                  controller.reload();
-                });
-              }
+              if (controller.state == ErrorState(errorType: ServerError())) {}
               if (controller.isIncoming) {
                 return icomingOrdersList(context);
               } else {

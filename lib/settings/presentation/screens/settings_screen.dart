@@ -10,54 +10,56 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(
-          text: "Settings",
-          onPressed: () {
-            Get.back();
-          }),
-      body: SingleChildScrollView(child: Container(
-        padding: const EdgeInsets.all(defaultPadding),
-        child: Column(
-          children: [
-            Padding(
-                padding: padding,
-                child: showSingleSetting("Account", Icons.person)),
-            div,
-            Padding(
-                padding: padding,
-                child: showSingleSetting(
-                    "Availability", Icons.remove_red_eye_outlined)),
-            div,
-            showNotificationToggleSetting(
-                "Notification", Icons.notification_important),
-            div,
-            Padding(
-                padding: padding,
-                child:
-                    showSingleSetting("Switch to buyer", Icons.switch_account)),
-            div,
-            Padding(
-                padding: padding,
-                child: showSingleSetting(
-                    "Change reservation price", Icons.price_change)),
-            div,
-            Padding(
-                padding: padding,
-                child: showSingleSetting("Upgrade package", Icons.upgrade)),
-            div,
-            Padding(
-                padding: padding,
-                child:
-                    showSingleSetting("Help and Support", Icons.support_agent)),
-            div,
-            Padding(
-                padding: padding,
-                child: showSingleSetting("About", Icons.help_center_rounded)),
-            div,
-          ],
-        ),
-      ),
-     ) );
+        appBar: customAppBar(
+            text: "Settings",
+            onPressed: () {
+              Get.back();
+            }),
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(defaultPadding),
+            child: Column(
+              children: [
+                Padding(
+                    padding: padding,
+                    child: showSingleSetting("Account", Icons.person)),
+                div,
+                Padding(
+                    padding: padding,
+                    child: showSingleSetting(
+                        "Availability", Icons.remove_red_eye_outlined)),
+                div,
+                showNotificationToggleSetting(
+                    "Notification", Icons.notification_important),
+                div,
+                Padding(
+                    padding: padding,
+                    child: showSingleSetting(
+                        "Switch to buyer", Icons.switch_account)),
+                div,
+                Padding(
+                    padding: padding,
+                    child: showSingleSetting(
+                        "Change reservation price", Icons.price_change)),
+                div,
+                Padding(
+                    padding: padding,
+                    child: showSingleSetting("Upgrade package", Icons.upgrade)),
+                div,
+                Padding(
+                    padding: padding,
+                    child: showSingleSetting(
+                        "Help and Support", Icons.support_agent)),
+                div,
+                Padding(
+                    padding: padding,
+                    child:
+                        showSingleSetting("About", Icons.help_center_rounded)),
+                div,
+              ],
+            ),
+          ),
+        ));
   }
 
   final div = const Divider(

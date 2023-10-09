@@ -5,7 +5,6 @@ import '../../../core/error_types/error_types.dart';
 import '../../../core/failure/failure.dart';
 import '../../../core/network/network_info.dart';
 import '../../../core/result/result.dart';
-import '../../../history/domain/entities/history_data.dart';
 
 abstract class NotificationRepo {
   Future<Either<Failure, Result<List<NotificationData>>>> getNotificationDate();

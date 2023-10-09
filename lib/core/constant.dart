@@ -12,6 +12,5 @@ final largeTextFontSize = 45.sp;
 const defaultPadding = 20.0;
 final smallTextFontSize = 20.sp;
 final smallerTextFontSize = 14.sp;
-const appFontFamily = "Inter";
 const fullWidthButtonSize = Size(370, 55);
 const mediumWidthButtonSize = Size(170, 55);

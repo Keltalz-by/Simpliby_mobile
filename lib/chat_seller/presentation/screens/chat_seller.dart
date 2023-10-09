@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 
+import '../../../core/reusable_widgets/cache_image.dart';
+
 class ChatSeller extends StatelessWidget {
   const ChatSeller({super.key});
 
@@ -43,10 +45,11 @@ class ChatSeller extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  "assets/images/test_cht_image.png",
+                ImageCacheCircle(
+                  "",
                   width: 80.w,
                   height: 80.h,
+                  errorPlaceHolder: "assets/images/test_cht_image.png",
                 ),
                 SizedBox(
                   width: 15.w,

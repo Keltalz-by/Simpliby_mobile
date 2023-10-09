@@ -30,7 +30,7 @@ class SharedPrefs {
   }
 
   static String userId() {
-    return prefs.getString(USERID) ?? "";
+    return prefs.getString(USERID) ?? "1111";
   }
 
   static Future<void> setUserId(String id) async {
@@ -54,7 +54,6 @@ class SharedPrefs {
   }
 }
 
-const USERTYPE = "usertype";
 const USERID = "uid";
 const USERNAME = "username";
 const FIRST_TIME = "firsttime";
