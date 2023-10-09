@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/authentication/presentation/screen_model_controllers/signup_screen_controller.dart';
-import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,7 +82,7 @@ class SignUpForm extends StatelessWidget {
       }
       if (controller.state == ErrorState(errorType: ServerError())) {
         final err = (controller.state as ErrorState).getErrorMessage();
-        errorToast(err);
+        toast(err);
       }
       return Container();
     });

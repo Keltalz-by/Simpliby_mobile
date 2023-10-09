@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/authentication/domain/usecases/enter_new_password_usecase.dart';
-import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/validators/validators_string.dart';
 import '../../../core/state/state.dart';
 
@@ -36,8 +36,7 @@ class EnterNewPasswordController extends GetxController with ValidatorMixin {
         _state.value = err;
       } else {
         _state.value = FinishedState();
-        normalToast(
-            "Password has been reset. You can log in with your new password");
+        toast("Password has been reset. You can log in with your new password");
       }
     }
   }

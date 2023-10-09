@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/core/constant.dart';
@@ -78,7 +78,7 @@ class ForgotPassword extends StatelessWidget {
       }
       if (controller.state == ErrorState(errorType: ServerError())) {
         final err = (controller.state as ErrorState).getErrorMessage();
-        errorToast(err);
+        toast(err);
       }
       return Container();
     });

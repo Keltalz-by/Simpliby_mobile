@@ -24,6 +24,7 @@ class RegistrationDataSource {
       'password': details.password
     };
     var response = await http.post(url, body: body);
+    print("This is the response $response");
     return response;
   }
 

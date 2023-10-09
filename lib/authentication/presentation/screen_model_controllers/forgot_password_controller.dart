@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/authentication/domain/usecases/forgot_password_usecase.dart';
-import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
 import 'package:simplibuy/core/validators/validators_string.dart';
 import '../../../core/state/state.dart';
@@ -28,7 +28,7 @@ class ForgotPasswordController extends GetxController with ValidatorMixin {
         _state.value = err;
       } else {
         Get.toNamed(VERIFY_EMAIL, arguments: _email);
-        normalToast("Code has been sent to your email");
+        toast("Code has been sent to your email");
       }
     }
   }

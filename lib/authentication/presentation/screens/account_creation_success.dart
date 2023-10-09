@@ -60,6 +60,11 @@ class AccountCreationSuccess extends StatelessWidget {
   }
 
   navigate() async {
-    Get.offAllNamed(LOGIN_ROUTE);
+    await SharedPrefs.initializeSharedPrefs();
+    if (SharedPrefs.userType() == TYPESELLER) {
+      Get.offAllNamed(BUSINESS_DETAILS_SCREEN);
+    } else {
+      Get.offAllNamed(LOGIN_ROUTE);
+    }
   }
 }

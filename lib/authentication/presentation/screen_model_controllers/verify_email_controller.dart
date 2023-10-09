@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/authentication/domain/usecases/verify_email_usecase.dart';
 import 'package:simplibuy/authentication/presentation/screens/account_creation_success.dart';
-import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/prefs/shared_prefs.dart';
 import '../../../core/state/state.dart';
 
@@ -63,7 +62,7 @@ class VerifyEmailController extends GetxController {
         err.setErrorMessage(result.left.message);
         _state.value = err;
       } else {
-        normalToast("Email verified");
+        toast("Email verified");
         Get.off(const AccountCreationSuccess());
       }
     }

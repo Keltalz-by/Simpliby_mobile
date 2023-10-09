@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/authentication/presentation/screen_model_controllers/enter_new_password_controller.dart';
-import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
 import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/core/constant.dart';
@@ -137,7 +137,7 @@ class EnterNewPassword extends StatelessWidget {
       }
       if (controller.state == ErrorState(errorType: ServerError())) {
         final err = (controller.state as ErrorState).getErrorMessage();
-        errorToast(err);
+        toast(err);
       }
       return Container();
     });

@@ -36,8 +36,6 @@ dependencies:
   carousel_indicator: ^1.0.6
   http: ^0.13.5
   flutter_rating_bar: ^4.0.1
-  #toast
-  fluttertoast: ^8.0.8
   bot_toast: ^4.0.3
   equatable: ^2.0.3
   flutter_signin_button: ^2.0.0
@@ -64,8 +62,6 @@ dependencies:
   flutter_cache_manager: ^3.3.1
   cached_network_image: ^3.2.3
   smooth_page_indicator: ^1.0.0+2
-
-  
 
 
 dev_dependencies:
