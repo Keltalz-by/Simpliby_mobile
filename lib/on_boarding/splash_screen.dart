@@ -24,11 +24,23 @@ class _MyHomePageState extends State<SplashScreen> {
         Get.toNamed(USER_FIRST_TIME);
         SharedPrefs.setUserFirstTimeStatus(true);
       } else {
-        if (SharedPrefs.userId().isEmpty ||
-            SharedPrefs.isUserVerified() == false) {
-          Get.offNamed(LOGIN_ROUTE);
+        if (SharedPrefs.userType() == TYPESELLER) {
+          if (SharedPrefs.userId().isEmpty ||
+              SharedPrefs.isUserVerified() == false) {
+            Get.offNamed(LOGIN_ROUTE);
+          } else {
+            Get.offNamed(SELLER_HOME_PAGE_ROUTE);
+          }
+        }
+        if (SharedPrefs.userType() == TYPEBUYER) {
+          if (SharedPrefs.userId().isEmpty ||
+              SharedPrefs.isUserVerified() == false) {
+            Get.offNamed(LOGIN_ROUTE);
+          } else {
+            Get.offNamed(BUYER_HOME_PAGE_ROUTE);
+          }
         } else {
-          Get.offNamed(SELLER_HOME_PAGE_ROUTE);
+          Get.offNamed(USER_TYPE);
         }
       }
     });
