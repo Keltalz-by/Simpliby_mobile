@@ -13,6 +13,7 @@ class UserType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SharedPrefs.initializeSharedPrefs();
     return Scaffold(
       body: Stack(
         clipBehavior: Clip.none,
@@ -66,24 +67,12 @@ class UserType extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 start(context, () async {
-                  await SharedPrefs.initializeSharedPrefs();
-                  if (SharedPrefs.isUserVerified() == true) {
-                    SharedPrefs.setUserType(TYPEBUYER)
-                        .then((value) => {Get.toNamed(BUYER_HOME_PAGE_ROUTE)});
-                  } else {
-                    SharedPrefs.setUserType(TYPEBUYER)
-                        .then((value) => {Get.toNamed(LOGIN_ROUTE)});
-                  }
+                  SharedPrefs.setUserType(TYPEBUYER)
+                      .then((value) => {Get.toNamed(LOGIN_ROUTE)});
                 }, "assets/on_boarding/on_buying.png", "Start Buying"),
                 start(context, () async {
-                  await SharedPrefs.initializeSharedPrefs();
-                  if (SharedPrefs.isUserVerified() == true) {
-                    SharedPrefs.setUserType(TYPESELLER)
-                        .then((value) => {Get.toNamed(SELLER_HOME_PAGE_ROUTE)});
-                  } else {
-                    SharedPrefs.setUserType(TYPESELLER)
-                        .then((value) => {Get.toNamed(LOGIN_ROUTE)});
-                  }
+                  SharedPrefs.setUserType(TYPESELLER)
+                      .then((value) => {Get.toNamed(LOGIN_ROUTE)});
                 }, "assets/on_boarding/on_selling.png", "Start Selling"),
               ],
             ))

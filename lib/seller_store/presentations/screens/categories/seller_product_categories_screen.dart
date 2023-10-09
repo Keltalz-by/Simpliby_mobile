@@ -3,11 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
-import 'package:simplibuy/core/reusable_widgets/custom_dialog.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/core/state/state.dart';
+import 'package:simplibuy/seller_store/presentations/controllers/seller_categories_controller.dart';
 
 class SellerProductCategoriesScreen extends StatelessWidget {
   SellerProductCategoriesScreen({Key? key}) : super(key: key);
+
+  final SellerCategoriesController controller =
+      Get.find<SellerCategoriesController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,34 +29,32 @@ class SellerProductCategoriesScreen extends StatelessWidget {
                   return actions();
                 })
           ]),
-      body: Container(
-        padding: const EdgeInsets.all(defaultPadding),
-        child: GridView.count(
-            crossAxisCount: 2,
-            physics: const ScrollPhysics(),
-            crossAxisSpacing: 4.0,
-            mainAxisSpacing: 18.0,
-            shrinkWrap: true,
-            children: List.generate(
-                categories.length,
-                (index) => Center(
-                        child: singleCategory(context, () {
-                      Get.toNamed(SELLER_PRODUCTS);
-                    }, categories[index])))),
-      ),
+      body: Obx(() => Container(
+            padding: const EdgeInsets.all(defaultPadding),
+            child: controller.state is FinishedState
+                ? controller.categories.isNotEmpty
+                    ? GridView.count(
+                        crossAxisCount: 2,
+                        physics: const ScrollPhysics(),
+                        crossAxisSpacing: 4.0,
+                        mainAxisSpacing: 10.0,
+                        shrinkWrap: true,
+                        children: List.generate(
+                            controller.categories.length,
+                            (index) => Center(
+                                    child: singleCategory(context, () {
+                                  Get.toNamed(SELLER_PRODUCTS);
+                                }, controller.categories[index].categoryName))))
+                    : Text(
+                        "You don't have any categories",
+                        style: TextStyle(fontSize: 24.sp),
+                      )
+                : controller.state is LoadingState
+                    ? defaultLoading(context)
+                    : Container(),
+          )),
     );
   }
-
-  final categories = [
-    "Food",
-    "Furniture",
-    "Cosmetics",
-    "Groceries",
-    "Gadgets",
-    "Health",
-    "Drinks",
-    "Books"
-  ];
 
   List<PopupMenuEntry<String>> actions() {
     return [

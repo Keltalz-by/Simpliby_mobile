@@ -42,7 +42,9 @@ import 'package:simplibuy/seller_plan/presentation/screens/pay_sub_screen.dart';
 import 'package:simplibuy/seller_plan/presentation/screens/plans.dart';
 import 'package:simplibuy/seller_plan/presentation/screens/pro_plan.dart';
 import 'package:simplibuy/seller_store/presentations/binding/add_new_product_binding.dart';
+import 'package:simplibuy/seller_store/presentations/binding/seller_categories_bindings.dart';
 import 'package:simplibuy/seller_store/presentations/binding/seller_products_bindings.dart';
+import 'package:simplibuy/seller_store/presentations/controllers/seller_categories_controller.dart';
 import 'package:simplibuy/seller_store/presentations/screens/categories/seller_product_categories_screen.dart';
 import 'package:simplibuy/seller_store/presentations/screens/products/add_new_product.dart';
 import 'package:simplibuy/seller_store/presentations/screens/products/seller_product_detail_screen.dart';
@@ -215,6 +217,7 @@ class MyApp extends StatelessWidget {
         binding: AddNewProductBinding()),
     GetPage(
       name: SELLER_PRODUCT_CATEGORIES,
+      binding: SellerCategoriesBindings(),
       page: () => SellerProductCategoriesScreen(),
     ),
     GetPage(
