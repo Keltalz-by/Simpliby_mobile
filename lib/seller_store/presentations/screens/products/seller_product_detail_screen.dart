@@ -6,7 +6,6 @@ import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 import 'package:simplibuy/seller_store/data/models/product.dart';
 import 'package:simplibuy/seller_store/presentations/screens/products/image_slider.dart';
-
 import '../../../../core/utils/price_formatter.dart';
 
 class SellerProductDetailScreen extends StatelessWidget {
