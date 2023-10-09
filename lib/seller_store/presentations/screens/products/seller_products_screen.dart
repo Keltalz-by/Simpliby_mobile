@@ -86,7 +86,8 @@ class SellerProductsScreens extends StatelessWidget {
                             child: Center(
                                 child: showItemsGrid(
                                     context, controller.products[index], () {
-                              Get.toNamed(SELLER_PRODUCT_DETAIL);
+                              Get.toNamed(SELLER_PRODUCT_DETAIL,
+                                  arguments: controller.products[index]);
                             }))))))
             : Text(
                 "No products for this category",

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/seller_store/data/models/product.dart';
 import 'package:simplibuy/seller_store/presentations/screens/products/image_slider.dart';
 
-class SellerProductDetailScreen extends StatelessWidget {
-  const SellerProductDetailScreen({Key? key}) : super(key: key);
+import '../../../../core/utils/price_formatter.dart';
 
+class SellerProductDetailScreen extends StatelessWidget {
+  SellerProductDetailScreen({Key? key}) : super(key: key);
+
+  SingleProduct product = Get.arguments as SingleProduct;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,14 +21,16 @@ class SellerProductDetailScreen extends StatelessWidget {
   }
 
   Widget _body(BuildContext context) {
+    final desc = TextEditingController(text: product.description);
+    final editPrice = TextEditingController(text: product.price);
+    final resPrice = TextEditingController(text: product.reservationPrice);
+    RxBool isAvailable =
+        product.inStock.obs; // Set this variable based on your condition
+
     return Column(
       children: [
-        ImageSliderWithIndicator(imageUrls: [
-          "https://lremflickr.com/g/320/240/paris,girl/all",
-          "https://lremflickr.com/g/320/240/paris,girl/all",
-          "https://lremflickr.com/g/320/240/paris,girl/all",
-          "https://lremflickr.com/g/320/240/paris,girl/all"
-        ]),
+        ImageSliderWithIndicator(
+            images: product.productImages.map((e) => e.url).toList()),
         Container(
           padding: const EdgeInsets.all(defaultPadding),
           child: Column(
@@ -30,42 +38,46 @@ class SellerProductDetailScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const Padding(padding: EdgeInsets.only(top: 30)),
-              const Text("Food Chicken",
+              Text(product.productName,
                   style: TextStyle(
                       color: blackColor,
                       fontSize: 23,
                       fontWeight: FontWeight.bold)),
               const Padding(padding: EdgeInsets.only(top: 10)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Radio(
-                    value: 1,
-                    groupValue: 1,
-                    activeColor: blueColor,
-                    onChanged: (value) {},
-                  ),
-                  Text(
-                    'Available',
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                  Radio(
-                    value: 2,
-                    groupValue: 2,
-                    activeColor: blueColor,
-                    onChanged: (value) {},
-                  ),
-                  Text(
-                    'Out of stock',
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                ],
-              ),
+              Obx(() => Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Radio(
+                        value: true,
+                        groupValue: isAvailable.value,
+                        activeColor: blueColor,
+                        onChanged: (value) {
+                          isAvailable.value = value as bool;
+                        },
+                      ),
+                      Text(
+                        'Available',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      Radio(
+                        value: false,
+                        groupValue: isAvailable.value,
+                        activeColor: blueColor,
+                        onChanged: (value) {
+                          isAvailable.value = value as bool;
+                        },
+                      ),
+                      Text(
+                        'Out of stock',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                    ],
+                  )),
               TextField(
-                  onChanged: (business) {},
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.multiline,
                   maxLines: 4,
-                  maxLength: 4,
+                  maxLength: 200,
+                  controller: desc,
                   decoration:
                       customInputDecoration(hint: null, errorText: null)),
               const Padding(padding: EdgeInsets.only(top: 10)),
@@ -83,9 +95,10 @@ class SellerProductDetailScreen extends StatelessWidget {
                             width: 120.w,
                             height: 60.h,
                             child: TextField(
-                                onChanged: (business) {},
+                                controller: editPrice,
                                 keyboardType: TextInputType.name,
                                 maxLines: 1,
+                                inputFormatters: [PriceInputFormatter()],
                                 decoration: customInputDecoration(
                                     hint: null, errorText: null)))
                       ]),
@@ -100,9 +113,10 @@ class SellerProductDetailScreen extends StatelessWidget {
                             width: 120.w,
                             height: 60.h,
                             child: TextField(
-                                onChanged: (business) {},
+                                controller: resPrice,
                                 keyboardType: TextInputType.name,
                                 maxLines: 1,
+                                //    inputFormatters: [PriceInputFormatter()],
                                 decoration: customInputDecoration(
                                     hint: null, errorText: null)))
                       ]),

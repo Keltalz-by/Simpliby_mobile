@@ -100,9 +100,13 @@ class AddNewProductScreen extends StatelessWidget {
             hintText: "Cosmetics",
             errorText: null),
         padding,
-        browseFileUpload("Upload Image of item"),
+        browseFileUpload("Upload Image of item", () {
+          controller.uploadProductImages();
+        }),
         padding,
-        browseFileUpload("Upload Image of rack (optional)"),
+        browseFileUpload("Upload Image of rack (optional)", () {
+          controller.uploaRackImage();
+        }),
         padding,
         defaultButtons(
             pressed: () {
@@ -113,7 +117,7 @@ class AddNewProductScreen extends StatelessWidget {
     );
   }
 
-  Widget browseFileUpload(String title) {
+  Widget browseFileUpload(String title, VoidCallback onClick) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
         title,
@@ -143,14 +147,14 @@ class AddNewProductScreen extends StatelessWidget {
                             color: blueColor,
                             fontSize: smallTextFontSize,
                             fontWeight: FontWeight.normal)),
-                    Icon(
+                    const Icon(
                       Icons.download_sharp,
                       size: 29,
                     ),
                   ],
                 )),
             defaultButtons(
-                pressed: () {}, text: "Upload", size: const Size(100, 40))
+                pressed: onClick, text: "Upload", size: const Size(100, 40))
           ])
     ]);
   }
