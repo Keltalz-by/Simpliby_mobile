@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:simplibuy/authentication/data/models/login_details.dart';
 import 'package:simplibuy/authentication/domain/usecases/login_usecase.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
+import 'package:simplibuy/core/prefs/shared_prefs.dart';
 import 'package:simplibuy/core/validators/validators_string.dart';
 import '../../../core/state/state.dart';
 
@@ -42,8 +43,32 @@ class LoginScreenController extends GetxController with ValidatorMixin {
           _state.value = err;
         }
       } else {
-        Get.delete<LoginScreenController>();
-        Get.offAllNamed(BUYER_HOME_PAGE_ROUTE);
+        Future<void> loginInUser() async {
+          if (_validateEmailAndPassword()) {
+            _state.value = LoadingState();
+            final result = await _usecase.sendAuthDetails(
+                LoginDetail(email: _email, password: _password));
+            if (result.isLeft) {
+              final err = ErrorState(errorType: result.left.error);
+              err.setErrorMessage(result.left.message);
+              if (result.left.message == "Please verify your email") {
+                resetState();
+                Get.toNamed(VERIFY_EMAIL, arguments: _email);
+              } else {
+                _state.value = err;
+              }
+            } else {
+              await SharedPrefs.initializeSharedPrefs();
+              final type = SharedPrefs.userType();
+              Get.delete<LoginScreenController>();
+              if (type == TYPEBUYER) {
+                Get.offAllNamed(BUYER_HOME_PAGE_ROUTE);
+              } else {
+                Get.offAllNamed(SELLER_HOME_PAGE_ROUTE);
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/authentication/domain/usecases/verify_email_usecase.dart';
 import 'package:simplibuy/authentication/presentation/screens/account_creation_success.dart';
 import 'package:simplibuy/authentication/presentation/screens/custom_widgets.dart';
@@ -86,7 +87,7 @@ class VerifyEmailController extends GetxController {
       _state.value = err;
     } else {
       _state.value = State();
-      normalToast("Otp has been sent");
+      toast("Otp has been sent");
       resetTimer();
     }
   }
