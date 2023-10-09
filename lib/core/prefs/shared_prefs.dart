@@ -38,7 +38,7 @@ class SharedPrefs {
   }
 
   static String userId() {
-    return prefs.getString(USERID) ?? "1111";
+    return prefs.getString(USERID) ?? "";
   }
 
   static Future<void> setUserId(String id) async {
