@@ -14,7 +14,7 @@ class SharedPrefs {
   }
 
   static String userType() {
-    return prefs.getString(USERTYPE) ?? TYPEBUYER;
+    return prefs.getString(USERTYPE) ?? "NO TYPE";
   }
 
   static Future<void> setUserType(String type) async {
