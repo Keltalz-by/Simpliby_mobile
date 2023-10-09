@@ -98,8 +98,10 @@ class ProductAndCategoryRepositoryImpl implements ProductAndCategoryRepository {
       try {
         final res = await dataSource.getProductByCategory(id);
         final status = json.decode(res.body)['success'];
+        print(status);
         if (res.statusCode == 200 && status == true) {
           final List<dynamic> data = json.decode(res.body)['data'];
+          print(data);
           final List<SingleProduct> products =
               data.map((item) => SingleProduct.fromJson(item)).toList();
           return Right(Result(value: products));

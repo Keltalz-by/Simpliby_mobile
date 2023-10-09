@@ -11,13 +11,20 @@ import 'package:simplibuy/seller_store/presentations/controllers/seller_products
 
 import '../../../../core/reusable_widgets/cache_image.dart';
 
+// ignore: must_be_immutable
 class SellerProductsScreens extends StatelessWidget {
   SellerProductsScreens({Key? key}) : super(key: key);
 
   final SellerProductsController controller =
       Get.find<SellerProductsController>();
+
+  String catId = (Get.arguments as List)[0];
+  String catName = (Get.arguments as List)[1];
   @override
   Widget build(BuildContext context) {
+    print(catId);
+    print(catName);
+    controller.getSellerProducts(catId);
     return Scaffold(
       appBar: customAppBar(
           text: "Products",
@@ -46,7 +53,7 @@ class SellerProductsScreens extends StatelessWidget {
                 child: Padding(
                     padding: EdgeInsets.only(left: 10.w),
                     child: Text(
-                      "Food",
+                      catName,
                       textAlign: TextAlign.start,
                       style: TextStyle(
                           color: blackColor,
@@ -64,22 +71,27 @@ class SellerProductsScreens extends StatelessWidget {
   Widget showUI(BuildContext context) {
     return Obx(() {
       if (controller.state is FinishedState) {
-        return Expanded(
-            child: GridView.count(
-                crossAxisCount: 2,
-                physics: const ScrollPhysics(),
-                crossAxisSpacing: 4.0,
-                mainAxisSpacing: 6.0,
-                shrinkWrap: true,
-                children: List.generate(
-                    controller.products.length,
-                    (index) => Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Center(
-                            child: showItemsGrid(
-                                context, controller.products[index], () {
-                          Get.toNamed(SELLER_PRODUCT_DETAIL);
-                        }))))));
+        return controller.products.isNotEmpty
+            ? Expanded(
+                child: GridView.count(
+                    crossAxisCount: 2,
+                    physics: const ScrollPhysics(),
+                    crossAxisSpacing: 4.0,
+                    mainAxisSpacing: 6.0,
+                    shrinkWrap: true,
+                    children: List.generate(
+                        controller.products.length,
+                        (index) => Padding(
+                            padding: EdgeInsets.all(6),
+                            child: Center(
+                                child: showItemsGrid(
+                                    context, controller.products[index], () {
+                              Get.toNamed(SELLER_PRODUCT_DETAIL);
+                            }))))))
+            : Text(
+                "No products for this category",
+                style: TextStyle(fontSize: 24.sp),
+              );
       }
       if (controller.state is LoadingState) {
         return defaultLoading(context);

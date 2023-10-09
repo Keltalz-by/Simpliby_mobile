@@ -16,7 +16,6 @@ class SellerCategoriesController extends GetxController {
 
   final RxList<Category> _categories = (List<Category>.of([])).obs;
 
-  // ignore: invalid_use_of_protected_member
   List<Category> get categories => _categories.value;
 
   final _state = const State().obs;
@@ -27,7 +26,7 @@ class SellerCategoriesController extends GetxController {
     repo.getAllCategory().then((value) {
       if (value.isLeft) {
         _state.value = ErrorState(errorType: value.left.error);
-        toast(value.left.error.errMessage);
+        toast(value.left.message);
       } else {
         _categories.value = value.right.value;
         _state.value = FinishedState();

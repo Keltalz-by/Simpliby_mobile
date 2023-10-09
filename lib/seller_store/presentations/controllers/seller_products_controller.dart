@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/core/state/state.dart';
 import 'package:simplibuy/seller_store/data/models/product.dart';
 import 'package:simplibuy/seller_store/domain/repo/product_and_category_repository.dart';
@@ -6,12 +7,6 @@ import 'package:simplibuy/seller_store/domain/repo/product_and_category_reposito
 class SellerProductsController extends GetxController {
   final ProductAndCategoryRepository repo;
   SellerProductsController({required this.repo});
-
-  @override
-  void onInit() {
-    super.onInit();
-    getSellerProducts();
-  }
 
   final RxList<SingleProduct> _products = (List<SingleProduct>.of([])).obs;
 
@@ -21,11 +16,12 @@ class SellerProductsController extends GetxController {
   final _state = const State().obs;
   State get state => _state.value;
 
-  getSellerProducts() {
+  getSellerProducts(String id) {
     _state.value = LoadingState();
-    repo.getAllProducts().then((value) {
+    repo.getProductByCategory(id).then((value) {
       if (value.isLeft) {
         _state.value = ErrorState(errorType: value.left.error);
+        toast(value.left.message);
       } else {
         _products.value = value.right.value;
         _state.value = FinishedState();

@@ -43,7 +43,10 @@ class SellerProductCategoriesScreen extends StatelessWidget {
                             controller.categories.length,
                             (index) => Center(
                                     child: singleCategory(context, () {
-                                  Get.toNamed(SELLER_PRODUCTS);
+                                  Get.toNamed(SELLER_PRODUCTS, arguments: [
+                                    controller.categories[index].id,
+                                    controller.categories[index].categoryName
+                                  ]);
                                 }, controller.categories[index].categoryName))))
                     : Text(
                         "You don't have any categories",

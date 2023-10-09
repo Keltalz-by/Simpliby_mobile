@@ -1,7 +1,7 @@
 class SingleProduct {
   String id;
   String storeId;
-  String categoryId;
+  // String categoryId;
   String productName;
   String description;
   String currency;
@@ -16,7 +16,7 @@ class SingleProduct {
   SingleProduct({
     required this.id,
     required this.storeId,
-    required this.categoryId,
+    //  required this.categoryId,
     required this.productName,
     required this.description,
     required this.currency,
@@ -33,7 +33,7 @@ class SingleProduct {
     return SingleProduct(
       id: json['_id'] ?? "",
       storeId: json['storeId'] ?? "",
-      categoryId: json['categoryId'] ?? "",
+      //categoryId: json['categoryId']["_id"] ?? "",
       productName: json['productName'] ?? "",
       description: json['description'] ?? "",
       currency: json['currency'] ?? "",
@@ -44,7 +44,7 @@ class SingleProduct {
       inStock: json['inStock'] ?? false,
       createdAt: DateTime.parse(json['createdAt'] ?? ""),
       updatedAt: DateTime.parse(json['updatedAt'] ?? ""),
-      v: json['__v'] ?? "",
+      v: json['__v'] ?? 0,
     );
   }
 }
