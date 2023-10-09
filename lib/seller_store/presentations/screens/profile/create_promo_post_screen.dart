@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:simplibuy_seller/core/constant.dart';
-import 'package:simplibuy_seller/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/core/constant.dart';
+import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 
 class CreatePromoPostScreen extends StatelessWidget {
   const CreatePromoPostScreen({Key? key}) : super(key: key);

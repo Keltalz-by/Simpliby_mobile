@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simplibuy_seller/core/constant.dart';
+import 'package:simplibuy/core/constant.dart';
 
 Widget planType(Color colorPlan, String planType) {
   return Container(

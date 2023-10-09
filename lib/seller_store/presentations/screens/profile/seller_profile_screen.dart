@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:simplibuy_seller/core/constant.dart';
-import 'package:simplibuy_seller/core/constants/route_constants.dart';
-import 'package:simplibuy_seller/core/constants/string_constants.dart';
-import 'package:simplibuy_seller/core/error_types/error_types.dart';
-import 'package:simplibuy_seller/core/reusable_widgets/cache_image.dart';
-import 'package:simplibuy_seller/core/reusable_widgets/reusable_widgets.dart';
-import 'package:simplibuy_seller/core/state/state.dart';
-import 'package:simplibuy_seller/seller_store/presentations/controllers/seller_profile_controller.dart';
-import 'package:simplibuy_seller/seller_store/presentations/screens/profile/custom_widgets.dart';
+import 'package:simplibuy/core/constant.dart';
+import 'package:simplibuy/core/constants/route_constants.dart';
+import 'package:simplibuy/core/constants/string_constants.dart';
+import 'package:simplibuy/core/error_types/error_types.dart';
+import 'package:simplibuy/core/reusable_widgets/cache_image.dart';
+import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/core/state/state.dart';
+import 'package:simplibuy/seller_store/presentations/controllers/seller_profile_controller.dart';
+import 'package:simplibuy/seller_store/presentations/screens/profile/custom_widgets.dart';
 
 // ignore: must_be_immutable
 class SellerProfileScreen extends StatelessWidget {

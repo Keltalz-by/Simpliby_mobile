@@ -13,6 +13,14 @@ class SharedPrefs {
     return _prefs!;
   }
 
+  static String userType() {
+    return prefs.getString(USERTYPE) ?? TYPEBUYER;
+  }
+
+  static Future<void> setUserType(String type) async {
+    await prefs.setString(USERTYPE, type);
+  }
+
   static String userEmail() {
     return prefs.getString(USEREMAIL) ?? "johndoe@gmail.com";
   }
@@ -54,6 +62,9 @@ class SharedPrefs {
   }
 }
 
+const USERTYPE = "usertype";
+const TYPEBUYER = "Buyer";
+const TYPESELLER = "Seller";
 const USERID = "uid";
 const USERNAME = "username";
 const FIRST_TIME = "firsttime";

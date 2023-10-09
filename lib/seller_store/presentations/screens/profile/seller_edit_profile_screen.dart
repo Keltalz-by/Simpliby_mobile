@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:simplibuy_seller/authentication/presentation/screens/business_details/custom_widgets.dart';
-import 'package:simplibuy_seller/core/constant.dart';
-import 'package:simplibuy_seller/core/constants/string_constants.dart';
-import 'package:simplibuy_seller/core/reusable_widgets/cache_image.dart';
-import 'package:simplibuy_seller/core/reusable_widgets/reusable_widgets.dart';
+import 'package:simplibuy/authentication/presentation/screens/business_details/custom_widgets.dart';
+import 'package:simplibuy/core/constant.dart';
+import 'package:simplibuy/core/constants/string_constants.dart';
+import 'package:simplibuy/core/reusable_widgets/cache_image.dart';
+import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 
 class SellerEditProfileScreen extends StatelessWidget {
   const SellerEditProfileScreen({Key? key}) : super(key: key);

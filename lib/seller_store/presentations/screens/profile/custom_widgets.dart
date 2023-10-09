@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:simplibuy_seller/core/constant.dart';
-import 'package:simplibuy_seller/core/constants/string_constants.dart';
-import 'package:simplibuy_seller/core/reusable_widgets/cache_image.dart';
-import 'package:simplibuy_seller/seller_store/data/models/seller_profile_details.dart';
+import 'package:simplibuy/core/constant.dart';
+import 'package:simplibuy/core/constants/string_constants.dart';
+import 'package:simplibuy/core/reusable_widgets/cache_image.dart';
+import 'package:simplibuy/seller_store/data/models/seller_profile_details.dart';
 
 Widget storeDescription({required String desc}) {
   return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
