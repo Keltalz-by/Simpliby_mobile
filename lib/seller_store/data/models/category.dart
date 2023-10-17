@@ -13,6 +13,15 @@ class Category {
     required this.v,
   });
 
+  factory Category.empty() {
+    return Category(
+        id: "id",
+        categoryName: "",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        v: 0);
+  }
+
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
       id: json['_id'] ?? "",

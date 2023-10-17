@@ -51,6 +51,28 @@ Widget textFieldWithHeader(
   );
 }
 
+Widget textFieldWithHeader2(
+    {required String title,
+    required String hintText,
+    required TextEditingController controller,
+    TextInputType type = TextInputType.name,
+    bool isReq = true,
+    int lines = 1}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _text(title, isRequired: isReq),
+      TextField(
+          keyboardType: type,
+          maxLines: lines,
+          controller: controller,
+          decoration: customInputDecoration(
+            hint: hintText,
+          ))
+    ],
+  );
+}
+
 Widget country(BuildContext context, String title, Function(String) onchanged) {
   String selectedValue = 'Nigeria';
 

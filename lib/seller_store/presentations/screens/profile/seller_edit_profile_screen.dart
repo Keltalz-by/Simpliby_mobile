@@ -42,7 +42,7 @@ class SellerEditProfileScreen extends StatelessWidget {
                   )),
                 ],
               )),
-          Padding(
+          /*  Padding(
               padding: const EdgeInsets.all(10),
               child: textFieldWithHeader(
                   errorText: null,
@@ -92,7 +92,7 @@ class SellerEditProfileScreen extends StatelessWidget {
                   onChanged: (value) {})),
           Padding(
               padding: EdgeInsets.all(10),
-              child: defaultButtons(pressed: () {}, text: "Save")),
+              child: defaultButtons(pressed: () {}, text: "Save")),*/
         ])));
   }
 

@@ -4,8 +4,8 @@ class AddNewProduct {
   final String name;
   final String desc;
   final String location;
-  final int price;
-  final int price_res;
+  final String price;
+  final String price_res;
   final List<String> images;
   final String rack_img;
 
