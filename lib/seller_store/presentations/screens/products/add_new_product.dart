@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:simplibuy/core/state/state.dart';
+import 'package:simplibuy/core/utils/price_formatter.dart';
 import 'package:simplibuy/seller_store/presentations/controllers/add_new_product_controller.dart';
 import 'package:simplibuy/authentication/presentation/screens/business_details/custom_widgets.dart';
 import 'package:simplibuy/core/constant.dart';
@@ -59,12 +60,14 @@ class AddNewProductScreen extends StatelessWidget {
             title: "Item Price",
             controller: controller.price,
             hintText: "eg. 500",
+            formatter: PriceInputFormatter(),
             type: TextInputType.number),
         padding,
         textFieldWithHeader2(
             title: "Reservation price per product ",
             controller: controller.priceRes,
             type: TextInputType.number,
+            formatter: PriceInputFormatter(),
             hintText: "eg. 20"),
         padding,
         Align(

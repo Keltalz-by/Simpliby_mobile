@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:simplibuy/core/constant.dart';
 import 'package:simplibuy/core/reusable_widgets/reusable_widgets.dart';
 
@@ -55,6 +56,7 @@ Widget textFieldWithHeader2(
     {required String title,
     required String hintText,
     required TextEditingController controller,
+    TextInputFormatter? formatter,
     TextInputType type = TextInputType.name,
     bool isReq = true,
     int lines = 1}) {
@@ -66,6 +68,7 @@ Widget textFieldWithHeader2(
           keyboardType: type,
           maxLines: lines,
           controller: controller,
+          inputFormatters: formatter != null ? [formatter] : [],
           decoration: customInputDecoration(
             hint: hintText,
           ))
