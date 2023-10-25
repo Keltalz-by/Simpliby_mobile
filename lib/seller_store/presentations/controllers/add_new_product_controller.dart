@@ -65,7 +65,6 @@ class AddNewProductController extends GetxController {
           _state.value = err;
         } else {
           _state.value = S.FinishedState();
-          //       onSuccess();
         }
       });
     } else {
