@@ -112,10 +112,12 @@ class AddNewProductController extends GetxController {
     ImagePicker()
         .pickMultiImage(maxWidth: 200, maxHeight: 200, imageQuality: 100)
         .then((value) {
-      if (value != null) {
+      if (value != null && value.isNotEmpty && value.length <= 3) {
         List<File> files = images.map((image) => File(image.path)).toList();
         _images.value = files;
         _areImagesSelected.value = true;
+      } else {
+        toast("Please enter maximum of 3 images");
       }
     });
   }
