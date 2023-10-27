@@ -1,3 +1,4 @@
+import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/authentication/data/models/signup_details.dart';
 import 'package:simplibuy/authentication/domain/usecases/signup_usecase.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -40,6 +41,7 @@ class SignupScreenController extends GetxController with ValidatorMixin {
       final result = await _usecase.sendAuthDetails(
           SignupDetail(email: _email, password: _password, name: _name));
       if (result.isLeft) {
+        toast(result.left.message);
         final err = ErrorState(errorType: result.left.error);
         err.setErrorMessage(result.left.message);
         _state.value = err;

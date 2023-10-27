@@ -78,10 +78,6 @@ class VerifyEmail extends StatelessWidget {
       if (controller.state is LoadingState) {
         return defaultLoading(context);
       }
-      if (controller.state == ErrorState(errorType: ServerError())) {
-        final err = (controller.state as ErrorState).getErrorMessage();
-        toast(err);
-      }
       return Container();
     });
   }

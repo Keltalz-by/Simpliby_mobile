@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:simplibuy/authentication/data/models/login_details.dart';
 import 'package:simplibuy/authentication/domain/usecases/login_usecase.dart';
 import 'package:simplibuy/core/constants/route_constants.dart';
@@ -36,6 +37,7 @@ class LoginScreenController extends GetxController with ValidatorMixin {
       if (result.isLeft) {
         final err = ErrorState(errorType: result.left.error);
         err.setErrorMessage(result.left.message);
+        toast(result.left.message);
         if (result.left.message == "Please verify your email") {
           resetState();
           Get.toNamed(VERIFY_EMAIL, arguments: _email);

@@ -58,6 +58,7 @@ class VerifyEmailController extends GetxController {
       final uid = SharedPrefs.userId();
       final result = await _usecase.verifyEmail(uid, _code);
       if (result.isLeft) {
+        toast(result.left.message);
         final err = ErrorState(errorType: result.left.error);
         err.setErrorMessage(result.left.message);
         _state.value = err;
@@ -81,6 +82,7 @@ class VerifyEmailController extends GetxController {
     email.isNotEmpty ? email : SharedPrefs.userEmail();
     final result = await _usecase.resendOtp(uid, email);
     if (result.isLeft) {
+      toast(result.left.message);
       final err = ErrorState(errorType: result.left.error);
       err.setErrorMessage(result.left.message);
       _state.value = err;
