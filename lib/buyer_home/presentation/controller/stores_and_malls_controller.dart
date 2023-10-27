@@ -33,12 +33,12 @@ class StoresAndMallsController extends GetxController {
   final RxString _userName = "John Doe".obs;
   String get userName => _userName.value;
 
-  final RxList<StoreDetails> _details = (List<StoreDetails>.of([])).obs;
-  final RxList<StoreDetails> _favStores = (List<StoreDetails>.of([])).obs;
+  final RxList<StoreData> _details = (List<StoreData>.of([])).obs;
+  final RxList<StoreData> _favStores = (List<StoreData>.of([])).obs;
   final RxList<ItemToBuy> _toBuyModel = (List<ItemToBuy>.of([])).obs;
 
-  List<StoreDetails> get details => _details.value;
-  List<StoreDetails> get favStores => _favStores.value;
+  List<StoreData> get details => _details.value;
+  List<StoreData> get favStores => _favStores.value;
   List<ItemToBuy> get toBuyModel => _toBuyModel.value;
 
   final _state = const State().obs;
@@ -68,7 +68,7 @@ class StoresAndMallsController extends GetxController {
     }
   }
 
-  RxBool isFav(int id) {
+  RxBool isFav(String id) {
     return _favStores.any((element) => element.id == id).obs;
   }
 
@@ -76,6 +76,7 @@ class StoresAndMallsController extends GetxController {
     final res = await usecaseFav.getAllFavoriteStoresAndMalls();
     if (res.isLeft) {
       _stateFav.value = ErrorState(errorType: res.left.error);
+      toast(res.left.message);
     } else {
       _favStores.value = res.right.value;
       _stateFav.value = FinishedState();
@@ -87,8 +88,9 @@ class StoresAndMallsController extends GetxController {
     usecase.searchStoreOrMall(query).then((value) {
       if (value.isLeft) {
         _state.value = ErrorState(errorType: value.left.error);
+        toast(value.left.message);
       } else {
-        _details.value = value.right.value;
+        _details.value = value.right.value.data;
         _state.value = FinishedState();
       }
     });
@@ -100,8 +102,9 @@ class StoresAndMallsController extends GetxController {
     usecase.getStores().then((value) {
       if (value.isLeft) {
         _state.value = ErrorState(errorType: value.left.error);
+        toast(value.left.message);
       } else {
-        _details.value = value.right.value;
+        _details.value = value.right.value.data;
         _state.value = FinishedState();
       }
     });
@@ -132,8 +135,9 @@ class StoresAndMallsController extends GetxController {
     usecase.getMalls().then((value) {
       if (value.isLeft) {
         _state.value = ErrorState(errorType: value.left.error);
+        toast(value.left.message);
       } else {
-        _details.value = value.right.value;
+        _details.value = value.right.value.data;
         _state.value = FinishedState();
       }
     });

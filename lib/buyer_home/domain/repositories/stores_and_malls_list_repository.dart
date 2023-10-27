@@ -9,10 +9,9 @@ import 'package:simplibuy/core/error_types/error_types.dart';
 import 'package:simplibuy/core/network/network_info.dart';
 
 abstract class StoresAndMallsRepository {
-  Future<Either<Failure, Result<List<StoreDetails>>>> getStores();
-  Future<Either<Failure, Result<List<StoreDetails>>>> getMalls();
-  Future<Either<Failure, Result<List<StoreDetails>>>> searchStoreOrMall(
-      String query);
+  Future<Either<Failure, Result<StoreDetails>>> getStores();
+  Future<Either<Failure, Result<StoreDetails>>> getMalls();
+  Future<Either<Failure, Result<StoreDetails>>> searchStoreOrMall(String query);
 }
 
 class StoresAndMallsRepositoryImpl implements StoresAndMallsRepository {
@@ -21,49 +20,18 @@ class StoresAndMallsRepositoryImpl implements StoresAndMallsRepository {
 
   StoresAndMallsRepositoryImpl(this.networkInfo, this.dataSource);
   @override
-  Future<Either<Failure, Result<List<StoreDetails>>>> getMalls() async {
+  Future<Either<Failure, Result<StoreDetails>>> getMalls() async {
     if (await networkInfo.isConnected) {
       try {
-        return Right(Result(value: malls));
-      } on Exception {
-        return Left(Failure(error: ServerError()));
-      }
-    } else {
-      return Left(Failure(error: InternetError()));
-    }
-  }
-
-  List<StoreDetails> stores = const <StoreDetails>[
-    StoreDetails(
-        id: 0,
-        name: 'Stores Stores Stores Stores',
-        location: "New Haven, Enugu"),
-    StoreDetails(id: 1, name: 'Roban Stores', location: "Old Haven, Enugu"),
-    StoreDetails(id: 3, name: 'Spar Stores', location: "New Haven, Enugu"),
-    StoreDetails(id: 5, name: 'Shoprite Stores', location: "New Haven, Enugu"),
-    StoreDetails(id: 6, name: 'Shoprite Stores', location: "New Haven, Enugu"),
-    StoreDetails(
-        id: 7, name: 'Home stores StoresStoresStores', location: "Perfect"),
-    StoreDetails(id: 8, name: 'Home', location: "Perfect"),
-    StoreDetails(id: 9, name: 'Home', location: "Perfect"),
-  ];
-
-  List<StoreDetails> malls = const <StoreDetails>[
-    StoreDetails(id: 12, name: 'Shoprite Mall', location: "New Haven, Enugu"),
-    StoreDetails(id: 13, name: 'Roban Mall', location: "Old Haven, Enugu"),
-    StoreDetails(id: 15, name: 'Spar mall', location: "New Haven, Enugu"),
-    StoreDetails(id: 16, name: 'Shoprite Mall', location: "New Haven, Enugu"),
-    StoreDetails(id: 17, name: 'Shoprite Mall', location: "New Haven, Enugu"),
-    StoreDetails(id: 19, name: 'Home', location: "Perfect"),
-    StoreDetails(id: 20, name: 'Home', location: "Perfect"),
-    StoreDetails(id: 30, name: 'Home', location: "Perfect"),
-  ];
-
-  @override
-  Future<Either<Failure, Result<List<StoreDetails>>>> getStores() async {
-    if (await networkInfo.isConnected) {
-      try {
-        return Right(Result(value: stores));
+        final res = await dataSource.getStores();
+        final status = json.decode(res.body);
+        if (res.statusCode == 201 && status == true) {
+          return Right(Result(value: StoreDetails.fromJson(status)));
+        } else {
+          final message = json.decode(res.body)['message'];
+          return Left(
+              Failure.withMessage(error: ServerError(), message: message));
+        }
       } on Exception {
         return Left(Failure(error: ServerError()));
       }
@@ -73,16 +41,38 @@ class StoresAndMallsRepositoryImpl implements StoresAndMallsRepository {
   }
 
   @override
-  Future<Either<Failure, Result<List<StoreDetails>>>> searchStoreOrMall(
+  Future<Either<Failure, Result<StoreDetails>>> getStores() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final res = await dataSource.getStores();
+        final status = json.decode(res.body);
+        print(status);
+        if (res.statusCode == 200 && status["success"] == true) {
+          return Right(Result(value: StoreDetails.fromJson(status)));
+        } else {
+          final message = status['message'];
+          return Left(
+              Failure.withMessage(error: ServerError(), message: message));
+        }
+      } on Exception {
+        return Left(Failure(error: ServerError()));
+      }
+    } else {
+      return Left(Failure(error: InternetError()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Result<StoreDetails>>> searchStoreOrMall(
       String query) async {
     if (await networkInfo.isConnected) {
       try {
         final res = await dataSource.searchStores(query);
-        final message = json.decode(res.body)['message'];
-
-        if (res.statusCode == 200) {
-          return Right(Result(value: []));
+        final status = json.decode(res.body);
+        if (res.statusCode == 200 && status["success"] == true) {
+          return Right(Result(value: StoreDetails.fromJson(status)));
         } else {
+          final message = status['message'];
           return Left(
               Failure.withMessage(error: ServerError(), message: message));
         }

@@ -9,15 +9,15 @@ class StoresAndMallsUsecase {
 
   StoresAndMallsUsecase({required this.repository});
 
-  Future<Either<Failure, Result<List<StoreDetails>>>> getStores() async {
+  Future<Either<Failure, Result<StoreDetails>>> getStores() async {
     return repository.getStores();
   }
 
-  Future<Either<Failure, Result<List<StoreDetails>>>> getMalls() async {
+  Future<Either<Failure, Result<StoreDetails>>> getMalls() async {
     return repository.getMalls();
   }
 
-  Future<Either<Failure, Result<List<StoreDetails>>>> searchStoreOrMall(
+  Future<Either<Failure, Result<StoreDetails>>> searchStoreOrMall(
       String query) async {
     return repository.searchStoreOrMall(query);
   }

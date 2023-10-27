@@ -8,10 +8,10 @@ import '../../../core/result/result.dart';
 import '../../data/models/fav_stores_model.dart';
 
 abstract class FavStoresAndMallsRepository {
-  addStoreToFavorite(StoreDetails storeDetails);
-  Future<Either<Failure, Result<List<StoreDetails>>>>
+  addStoreToFavorite(StoreData storeDetails);
+  Future<Either<Failure, Result<List<StoreData>>>>
       getAllFavoriteStoresAndMalls();
-  removeStoreFromFavorite(int id);
+  removeStoreFromFavorite(String id);
 }
 
 class FavStoresRepoImpl implements FavStoresAndMallsRepository {
@@ -19,17 +19,17 @@ class FavStoresRepoImpl implements FavStoresAndMallsRepository {
   FavStoresRepoImpl({required this.dao});
 
   @override
-  addStoreToFavorite(StoreDetails storeDetails) async {
+  addStoreToFavorite(StoreData storeDetails) async {
     await dao.addToFavorite(_convertToFavStoreModel(storeDetails));
   }
 
   @override
-  removeStoreFromFavorite(int id) async {
+  removeStoreFromFavorite(String id) async {
     await dao.removeFromFav(id);
   }
 
   @override
-  Future<Either<Failure, Result<List<StoreDetails>>>>
+  Future<Either<Failure, Result<List<StoreData>>>>
       getAllFavoriteStoresAndMalls() async {
     final res = await dao.getAllFavStores().first;
     if (res.isEmpty) {
@@ -39,28 +39,27 @@ class FavStoresRepoImpl implements FavStoresAndMallsRepository {
     }
   }
 
-  FavStoresModel _convertToFavStoreModel(StoreDetails details) {
+  FavStoresModel _convertToFavStoreModel(StoreData details) {
     return FavStoresModel(
         id: details.id,
-        storeName: details.name,
-        location: details.location,
-        imageLogo: details.imageLogo,
+        storeName: details.businessName,
+        location: details.businessLocation,
+        imageLogo: details.logo.url,
         storeAddress: details.address,
-        rating: details.ratings);
+        rating: 2);
   }
 
-  StoreDetails _convertToStoreDetails(FavStoresModel details) {
-    return StoreDetails(
-      id: details.id,
-      name: details.storeName,
-      location: details.location,
-      //imageLogo: details.imageLogo,
-      //storeAddress: details.address,
-      //rating: details.ratings);
-    );
+  StoreData _convertToStoreDetails(FavStoresModel details) {
+    return StoreData.part(
+        id: details.id,
+        businessName: details.storeName,
+        businessLocation: details.location,
+        logoUrl: details.imageLogo,
+        address: details.storeAddress,
+        rating: details.rating);
   }
 
-  List<StoreDetails> _convertFavList(List<FavStoresModel> details) {
+  List<StoreData> _convertFavList(List<FavStoresModel> details) {
     return details.map((e) => _convertToStoreDetails(e)).toList();
   }
 }

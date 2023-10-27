@@ -10,16 +10,16 @@ class StoresAndMallsFavUsecase {
 
   StoresAndMallsFavUsecase(this.repo);
 
-  addStoreToFavorite(StoreDetails storeDetails) {
-    repo.addStoreToFavorite(storeDetails);
+  addStoreToFavorite(StoreData storeData) {
+    repo.addStoreToFavorite(storeData);
   }
 
-  Future<Either<Failure, Result<List<StoreDetails>>>>
+  Future<Either<Failure, Result<List<StoreData>>>>
       getAllFavoriteStoresAndMalls() {
     return repo.getAllFavoriteStoresAndMalls();
   }
 
-  removeStoreFromFavorite(int id) {
+  removeStoreFromFavorite(String id) {
     repo.removeStoreFromFavorite(id);
   }
 }

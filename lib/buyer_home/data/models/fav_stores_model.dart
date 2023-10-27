@@ -3,7 +3,7 @@ import 'package:floor/floor.dart';
 @entity
 class FavStoresModel {
   @PrimaryKey(autoGenerate: false)
-  final int id;
+  final String id;
   final String storeName;
   final String location;
   final String storeAddress;

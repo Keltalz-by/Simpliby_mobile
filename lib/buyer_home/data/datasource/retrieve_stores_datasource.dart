@@ -10,7 +10,7 @@ class RetrieveStoresDataSource {
   }
 
   Future<http.Response> getMalls() async {
-    var url = Uri.parse('${BASE_URL}malls');
+    var url = Uri.parse('${BASE_URL}stores');
 
     var response = await http.get(url);
     return response;

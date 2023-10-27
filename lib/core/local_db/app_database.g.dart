@@ -67,8 +67,11 @@ class _$AppDatabase extends AppDatabase {
 
   ToBuyModelDao? _toBuyDaoInstance;
 
-  Future<sqflite.Database> open(String path, List<Migration> migrations,
-      [Callback? callback]) async {
+  Future<sqflite.Database> open(
+    String path,
+    List<Migration> migrations, [
+    Callback? callback,
+  ]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
       version: 1,
       onConfigure: (database) async {
@@ -88,9 +91,9 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `ItemCartDetails` (`id` INTEGER NOT NULL, `storeName` TEXT NOT NULL, `storeId` INTEGER NOT NULL, `itemName` TEXT NOT NULL, `itemPieces` INTEGER NOT NULL, `itemPrice` REAL NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `FavStoresModel` (`id` INTEGER NOT NULL, `storeName` TEXT NOT NULL, `location` TEXT NOT NULL, `storeAddress` TEXT NOT NULL, `imageLogo` TEXT NOT NULL, `rating` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `FavStoresModel` (`id` TEXT NOT NULL, `storeName` TEXT NOT NULL, `location` TEXT NOT NULL, `storeAddress` TEXT NOT NULL, `imageLogo` TEXT NOT NULL, `rating` INTEGER NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `ToBuyModel` (`id` INTEGER NOT NULL, `item` TEXT NOT NULL, `isBought` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `ItemToBuy` (`id` INTEGER NOT NULL, `item` TEXT NOT NULL, `isBought` INTEGER NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -115,8 +118,10 @@ class _$AppDatabase extends AppDatabase {
 }
 
 class _$CartDao extends CartDao {
-  _$CartDao(this.database, this.changeListener)
-      : _queryAdapter = QueryAdapter(database, changeListener),
+  _$CartDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database, changeListener),
         _itemCartDetailsInsertionAdapter = InsertionAdapter(
             database,
             'ItemCartDetails',
@@ -140,8 +145,8 @@ class _$CartDao extends CartDao {
 
   @override
   Future<double?> totalResults() async {
-    await _queryAdapter
-        .queryNoReturn('SELECT  SUM(totalPrice) FROM ItemCartDetails');
+    return _queryAdapter.query('SELECT  SUM(totalPrice) FROM ItemCartDetails',
+        mapper: (Map<String, Object?> row) => row.values.first as double);
   }
 
   @override
@@ -166,7 +171,10 @@ class _$CartDao extends CartDao {
   }
 
   @override
-  Future<void> updateNumberOfItems(int number, int id) async {
+  Future<void> updateNumberOfItems(
+    int number,
+    int id,
+  ) async {
     await _queryAdapter.queryNoReturn(
         'UPDATE ItemCartDetails SET itemPieces = ?1 WHERE id = ?2',
         arguments: [number, id]);
@@ -175,13 +183,15 @@ class _$CartDao extends CartDao {
   @override
   Future<void> addToCart(ItemCartDetails item) async {
     await _itemCartDetailsInsertionAdapter.insert(
-        item, OnConflictStrategy.abort);
+        item, OnConflictStrategy.replace);
   }
 }
 
 class _$FavStoresDao extends FavStoresDao {
-  _$FavStoresDao(this.database, this.changeListener)
-      : _queryAdapter = QueryAdapter(database, changeListener),
+  _$FavStoresDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database, changeListener),
         _favStoresModelInsertionAdapter = InsertionAdapter(
             database,
             'FavStoresModel',
@@ -207,7 +217,7 @@ class _$FavStoresDao extends FavStoresDao {
   Stream<List<FavStoresModel>> getAllFavStores() {
     return _queryAdapter.queryListStream('SELECT * FROM FavStoresModel',
         mapper: (Map<String, Object?> row) => FavStoresModel(
-            id: row['id'] as int,
+            id: row['id'] as String,
             storeName: row['storeName'] as String,
             imageLogo: row['imageLogo'] as String,
             location: row['location'] as String,
@@ -218,7 +228,7 @@ class _$FavStoresDao extends FavStoresDao {
   }
 
   @override
-  Future<void> removeFromFav(int id) async {
+  Future<void> removeFromFav(String id) async {
     await _queryAdapter.queryNoReturn(
         'DELETE FROM FavStoresModel WHERE id = ?1',
         arguments: [id]);
@@ -232,11 +242,13 @@ class _$FavStoresDao extends FavStoresDao {
 }
 
 class _$ToBuyModelDao extends ToBuyModelDao {
-  _$ToBuyModelDao(this.database, this.changeListener)
-      : _queryAdapter = QueryAdapter(database),
-        _toBuyModelInsertionAdapter = InsertionAdapter(
+  _$ToBuyModelDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
+        _itemToBuyInsertionAdapter = InsertionAdapter(
             database,
-            'ToBuyModel',
+            'ItemToBuy',
             (ItemToBuy item) => <String, Object?>{
                   'id': item.id,
                   'item': item.item,
@@ -249,7 +261,7 @@ class _$ToBuyModelDao extends ToBuyModelDao {
 
   final QueryAdapter _queryAdapter;
 
-  final InsertionAdapter<ItemToBuy> _toBuyModelInsertionAdapter;
+  final InsertionAdapter<ItemToBuy> _itemToBuyInsertionAdapter;
 
   @override
   Future<List<ItemToBuy>> getAllItemsToBuy() async {
@@ -267,14 +279,20 @@ class _$ToBuyModelDao extends ToBuyModelDao {
   }
 
   @override
-  Future<void> updateNewItemToBuy(int id, String newValue) async {
+  Future<void> updateNewItemToBuy(
+    int id,
+    String newValue,
+  ) async {
     await _queryAdapter.queryNoReturn(
         'UPDATE ToBuyModel SET item = ?2 WHERE id = ?1',
         arguments: [id, newValue]);
   }
 
   @override
-  Future<void> changeIsBought(int id, bool isBought) async {
+  Future<void> changeIsBought(
+    int id,
+    bool isBought,
+  ) async {
     await _queryAdapter.queryNoReturn(
         'UPDATE ToBuyModel SET isBought = ?2 WHERE id = ?1',
         arguments: [id, isBought ? 1 : 0]);
@@ -282,6 +300,6 @@ class _$ToBuyModelDao extends ToBuyModelDao {
 
   @override
   Future<void> insertNewItemsToBuy(ItemToBuy model) async {
-    await _toBuyModelInsertionAdapter.insert(model, OnConflictStrategy.replace);
+    await _itemToBuyInsertionAdapter.insert(model, OnConflictStrategy.replace);
   }
 }

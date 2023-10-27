@@ -189,7 +189,7 @@ const snackRemoved = SnackBar(
 );
 
 Widget storesListSingleItem(
-    {required StoreDetails details,
+    {required StoreData details,
     required VoidCallback onClick,
     required VoidCallback? onFavClicked}) {
   return Card(
@@ -205,7 +205,7 @@ Widget storesListSingleItem(
               child: Row(
                 children: [
                   ImageCacheR(
-                    "",
+                    details.storeImage.url,
                     errorPlaceHolder: "assets/images/shoprite_small.png",
                     topBottom: 20.r,
                     topRadius: 20.r,
@@ -232,7 +232,7 @@ Widget storesListSingleItem(
                               itemBuilder: (context, _) =>
                                   const Icon(Icons.star, color: Colors.amber)),
                         ),
-                        Text(details.name,
+                        Text(details.businessName,
                             maxLines: 1,
                             style: TextStyle(
                                 color: blackColor,
@@ -240,7 +240,7 @@ Widget storesListSingleItem(
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(details.location,
+                            Text(details.businessLocation,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -260,7 +260,7 @@ Widget storesListSingleItem(
 }
 
 Widget storesGridSingleItem(
-    {required StoreDetails details,
+    {required StoreData details,
     required VoidCallback onPressed,
     required VoidCallback onFavClicked,
     required bool isFav,
@@ -285,7 +285,7 @@ Widget storesGridSingleItem(
               splashColor: Colors.blue,
               highlightColor: Colors.red,
               onTap: onPressed,
-              child: ImageCacheR("",
+              child: ImageCacheR(details.storeImage.url,
                   errorPlaceHolder: "assets/images/buy.png",
                   width: MediaQuery.of(context).size.width,
                   topBottom: 20.r,
@@ -294,7 +294,7 @@ Widget storesGridSingleItem(
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Flexible(
               child: Text(
-                details.name,
+                details.businessName,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 style:
@@ -322,7 +322,7 @@ Widget storesGridSingleItem(
           ]),
           Flexible(
               child: Text(
-            details.location,
+            details.businessLocation,
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 16.sp, color: blackColor),

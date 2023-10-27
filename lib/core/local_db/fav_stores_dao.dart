@@ -10,5 +10,5 @@ abstract class FavStoresDao {
   Future<void> addToFavorite(FavStoresModel item);
 
   @Query('DELETE FROM FavStoresModel WHERE id = :id')
-  Future<void> removeFromFav(int id);
+  Future<void> removeFromFav(String id);
 }
